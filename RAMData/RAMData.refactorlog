@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="98b99fb9-88f3-425d-ad1e-023d22ed54ac" ChangeDateTime="02/09/2021 04:13:41">
+    <Property Name="ElementName" Value="[dbo].[User].[fIRSTnAME]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[User]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FirstName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1c7bc0fa-6edf-451b-98d5-b326de91442b" ChangeDateTime="02/09/2021 04:21:09">
+    <Property Name="ElementName" Value="[dbo].[Order].[Total]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Order]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TotalCost" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ab01a5f2-b298-4113-a6cb-1069ae0e1f05" ChangeDateTime="02/09/2021 04:30:07">
+    <Property Name="ElementName" Value="[dbo].[Order].[UnitCost]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Order]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Avg Price" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c4c7cb66-2d4e-46a5-b849-d89990ea0edf" ChangeDateTime="02/09/2021 04:30:12">
+    <Property Name="ElementName" Value="[dbo].[Order].[Avg Price]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Order]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AvgPrice" />
+  </Operation>
+</Operations>

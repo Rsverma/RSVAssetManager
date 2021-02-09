@@ -9,7 +9,7 @@ namespace RAMApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HoldingController : ControllerBase
+    public class PositionController : ControllerBase
     {
     }
 }
