@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using RAMDesktopUI.Helpers;
 using RAMDesktopUI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -6,16 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace RAMDesktopUI
 {
     public class Bootstrapper : BootstrapperBase
     {
-        private SimpleContainer _container = new SimpleContainer();
+        private readonly SimpleContainer _container = new SimpleContainer();
 
         public Bootstrapper()
         {
             Initialize();
+            ConventionManager.AddElementConvention<PasswordBox>(
+             PasswordBoxHelper.BoundPasswordProperty,
+             "Password",
+             "PasswordChanged");
         }
 
         protected override void Configure()

@@ -15,4 +15,8 @@
     <Folder Include="Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RAMDesktopUI.Library\RAMDesktopUI.Library.csproj" />
+  </ItemGroup>
+
 </Project>

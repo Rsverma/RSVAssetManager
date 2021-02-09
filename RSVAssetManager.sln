@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAMApi", "RAMApi\RAMApi.csproj", "{9FE70D57-E705-47AB-94F9-FD083EDA4575}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RAMApi", "RAMApi\RAMApi.csproj", "{9FE70D57-E705-47AB-94F9-FD083EDA4575}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "RAMData", "RAMData\RAMData.sqlproj", "{81CE8250-B850-4EFC-A389-ED21387EA364}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAMDesktopUI", "RAMDesktopUI\RAMDesktopUI.csproj", "{C328EB66-01A2-48ED-BA1C-12714BB05EAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RAMDesktopUI", "RAMDesktopUI\RAMDesktopUI.csproj", "{C328EB66-01A2-48ED-BA1C-12714BB05EAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAMDesktopUI.Library", "RAMDesktopUI.Library\RAMDesktopUI.Library.csproj", "{B43BC3F7-9241-458F-882A-9C9EB8CC7928}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{C328EB66-01A2-48ED-BA1C-12714BB05EAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C328EB66-01A2-48ED-BA1C-12714BB05EAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C328EB66-01A2-48ED-BA1C-12714BB05EAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B43BC3F7-9241-458F-882A-9C9EB8CC7928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B43BC3F7-9241-458F-882A-9C9EB8CC7928}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B43BC3F7-9241-458F-882A-9C9EB8CC7928}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B43BC3F7-9241-458F-882A-9C9EB8CC7928}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
