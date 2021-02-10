@@ -1,5 +1,7 @@
 ﻿using Caliburn.Micro;
 using RAMDesktopUI.Helpers;
+using RAMDesktopUI.Library.Api;
+using RAMDesktopUI.Library.Models;
 using RAMDesktopUI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -29,7 +31,9 @@ namespace RAMDesktopUI
             _ = _container.Instance(_container);
             _ = _container
                 .Singleton<IWindowManager, WindowManager>()
-                .Singleton<IEventAggregator, EventAggregator>();
+                .Singleton<IEventAggregator, EventAggregator>()
+                .Singleton<ILoggedInUserModel, LoggedInUserModel>()
+                .Singleton<IAPIHelper, APIHelper>();
 
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass && type.Name.EndsWith("ViewModel"))
