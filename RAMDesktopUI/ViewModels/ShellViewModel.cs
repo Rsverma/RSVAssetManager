@@ -55,7 +55,9 @@ namespace RAMDesktopUI.ViewModels
         {
             await ActivateItemAsync(IoC.Get<UserDisplayViewModel>());
         }
-
+        private CreateOrderViewModel CreateOrderView = null;
+        private OrderManagerViewModel OrderManagerView = null;
+        private PortfolioManagerViewModel PortfolioManagerView = null;
 
         public async Task HandleAsync(LaunchModuleEvent moduleEvent, CancellationToken cancellationToken)
         {
@@ -65,13 +67,43 @@ namespace RAMDesktopUI.ViewModels
             switch (moduleEvent.ModuleName)
             {
                 case "CreateOrder":
-                    await _window.ShowWindowAsync(IoC.Get<CreateOrderViewModel>(), null, settings);
+                    if (CreateOrderView == null)
+                    {
+                        CreateOrderView = IoC.Get<CreateOrderViewModel>();
+                        CreateOrderView.ActivateWith(this);
+                        await _window.ShowWindowAsync(CreateOrderView, null, settings);
+                    }
+                    else
+                    {
+                        CreateOrderView.CurWindowState = WindowState.Normal;
+                        ((Window)CreateOrderView.GetView()).Activate();
+                    }
                     break;
                 case "OrderManager":
-                    await _window.ShowWindowAsync(IoC.Get<OrderManagerViewModel>(), null, settings);
+                    if (OrderManagerView == null)
+                    {
+                        OrderManagerView = IoC.Get<OrderManagerViewModel>();
+                        OrderManagerView.ActivateWith(this);
+                        await _window.ShowWindowAsync(OrderManagerView, null, settings);
+                    }
+                    else
+                    {
+                        OrderManagerView.CurWindowState = WindowState.Normal;
+                        ((Window)OrderManagerView.GetView()).Activate();
+                    }
                     break;
                 case "PortfolioManager":
-                    await _window.ShowWindowAsync(IoC.Get<PortfolioManagerViewModel>(), null, settings);
+                    if (PortfolioManagerView == null)
+                    {
+                        PortfolioManagerView = IoC.Get<PortfolioManagerViewModel>();
+                        PortfolioManagerView.ActivateWith(this);
+                        await _window.ShowWindowAsync(PortfolioManagerView, null, settings);
+                    }
+                    else
+                    {
+                        PortfolioManagerView.CurWindowState = WindowState.Normal;
+                        ((Window)PortfolioManagerView.GetView()).Activate();
+                    }
                     break;
 
             }
