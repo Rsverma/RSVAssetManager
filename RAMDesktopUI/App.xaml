@@ -28,7 +28,7 @@
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <helpers:VisiblityToInverseBooleanConverter x:Key="VisiblityToInverseBooleanConverter" True="Collapsed" False="Visible" />
 
-            <ContextMenu x:Key="ColumnChooserMenu" x:Shared="False"
+            <ContextMenu x:Key="ColumnChooserMenu" x:Shared="True"
              DataContext="{Binding Path=PlacementTarget, RelativeSource={RelativeSource Self}}" 
              ItemsSource="{Binding Columns, RelativeSource={RelativeSource AncestorType=DataGrid}}">
                 <ContextMenu.ItemContainerStyle>
@@ -37,6 +37,9 @@
                         <Setter Property="AutomationProperties.Name" Value="{Binding Header}"/>
                         <Setter Property="IsCheckable" Value="True" />
                         <Setter Property="IsChecked" Value="{Binding Visibility, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="Background" Value="Silver"/>
+                        <Setter Property="Foreground" Value="Black"/>
                     </Style>
                 </ContextMenu.ItemContainerStyle>
             </ContextMenu>
@@ -52,7 +55,7 @@
             </Style>
 
             <ContextMenu x:Key="GridItemsContextMenu" >
-                <MenuItem Header="Launch Do Some other action"/>
+                <!--<MenuItem Header="Launch Do Some other action"/>-->
             </ContextMenu>
         </ResourceDictionary>
     </Application.Resources>
