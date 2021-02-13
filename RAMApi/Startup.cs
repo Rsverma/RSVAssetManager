@@ -43,6 +43,7 @@ namespace RAMApi
 
             //Personal Services
             services.AddTransient<IUserData, UserData>();
+            services.AddTransient<IOrderData, OrderData>();
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
 
 

@@ -1,4 +1,6 @@
 ﻿using Caliburn.Micro;
+using RAMDesktopUI.Library.Api;
+using RAMDesktopUI.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,9 +13,10 @@ namespace RAMDesktopUI.ViewModels
 {
     public class CreateOrderViewModel : ModuleBase
     {
-        public CreateOrderViewModel()
+        private readonly IOrderEndpoint _orderEndpoint;
+        public CreateOrderViewModel(IOrderEndpoint orderEndpoint)
         {
-
+            _orderEndpoint = orderEndpoint;
         }
 
         protected override void OnViewLoaded(object view)
@@ -49,7 +52,7 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
-        private string _selectedOrderSide;
+        private string _selectedOrderSide = "Buy";
 
         public string SelectedOrderSide
         {
@@ -73,7 +76,7 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
-        private string _selectedOrderType;
+        private string _selectedOrderType = "Market";
 
         public string SelectedOrderType
         {
@@ -102,13 +105,13 @@ namespace RAMDesktopUI.ViewModels
         {
             get
             {
-                return !string.IsNullOrEmpty(SelectedOrderType) && SelectedOrderType.Equals("Limit");
+                return (bool)(SelectedOrderType?.Equals("Limit"));
             }
         }
 
-        private int _quantity = 1;
+        private uint _quantity = 1;
 
-        public int Quantity
+        public uint Quantity
         {
             get { return _quantity; }
             set
@@ -140,6 +143,30 @@ namespace RAMDesktopUI.ViewModels
                 _avgPrice = value;
                 NotifyOfPropertyChange(() => AvgPrice);
             }
+        }
+        public bool IsValidOrder(bool isSaveOnly)
+        {
+            return !string.IsNullOrEmpty(Symbol) && OrderTypes.Contains(SelectedOrderType)
+                && OrderSides.Contains(SelectedOrderSide) && Quantity>0 && LimitPrice>=0 && (!isSaveOnly || AvgPrice >= 0);
+        }
+
+        public async Task SaveOrder()
+        {
+            OrderModel order = new OrderModel
+            {
+                Symbol = Symbol,
+                OrderSide = SelectedOrderSide,
+                Quantity = Quantity,
+                OrderType = SelectedOrderType,
+                LimitPrice = LimitPrice,
+                AvgPrice = AvgPrice
+            };
+            await _orderEndpoint.PostOrder(order); 
+            ResetOrderViewModel();
+        }
+        private void ResetOrderViewModel()
+        {
+            InitializeData();
         }
 
     }

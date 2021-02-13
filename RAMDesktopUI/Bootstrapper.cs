@@ -57,6 +57,10 @@ namespace RAMDesktopUI
         protected override void Configure()
         {
             _ = _container.Instance(_container);
+
+            _container.Instance(_container)
+                .PerRequest<IUserEndpoint, UserEndpoint>()
+                .PerRequest<IOrderEndpoint, OrderEndpoint>();
             _ = _container
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()
