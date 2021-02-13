@@ -31,7 +31,7 @@ namespace RAMApi.Controllers
             string traderId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             OrderDBModel orderDetails = new OrderDBModel
             {
-                Symbol = order.Symbol,
+                TickerSymbol = order.Symbol,
                 AvgPrice = order.AvgPrice,
                 TraderId = traderId,
                 LimitPrice = order.LimitPrice,

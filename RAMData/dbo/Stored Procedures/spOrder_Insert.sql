@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spOrder_Insert]
-	@Symbol NVARCHAR(50),
+	@TickerSymbol NVARCHAR(50),
     @OrderSide int,
     @Quantity int,
     @OrderType int,
@@ -7,15 +7,15 @@
     @AvgPrice money,
     @CommissionAndFees money,
     @TraderId NVARCHAR(128),
-    @TradeDate datetime2
+    @OrderDate datetime2
 	
 AS
 BEGIN
 	SET NOCOUNT ON;
 	Insert into dbo.[Order] (TickerSymbol, Side, Quantity, Type, LimitPrice, AvgPrice, CommissionAndFees
     , TotalCost, TraderId, OrderDate)
-	Values (@Symbol, @OrderSide, @Quantity, @OrderType, @LimitPrice,@AvgPrice, @CommissionAndFees
-    , @CommissionAndFees + @AvgPrice,@TraderId,@TradeDate);
+	Values (@TickerSymbol, @OrderSide, @Quantity, @OrderType, @LimitPrice,@AvgPrice, @CommissionAndFees
+    , @CommissionAndFees + @AvgPrice,@TraderId,@OrderDate);
 
 	Select @@IDENTITY;
 END

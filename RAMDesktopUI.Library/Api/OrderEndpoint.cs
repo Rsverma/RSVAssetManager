@@ -32,7 +32,7 @@ namespace RAMDesktopUI.Library.Api
 
         public async Task<List<OrderDetailModel>> GetAll()
         {
-            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync("/api/Order"))
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync("/api/Order/GetAllOrders"))
             {
                 if (response.IsSuccessStatusCode)
                 {

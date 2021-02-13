@@ -32,7 +32,13 @@ namespace RAMDesktopUI.ViewModels
             _events.SubscribeOnPublishedThread(this);
             ActivateItemAsync(IoC.Get<LoginViewModel>());
         }
-
+        public async Task CloseAllModules()
+        {
+            foreach (var key in _modules.Keys.ToList())
+            {
+                await _modules[key].TryCloseAsync();
+            }
+        }
         public void ModuleClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Window moduleWindow = sender as Window;
@@ -82,6 +88,7 @@ namespace RAMDesktopUI.ViewModels
                 await ActivateItemAsync(IoC.Get<HomeViewModel>(), cancellationToken);
             else
             {
+                await CloseAllModules();
                 _user.ResetUserModel();
                 _apiHelper.LogOffUser();
                 await ActivateItemAsync(IoC.Get<LoginViewModel>(), cancellationToken);
@@ -90,6 +97,7 @@ namespace RAMDesktopUI.ViewModels
         
         public async Task HandleAsync(ExitAppEvent message, CancellationToken cancellationToken)
         {
+            await CloseAllModules();
             await TryCloseAsync();
         }
     }

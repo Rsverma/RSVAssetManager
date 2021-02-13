@@ -72,8 +72,6 @@
     <Build Include="dbo\Tables\Security.sql" />
     <Build Include="dbo\Stored Procedures\spUserLookup.sql" />
     <Build Include="dbo\Stored Procedures\spOrder_Insert.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="RAMData.refactorlog" />
+    <Build Include="dbo\Stored Procedures\spOrder_GetAll.sql" />
   </ItemGroup>
 </Project>

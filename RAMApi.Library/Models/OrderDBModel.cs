@@ -6,7 +6,7 @@ namespace RAMApi.Library.Models
 {
     public class OrderDBModel
     {
-        public string Symbol { get; set; }
+        public string TickerSymbol { get; set; }
         public int OrderSide { get; set; }
         public int Quantity { get; set; }
         public int OrderType { get; set; }
@@ -14,6 +14,6 @@ namespace RAMApi.Library.Models
         public decimal AvgPrice { get; set; }
         public decimal CommissionAndFees { get; set; } = 0;
         public string TraderId { get; set; }
-        public DateTime TradeDate { get; set; } = DateTime.UtcNow;
+        public DateTime OrderDate { get; set; } = DateTime.UtcNow;
     }
 }
