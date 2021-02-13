@@ -12,13 +12,13 @@ namespace RAMApi.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        //private readonly RoleManager<IdentityRole> _roleManager;
+        //private readonly UserManager<IdentityUser> _userManager;
 
-        public HomeController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
+        public HomeController(/*RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager*/)
         {
-            _roleManager = roleManager;
-            _userManager = userManager;
+            //_roleManager = roleManager;
+            //_userManager = userManager;
         }
 
         public IActionResult Index()

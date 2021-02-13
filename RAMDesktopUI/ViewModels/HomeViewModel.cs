@@ -18,6 +18,16 @@ namespace RAMDesktopUI.ViewModels
             _events = events;
         }
 
+        public async Task LogOut()
+        {
+            await _events.PublishOnUIThreadAsync(new LogInOutEvent { IsLogin = false });
+        }
+
+        public async Task Exit()
+        {
+            await _events.PublishOnUIThreadAsync(new ExitAppEvent());
+        }
+
         public async Task LaunchCreateOrder()
         {
             await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.CreateOrder));

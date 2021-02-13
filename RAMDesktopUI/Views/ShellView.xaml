@@ -4,22 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RAMDesktopUI.Views"
-        mc:Ignorable="d" FontSize="18"
-        Title="RSV Asset Manager" Height="500" Width="900">
-    <DockPanel>
-        <Menu DockPanel.Dock="Top" FontSize="18">
-            <MenuItem Header="_File">
-                <MenuItem x:Name="ExitApplication" Header="E_xit"/>
-            </MenuItem>
-            <MenuItem Header="_Users">
-                <MenuItem x:Name="UserManagement" Header="User_Management"/>
-            </MenuItem>
-            <MenuItem Header="_Account"  Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
-                <MenuItem x:Name="LogOut" Header="_Log Out"/>
-            </MenuItem>
-        </Menu>
-        <Grid>
-            <ContentControl x:Name="ActiveItem" Margin="20 5 20 20"/>
-        </Grid>
-    </DockPanel>
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="12"
+        FontFamily="{materialDesign:MaterialDesignFont}"
+        
+        Title="RSV Asset Manager" Height="300" Width="500">
+
+    <Grid>
+        <ContentControl x:Name="ActiveItem"/>
+    </Grid>
 </Window>

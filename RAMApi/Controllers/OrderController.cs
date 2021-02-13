@@ -28,7 +28,7 @@ namespace RAMApi.Controllers
         [HttpPost]
         public void Post(OrderModel order)
         {
-            string traderId = User.FindFirstValue(ClaimTypes.NameIdentifier); //RequestContext.Principal.Identity.GetUserId();
+            string traderId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             OrderDBModel orderDetails = new OrderDBModel
             {
                 Symbol = order.Symbol,
@@ -51,7 +51,7 @@ namespace RAMApi.Controllers
         [Authorize(Roles = "Admin,FundManager")]
         [Route("GetAllOrders")]
         [HttpGet]
-        public List<OrderDetailModel> GetAllOrders()
+        public List<OrderDBModel> GetAllOrders()
         {
             return _orderData.GetAllOrders();
         }

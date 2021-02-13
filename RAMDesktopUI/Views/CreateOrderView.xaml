@@ -4,7 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RAMDesktopUI.Views"
-        mc:Ignorable="d" FontSize="18"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}"
+        mc:Ignorable="d"
         x:Name="CreateOrder"
         Title="Create Order"  MinHeight="450" MinWidth="800" WindowState="{Binding CurWindowState, Mode=TwoWay}">
     <Grid Margin="10">
@@ -30,7 +36,7 @@
         <ComboBox Grid.Row="1" Grid.Column="2" Margin="10" Width="100" IsTextSearchEnabled="True" IsEditable="True" 
                   ItemsSource="{Binding Securities}" Text="{Binding Symbol, Mode=TwoWay}" />
 
-        <TextBlock x:Name="SymbolDetail" Grid.Row="1" Grid.Column="3" Margin="10" FontSize="24" Grid.ColumnSpan="3"/>
+        <TextBlock x:Name="SymbolDetail" Grid.Row="1" Grid.Column="3" Margin="10" Grid.ColumnSpan="3"/>
 
 
         <TextBlock Grid.Row="2" Grid.Column="1" Margin="10 10 10 0">Order Side</TextBlock>

@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <PackageReference Include="Caliburn.Micro" Version="4.0.136-rc" />
+    <PackageReference Include="MaterialDesignThemes" Version="3.2.0" />
+    <PackageReference Include="ShowMeTheXAML.MSBuild" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -14,7 +14,7 @@ using static RAMDesktopUI.Library.Helpers.AppConstants;
 
 namespace RAMDesktopUI.ViewModels
 {
-    public class ShellViewModel : Conductor<object>, IHandle<LogOnEvent>, IHandle<LaunchModuleEvent>
+    public class ShellViewModel : Conductor<object>, IHandle<LogInOutEvent>, IHandle<LaunchModuleEvent>,IHandle<ExitAppEvent>
     {
         private readonly IEventAggregator _events;
         private readonly IWindowManager _window;
@@ -31,31 +31,6 @@ namespace RAMDesktopUI.ViewModels
             _apiHelper = apiHelper;
             _events.SubscribeOnPublishedThread(this);
             ActivateItemAsync(IoC.Get<LoginViewModel>());
-        }
-
-        public bool IsLoggedIn
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(_user.Token);
-            }
-        }
-
-        public void ExitApplication()
-        {
-            TryCloseAsync();
-        }
-        public async Task LogOut()
-        {
-            _user.ResetUserModel();
-            _apiHelper.LogOffUser();
-            await ActivateItemAsync(IoC.Get<LoginViewModel>());
-            NotifyOfPropertyChange(() => IsLoggedIn);
-        }
-
-        public async Task UserManagement()
-        {
-            await ActivateItemAsync(IoC.Get<UserDisplayViewModel>());
         }
 
         public void ModuleClosing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -101,11 +76,21 @@ namespace RAMDesktopUI.ViewModels
 
         }
 
-
-        public async Task HandleAsync(LogOnEvent message, CancellationToken cancellationToken)
+        public async Task HandleAsync(LogInOutEvent message, CancellationToken cancellationToken)
         {
-            await ActivateItemAsync(IoC.Get<HomeViewModel>(), cancellationToken);
-            NotifyOfPropertyChange(() => IsLoggedIn);
+            if (message.IsLogin)
+                await ActivateItemAsync(IoC.Get<HomeViewModel>(), cancellationToken);
+            else
+            {
+                _user.ResetUserModel();
+                _apiHelper.LogOffUser();
+                await ActivateItemAsync(IoC.Get<LoginViewModel>(), cancellationToken);
+            }
+        }
+        
+        public async Task HandleAsync(ExitAppEvent message, CancellationToken cancellationToken)
+        {
+            await TryCloseAsync();
         }
     }
 }

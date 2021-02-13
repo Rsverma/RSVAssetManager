@@ -83,12 +83,17 @@ namespace RAMDesktopUI.ViewModels
                 //Capture more information about the user
                 await _apiHelper.GetLoggedInUserInfo(result.Access_Token);
 
-                await _events.PublishOnUIThreadAsync(new LogOnEvent());
+                await _events.PublishOnUIThreadAsync(new LogInOutEvent { IsLogin = true });
             }
             catch (Exception ex)
             {
                 ErrorMessage = ex.Message;
             }
+        }
+
+        public async Task Exit()
+        {
+            await _events.PublishOnUIThreadAsync(new ExitAppEvent());
         }
     }
 }

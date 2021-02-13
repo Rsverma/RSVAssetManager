@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace RAMDesktopUI.EventModels
 {
-    public class LogInOutEvent
+    public class ExitAppEvent
     {
-        public bool IsLogin { get; set; }
     }
 }
