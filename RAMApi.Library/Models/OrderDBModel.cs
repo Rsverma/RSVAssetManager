@@ -12,6 +12,7 @@ namespace RAMApi.Library.Models
         public int OrderType { get; set; }
         public decimal LimitPrice { get; set; }
         public decimal AvgPrice { get; set; }
+        public decimal CommissionAndFees { get; set; } = 0;
         public string TraderId { get; set; }
         public DateTime TradeDate { get; set; } = DateTime.UtcNow;
     }

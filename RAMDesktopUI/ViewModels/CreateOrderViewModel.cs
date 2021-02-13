@@ -30,6 +30,12 @@ namespace RAMDesktopUI.ViewModels
             Securities = new BindingList<string>() { "AAPL", "MSFT", "GOOG" };
             OrderSides = new BindingList<string>() { "Buy", "Sell", "SellShort", "BuyToClose" };
             OrderTypes = new BindingList<string>() { "Market", "Limit"};
+            Symbol = string.Empty;
+            SelectedOrderSide = "Buy";
+            SelectedOrderType = "Market";
+            Quantity = 1;
+            LimitPrice = 0;
+            AvgPrice = 0;
         }
 
         private string _symbol = string.Empty;
