@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using RAMDesktopUI.EventModels;
+using static RAMDesktopUI.Library.Helpers.AppConstants;
 
 namespace RAMDesktopUI.ViewModels
 {
@@ -19,17 +20,17 @@ namespace RAMDesktopUI.ViewModels
 
         public async Task LaunchCreateOrder()
         {
-            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent("CreateOrder"));
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.CreateOrder));
         }
 
         public async Task LaunchOrderManager()
         {
-            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent("OrderManager"));
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.OrderManager));
         }
 
         public async Task LaunchPortfolioManager()
         {
-            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent("PortfolioManager"));
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.PortfolioManager));
         }
     }
 }

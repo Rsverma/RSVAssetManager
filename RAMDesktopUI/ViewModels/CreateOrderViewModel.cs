@@ -8,19 +8,7 @@ using System.Windows;
 
 namespace RAMDesktopUI.ViewModels
 {
-    public class CreateOrderViewModel:Screen
+    public class CreateOrderViewModel : ModuleBase
     {
-        private WindowState _curWindowState;
-
-        public WindowState CurWindowState
-        {
-            get { return _curWindowState; }
-            set
-            {
-                _curWindowState = value;
-                NotifyOfPropertyChange(() => CurWindowState);
-            }
-        }
-
     }
 }

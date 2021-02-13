@@ -8,19 +8,7 @@ using System.Windows;
 
 namespace RAMDesktopUI.ViewModels
 {
-    public class PortfolioManagerViewModel:Screen
+    public class PortfolioManagerViewModel : ModuleBase
     {
-        private WindowState _curWindowState;
-
-        public WindowState CurWindowState
-        {
-            get { return _curWindowState; }
-            set
-            {
-                _curWindowState = value;
-                NotifyOfPropertyChange(() => CurWindowState);
-            }
-        }
-
     }
 }

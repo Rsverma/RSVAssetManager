@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static RAMDesktopUI.Library.Helpers.AppConstants;
 
 namespace RAMDesktopUI.EventModels
 {
     public class LaunchModuleEvent
     {
-        public LaunchModuleEvent(string moduleName)
+        public LaunchModuleEvent(ModuleTypes moduleType)
         {
-            ModuleName = moduleName;
+            ModuleType = moduleType;
         }
-        public string ModuleName { get; private set; }
+        public ModuleTypes ModuleType { get; private set; }
     }
 }

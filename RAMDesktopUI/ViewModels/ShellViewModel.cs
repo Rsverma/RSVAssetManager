@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using static RAMDesktopUI.Library.Helpers.AppConstants;
 
 namespace RAMDesktopUI.ViewModels
 {
@@ -19,6 +20,7 @@ namespace RAMDesktopUI.ViewModels
         private readonly IWindowManager _window;
         private readonly ILoggedInUserModel _user;
         private readonly IAPIHelper _apiHelper;
+        private readonly Dictionary<ModuleTypes, ModuleBase> _modules = new Dictionary<ModuleTypes, ModuleBase>();
 
         public ShellViewModel(IEventAggregator events, IWindowManager window,
             ILoggedInUserModel user, IAPIHelper apiHelper)
@@ -55,59 +57,50 @@ namespace RAMDesktopUI.ViewModels
         {
             await ActivateItemAsync(IoC.Get<UserDisplayViewModel>());
         }
-        private CreateOrderViewModel CreateOrderView = null;
-        private OrderManagerViewModel OrderManagerView = null;
-        private PortfolioManagerViewModel PortfolioManagerView = null;
+
+        public void ModuleClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Window moduleWindow = sender as Window;
+            if(Enum.TryParse(moduleWindow.Name, out ModuleTypes modType))
+                _modules.Remove(modType);
+            moduleWindow.Closing -= ModuleClosing;
+        }
 
         public async Task HandleAsync(LaunchModuleEvent moduleEvent, CancellationToken cancellationToken)
         {
-            dynamic settings = new ExpandoObject();
-            settings.ShowInTaskbar = false;
-            settings.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            switch (moduleEvent.ModuleName)
+            if (!_modules.ContainsKey(moduleEvent.ModuleType))
             {
-                case "CreateOrder":
-                    if (CreateOrderView == null)
-                    {
-                        CreateOrderView = IoC.Get<CreateOrderViewModel>();
-                        CreateOrderView.ActivateWith(this);
-                        await _window.ShowWindowAsync(CreateOrderView, null, settings);
-                    }
-                    else
-                    {
-                        CreateOrderView.CurWindowState = WindowState.Normal;
-                        ((Window)CreateOrderView.GetView()).Activate();
-                    }
-                    break;
-                case "OrderManager":
-                    if (OrderManagerView == null)
-                    {
-                        OrderManagerView = IoC.Get<OrderManagerViewModel>();
-                        OrderManagerView.ActivateWith(this);
-                        await _window.ShowWindowAsync(OrderManagerView, null, settings);
-                    }
-                    else
-                    {
-                        OrderManagerView.CurWindowState = WindowState.Normal;
-                        ((Window)OrderManagerView.GetView()).Activate();
-                    }
-                    break;
-                case "PortfolioManager":
-                    if (PortfolioManagerView == null)
-                    {
-                        PortfolioManagerView = IoC.Get<PortfolioManagerViewModel>();
-                        PortfolioManagerView.ActivateWith(this);
-                        await _window.ShowWindowAsync(PortfolioManagerView, null, settings);
-                    }
-                    else
-                    {
-                        PortfolioManagerView.CurWindowState = WindowState.Normal;
-                        ((Window)PortfolioManagerView.GetView()).Activate();
-                    }
-                    break;
-
+                dynamic settings = new ExpandoObject();
+                settings.ShowInTaskbar = false;
+                settings.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                ModuleBase viewModel = null;
+                switch (moduleEvent.ModuleType)
+                {
+                    case ModuleTypes.CreateOrder:
+                        viewModel = IoC.Get<CreateOrderViewModel>();
+                        break;
+                    case ModuleTypes.OrderManager:
+                        viewModel = IoC.Get<OrderManagerViewModel>();
+                        break;
+                    case ModuleTypes.PortfolioManager:
+                        viewModel = IoC.Get<PortfolioManagerViewModel>();
+                        break;
+                }
+                viewModel.ActivateWith(this);
+                _modules.Add(moduleEvent.ModuleType, viewModel);
+                await _window.ShowWindowAsync(viewModel, null, settings);
+                ((Window)viewModel.GetView()).Closing += ModuleClosing;
             }
+            else
+            {
+                ModuleBase viewModel = _modules[moduleEvent.ModuleType];
+                if (viewModel.CurWindowState == WindowState.Minimized)
+                    viewModel.CurWindowState = WindowState.Normal;
+                ((Window)viewModel.GetView()).Activate();
+            }
+
         }
+
 
         public async Task HandleAsync(LogOnEvent message, CancellationToken cancellationToken)
         {
