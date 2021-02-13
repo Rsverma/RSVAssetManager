@@ -20,6 +20,34 @@ namespace RAMDesktopUI
         public Bootstrapper()
         {
             Initialize();
+            ConventionManager.AddElementConvention<FrameworkElement>(
+         UIElement.IsEnabledProperty,
+         "IsEnabled",
+         "IsEnabledChanged");
+            var baseBindProperties = ViewModelBinder.BindProperties;
+            ViewModelBinder.BindProperties =
+                (frameWorkElements, viewModels) =>
+                {
+                    foreach (var frameworkElement in frameWorkElements)
+                    {
+                        var propertyName = frameworkElement.Name + "Enabled";
+                        var property = viewModels
+                             .GetPropertyCaseInsensitive(propertyName);
+                        if (property != null)
+                        {
+                            var convention = ConventionManager
+                                .GetElementConvention(typeof(FrameworkElement));
+                            ConventionManager.SetBindingWithoutBindingOverwrite(
+                                viewModels,
+                                propertyName,
+                                property,
+                                frameworkElement,
+                                convention,
+                                convention.GetBindableProperty(frameworkElement));
+                        }
+                    }
+                    return baseBindProperties(frameWorkElements, viewModels);
+                };
             ConventionManager.AddElementConvention<PasswordBox>(
              PasswordBoxHelper.BoundPasswordProperty,
              "Password",
