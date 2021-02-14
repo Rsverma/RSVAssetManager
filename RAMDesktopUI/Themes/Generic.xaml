@@ -1,0 +1,134 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:RAMDesktopUI"
+    xmlns:aero="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:controls="clr-namespace:RAMDesktopUI.Controls">
+
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <!--Base style for title bar buttons-->
+            <Style x:Key="CaptionButtonStyle" TargetType="Button">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid x:Name="LayoutRoot" Background="Transparent" Width="44" Height="25">
+                                <TextBlock x:Name="txt" Text="{TemplateBinding Content}" FontFamily="Segoe MDL2 Assets" FontSize="10" 
+                                   Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   RenderOptions.ClearTypeHint="Auto" TextOptions.TextRenderingMode="Aliased"  TextOptions.TextFormattingMode="Display"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="LayoutRoot" Property="Background" Value="#E5E5E5"/>
+                                    <Setter TargetName="txt" Property="Foreground" Value="#000000"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--Minimize-->
+            <Style x:Key="MinimizeButtonStyle" TargetType="Button" BasedOn="{StaticResource CaptionButtonStyle}">
+                <Setter Property="Content" Value="&#xE949;"/>
+            </Style>
+
+            <!--Maximize-->
+            <Style x:Key="MaximizeButtonStyle" TargetType="Button" BasedOn="{StaticResource CaptionButtonStyle}">
+                <Setter Property="Content" Value="&#xE739;"/>
+            </Style>
+
+            <!--Restore-->
+            <Style x:Key="RestoreButtonStyle" TargetType="Button" BasedOn="{StaticResource CaptionButtonStyle}">
+                <Setter Property="Content" Value="&#xE923;"/>
+            </Style>
+
+            <!--Close-->
+            <Style x:Key="CloseButtonStyle" TargetType="Button" BasedOn="{StaticResource CaptionButtonStyle}">
+                <Setter Property="Content" Value="&#xE106;"/>
+            </Style>
+
+            <ContextMenu x:Key="ColumnChooserMenu" x:Shared="True"
+             DataContext="{Binding Path=PlacementTarget, RelativeSource={RelativeSource Self}}" 
+             ItemsSource="{Binding Columns, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                <ContextMenu.ItemContainerStyle>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="Header" Value="{Binding Header}"/>
+                        <Setter Property="AutomationProperties.Name" Value="{Binding Header}"/>
+                        <Setter Property="IsCheckable" Value="True" />
+                        <Setter Property="IsChecked" Value="{Binding Visibility, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="Background" Value="Silver"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                    </Style>
+                </ContextMenu.ItemContainerStyle>
+            </ContextMenu>
+
+            <ContextMenu x:Key="GridItemsContextMenu" >
+                <!--<MenuItem Header="Launch Do Some other action"/>-->
+            </ContextMenu>
+
+            <!--A custom DataGridColumnHeadersPresenter is required to "not" display the custom ColumnHeader template as background of the datagrid header-->
+            <Style TargetType="{x:Type DataGridColumnHeadersPresenter}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type DataGridColumnHeadersPresenter}">
+                            <Grid>
+                                <!--"part_fillercolumnheader" (DataGridColumnHeader type) is removed, and a plain rectangle is placed in its place.-->
+                                <Rectangle Fill="Silver" />
+
+                                <!--Leave the item presenter in its place.-->
+                                <ItemsPresenter x:Name="itemsPresenter" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <!--End of custom DataGridColumnHeadersPresenter template-->
+
+            <!--Custom Column Header Gripper styling-->
+            <!--Thanks to Nipun Tomar (http://www.c-sharpcorner.com/UploadFile/nipuntomar/wpf-datagrid-style/)-->
+            <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}">
+                <Setter Property="Width" Value="3"/>
+                <Setter Property="Foreground" Value="Transparent" />
+                <Setter Property="Cursor" Value="SizeWE"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Thumb}">
+                            <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Foreground}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="ColumnHeaderStyle" TargetType="DataGridColumnHeader">
+                <Setter Property="ContextMenu" Value="{StaticResource ColumnChooserMenu}" />
+                <Setter Property="Background" Value="Silver"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="BorderBrush" Value="Black"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style>
+
+        </ResourceDictionary>
+        <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="Grey" SecondaryColor="DeepPurple" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" >
+            <!--<Style x:Key="MaterialDesignMenuItem"  TargetType="{x:Type MenuItem}" BasedOn="{StaticResource MaterialDesignMenuItem}">
+                        <Setter Property="FontSize" Value="12" />
+                        <Setter Property="Height" Value="12" />
+                        <Setter Property="Padding" Value="2 2 2 2" />
+                        <Setter Property="Margin" Value="2 2 2 2" />
+                    </Style>
+                    <Style x:Key="MaterialDesignMenu"  TargetType="{x:Type Menu}" BasedOn="{StaticResource MaterialDesignMenu}">
+                        <Setter Property="FontSize" Value="12" />
+                        <Setter Property="Height" Value="20" />
+                        <Setter Property="Margin" Value="2 2 2 2" />
+                        <Setter Property="Padding" Value="2 2 2 2" />
+                    </Style>-->
+        </ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>
