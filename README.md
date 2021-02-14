@@ -19,7 +19,7 @@
 
 ## Key Features
 
-* Create Order - Send to Broker or save to databse
+* Create Order - Send to Broker or save to database
   - Send orders to broker using FIX protocol or save already executed orders to database
 * View Orders
   - View all orders executed by traders in your firm.
