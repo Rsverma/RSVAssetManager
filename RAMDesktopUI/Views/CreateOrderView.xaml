@@ -10,10 +10,21 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
-        mc:Ignorable="d"
-        x:Name="CreateOrder"
-        Title="Create Order"  MinHeight="450" MinWidth="800" WindowState="{Binding CurWindowState, Mode=TwoWay}">
-    <Grid Margin="10">
+        mc:Ignorable="d" WindowStyle="None" x:Name="CreateOrder" 
+        MinHeight="450" MinWidth="800" WindowState="{Binding CurWindowState, Mode=TwoWay}">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="29" />
+    </WindowChrome.WindowChrome>
+
+    <!--Title bar button commands-->
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static SystemCommands.CloseWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Close" />
+        <CommandBinding Command="{x:Static SystemCommands.MaximizeWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Maximize" />
+        <CommandBinding Command="{x:Static SystemCommands.MinimizeWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Minimize" />
+        <CommandBinding Command="{x:Static SystemCommands.RestoreWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Restore" />
+    </Window.CommandBindings>
+    
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
@@ -32,6 +43,34 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
+        <!--Window chrome-->
+        <Grid Grid.Row="0" Grid.ColumnSpan="7" Height="25" Background="Gray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <!--App icon-->
+                <Image Grid.Column="0" Source="/Resources/CreateOrder.ico" Margin="2"
+                       VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Text="Create Order" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            
+            
+            <!--Caption buttons-->
+            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button Style="{StaticResource MinimizeButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Minimize"
+                            Command="{x:Static SystemCommands.MinimizeWindowCommand}"/>
+                <Button x:Name="RestoreButton" Visibility="Collapsed" Style="{StaticResource RestoreButtonStyle}" 
+                            Command="{x:Static SystemCommands.RestoreWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Restore"/>
+                <Button x:Name="MaximizeButton" Visibility="Visible" Style="{StaticResource MaximizeButtonStyle}" 
+                            Command="{x:Static SystemCommands.MaximizeWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Maximize" />
+                <Button Style="{StaticResource CloseButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Close"
+                            Command="{x:Static SystemCommands.CloseWindowCommand}"/>
+            </StackPanel>
+        </Grid>
+
+        <!--App content-->
         <TextBlock Grid.Row="1" Grid.Column="1" Margin="10">Symbol:</TextBlock>
         <ComboBox Grid.Row="1" Grid.Column="2" Margin="10" Width="100" IsTextSearchEnabled="True" IsEditable="True" 
                   ItemsSource="{Binding Securities}" Text="{Binding Symbol, Mode=TwoWay}" />

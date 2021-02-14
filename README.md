@@ -54,8 +54,8 @@ This software uses the following open source packages:
 - [Material Design In XAML](http://materialdesigninxaml.net/)
 - [SwashBuckle](https://github.com/domaindrivendev/Swashbuckle.WebApi)
 - [Dapper](https://github.com/StackExchange/Dapper)
-- Icon from - (https://www.iconfinder.com/)
-- Special Shoutout [TimCo Retail Manager Course](https://www.youtube.com/playlist?list=PLLWMQd6PeGY0bEMxObA6dtYXuJOGfxSPx)
+- Icons from - [IconFinder](https://www.iconfinder.com/iconsets/business-collection-2027)
+- Special shoutout [TimCo Retail Manager Course](https://www.youtube.com/playlist?list=PLLWMQd6PeGY0bEMxObA6dtYXuJOGfxSPx)
 
 ## Related
 
