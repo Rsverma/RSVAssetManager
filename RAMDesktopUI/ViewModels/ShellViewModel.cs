@@ -66,6 +66,9 @@ namespace RAMDesktopUI.ViewModels
                     case ModuleTypes.PortfolioManager:
                         viewModel = IoC.Get<PortfolioManagerViewModel>();
                         break;
+                    case ModuleTypes.Watchlist:
+                        viewModel = IoC.Get<WatchlistViewModel>();
+                        break;
                 }
                 viewModel.ActivateWith(this);
                 _modules.Add(moduleEvent.ModuleType, viewModel);

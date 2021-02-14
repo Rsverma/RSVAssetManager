@@ -15,13 +15,13 @@ using System.Windows.Shapes;
 namespace RAMDesktopUI.Views
 {
     /// <summary>
-    /// Interaction logic for OrderManagerView.xaml
+    /// Interaction logic for WatchlistView.xaml
     /// </summary>
-    public partial class OrderManagerView : Window
+    public partial class WatchlistView : Window
     {
-        public OrderManagerView()
+        public WatchlistView()
         {
-            InitializeComponent(); 
+            InitializeComponent();
             StateChanged += MainWindowStateChangeRaised;
         }
         // Can execute

@@ -71,39 +71,6 @@
                 <!--<MenuItem Header="Launch Do Some other action"/>-->
             </ContextMenu>
 
-            <!--A custom DataGridColumnHeadersPresenter is required to "not" display the custom ColumnHeader template as background of the datagrid header-->
-            <Style TargetType="{x:Type DataGridColumnHeadersPresenter}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type DataGridColumnHeadersPresenter}">
-                            <Grid>
-                                <!--"part_fillercolumnheader" (DataGridColumnHeader type) is removed, and a plain rectangle is placed in its place.-->
-                                <Rectangle Fill="Silver" />
-
-                                <!--Leave the item presenter in its place.-->
-                                <ItemsPresenter x:Name="itemsPresenter" />
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <!--End of custom DataGridColumnHeadersPresenter template-->
-
-            <!--Custom Column Header Gripper styling-->
-            <!--Thanks to Nipun Tomar (http://www.c-sharpcorner.com/UploadFile/nipuntomar/wpf-datagrid-style/)-->
-            <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}">
-                <Setter Property="Width" Value="3"/>
-                <Setter Property="Foreground" Value="Transparent" />
-                <Setter Property="Cursor" Value="SizeWE"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type Thumb}">
-                            <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Foreground}"/>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
             <Style x:Key="ColumnHeaderStyle" TargetType="DataGridColumnHeader">
                 <Setter Property="ContextMenu" Value="{StaticResource ColumnChooserMenu}" />
                 <Setter Property="Background" Value="Silver"/>

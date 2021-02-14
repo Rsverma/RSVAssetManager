@@ -10,7 +10,10 @@ namespace RAMDesktopUI.Library.Helpers
         {
             CreateOrder,
             OrderManager,
-            PortfolioManager
+            PortfolioManager,
+            FundAllocater,
+            Watchlist,
+            Import
         }
     }
 }

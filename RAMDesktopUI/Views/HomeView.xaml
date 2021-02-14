@@ -29,6 +29,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Margin="0 0 0 20"
@@ -45,6 +46,15 @@
 
             <Button x:Name="LaunchPortfolioManager" Grid.Column="3" Grid.Row="1" Margin="10">
                 View Positions
+            </Button>
+            <Button x:Name="LaunchFundAllocater" Grid.Column="1" Grid.Row="2" Margin="10">
+                Allocate Orders
+            </Button>
+            <Button x:Name="LaunchWatchlist" Grid.Column="2" Grid.Row="2" Margin="10">
+                Watchlist
+            </Button>
+            <Button x:Name="LaunchImport" Grid.Column="3" Grid.Row="2" Margin="10">
+                Import Trades
             </Button>
         </Grid>
     </DockPanel>

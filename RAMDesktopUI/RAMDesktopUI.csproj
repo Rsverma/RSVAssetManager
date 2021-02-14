@@ -5,7 +5,7 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <AssemblyName>RSVAssetManager</AssemblyName>
-    <ApplicationIcon>AppIication.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\AppIication.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>

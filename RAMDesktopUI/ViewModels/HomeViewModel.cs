@@ -17,7 +17,8 @@ namespace RAMDesktopUI.ViewModels
         {
             _events = events;
         }
-        public bool CanLaunchPortfolioManager { get { return false; }  }
+        public bool CanLaunchFundAllocater { get { return false; } }
+        public bool CanLaunchImport { get { return false; } }
         public async Task LogOut()
         {
             await _events.PublishOnUIThreadAsync(new LogInOutEvent { IsLogin = false });
@@ -41,6 +42,21 @@ namespace RAMDesktopUI.ViewModels
         public async Task LaunchPortfolioManager()
         {
             await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.PortfolioManager));
+        }
+
+        public async Task LaunchFundAllocater()
+        {
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.FundAllocater));
+        }
+
+        public async Task LaunchWatchlist()
+        {
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.Watchlist));
+        }
+
+        public async Task LaunchImport()
+        {
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.Import));
         }
     }
 }

@@ -60,6 +60,7 @@ namespace RAMDesktopUI
 
             _container.Instance(_container)
                 .PerRequest<IUserEndpoint, UserEndpoint>()
+                .PerRequest<IMarketDataEndpoint, MarketDataEndpoint>()
                 .PerRequest<IOrderEndpoint, OrderEndpoint>();
             _ = _container
                 .Singleton<IWindowManager, WindowManager>()
