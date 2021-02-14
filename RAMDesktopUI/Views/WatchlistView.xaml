@@ -45,7 +45,7 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <!--App icon-->
-            <Image Grid.Column="0" Source="/Resources/OrderManager.ico" Margin="2"
+            <Image Grid.Column="0" Source="/Resources/Watchlist.ico" Margin="2"
                        VerticalAlignment="Center" />
             <TextBlock Grid.Column="1" Text="Watchlist" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
@@ -68,7 +68,7 @@
                   CanUserDeleteRows="False" IsReadOnly="True"
                   CanUserResizeRows="False" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
                   ContextMenu="{StaticResource GridItemsContextMenu}"
-                  AutoGenerateColumns="True"
+                  AutoGenerateColumns="False"
                   >
         </DataGrid>
     </Grid>

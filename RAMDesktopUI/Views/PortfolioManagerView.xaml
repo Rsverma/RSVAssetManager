@@ -45,7 +45,7 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <!--App icon-->
-            <Image Grid.Column="0" Source="/Resources/OrderManager.ico" Margin="2"
+            <Image Grid.Column="0" Source="/Resources/PortfolioManager.ico" Margin="2"
                        VerticalAlignment="Center" />
             <TextBlock Grid.Column="1" Text="Order Manager" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 

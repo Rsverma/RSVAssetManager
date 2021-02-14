@@ -23,13 +23,14 @@
   - Send orders to broker using FIX protocol or save already executed orders to database
 * View Orders
   - View all orders executed by traders in your firm.
+* Symbol Watchlist
+  - Monitor live market prices of Symbols before trading
 * User Roles
   - Permissions for differnet modules in application based on roles for users 
 
 ## Upcoming Features
 * Fund Level Allocation
 * View Positions
-* Symbol Watchlist
 * Multi Trade Import
 
 ## How To Use
@@ -41,9 +42,26 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [V
 $ git clone https://github.com/Rsverma/RSVAssetManager.git
 
 # Go into the repository
-$ cd RSVAssetManager
 
-# Open Solution File RSVAssetManager.sln
+# Open Solution File RSVAssetManager.sln in Visual Studio
+
+# Publish RAMData database in sql server
+
+# Launch RAMApi project as startup
+
+# Click on Register and apply migrations
+
+# Create account using your Email address
+
+# Copy the user from RAMApiAuthDB table to RAMData
+
+# Uncomment role creation code from HomeController with your email address in Privacy method
+
+# Launch Api again and go to Privacy link from Home
+
+# Setup both RAMDesktopUI and RAMApi as startup project
+
+# Launch and login using credentials of registered account
 ```
 
 ## Credits
