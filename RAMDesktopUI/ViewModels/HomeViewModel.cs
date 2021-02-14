@@ -17,7 +17,7 @@ namespace RAMDesktopUI.ViewModels
         {
             _events = events;
         }
-
+        public bool CanLaunchPortfolioManager { get { return false; }  }
         public async Task LogOut()
         {
             await _events.PublishOnUIThreadAsync(new LogInOutEvent { IsLogin = false });

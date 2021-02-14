@@ -66,8 +66,23 @@
                   AlternatingRowBackground="#78909C" CanUserAddRows="False" 
                   CanUserDeleteRows="False" IsReadOnly="True"
                   CanUserResizeRows="False" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
-                  ContextMenu="{StaticResource GridItemsContextMenu}">
-            
+                  ContextMenu="{StaticResource GridItemsContextMenu}"
+                  AutoGenerateColumns="False"
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Ticker Symbol" Binding="{Binding Path=TickerSymbol}"/>
+                <DataGridTextColumn Header="Order Side" Binding="{Binding Path=OrderSide}"/>
+                <DataGridTextColumn Header="Total Quantity" Binding="{Binding Path=TotalQuantity}"/>
+                <DataGridTextColumn Header="Executed Quantity" Binding="{Binding Path=ExecutedQuantity}"/>
+                <DataGridTextColumn Header="Remaining Quantity" Binding="{Binding Path=RemainingQuantity}"/>
+                <DataGridTextColumn Header="Order Type" Binding="{Binding Path=OrderType}"/>
+                <DataGridTextColumn Header="Limit Price" Binding="{Binding Path=LimitPrice}"/>
+                <DataGridTextColumn Header="Avg Price" Binding="{Binding Path=AvgPrice}"/>
+                <DataGridTextColumn Header="Commission And Fees" Binding="{Binding Path=CommissionAndFees}"/>
+                <DataGridTextColumn Header="Total Cost" Binding="{Binding Path=TotalCost}"/>
+                <DataGridTextColumn Header="Trader Name" Binding="{Binding Path=TraderName}"/>
+                <DataGridTextColumn Header="Order Date" Binding="{Binding Path=OrderDate}"/>
+            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </Window>

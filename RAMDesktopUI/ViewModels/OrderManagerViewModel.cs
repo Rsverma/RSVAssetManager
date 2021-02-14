@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using RAMDesktopUI.Library.Api;
 using RAMDesktopUI.Library.Models;
+using RAMDesktopUI.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,11 +29,36 @@ namespace RAMDesktopUI.ViewModels
         private async Task LoadOrders()
         {
             var orderDetails = await _orderEndpoint.GetAll();
-            Orders = new BindingList<OrderDetailModel>(orderDetails);
-        }
-        private BindingList<OrderDetailModel> _orders;
+            foreach(var order in orderDetails)
+            {
+                OrderManagerRowModel orderRow = new OrderManagerRowModel
+                {
+                    TickerSymbol = order.TickerSymbol,
+                    AvgPrice = order.AvgPrice,
+                    LimitPrice = order.LimitPrice,
+                    OrderDate = order.OrderDate,
+                    CommissionAndFees = order.CommissionAndFees,
+                    TotalQuantity = order.Quantity,
+                    ExecutedQuantity = order.Quantity,
+                    RemainingQuantity = 0,
+                    OrderType = order.OrderType == 0 ? "Market" : "Limit",
+                    TraderName = "Ramesh Verma"
+                };
+                orderRow.TotalCost = order.AvgPrice + order.CommissionAndFees;
 
-        public BindingList<OrderDetailModel> Orders
+                orderRow.OrderSide = order.OrderSide switch
+                {
+                    1 => "Sell",
+                    2 => "SellShort",
+                    3 => "BuyToClose",
+                    _ => "Buy"
+                };
+                Orders.Add(orderRow);
+            }
+        }
+        private BindingList<OrderManagerRowModel> _orders = new BindingList<OrderManagerRowModel>();
+
+        public BindingList<OrderManagerRowModel> Orders
         {
             get { return _orders; }
             set { _orders = value;
