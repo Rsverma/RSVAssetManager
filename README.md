@@ -30,8 +30,13 @@
 
 ## Upcoming Features
 * Fund Level Allocation
-* View Positions
+* Portfolio Manager
 * Multi Trade Import
+
+## Wishlist
+* Xamarin app with same features
+* Blazor Website with same features
+* Unit testing
 
 ## How To Use
 
@@ -85,5 +90,6 @@ AGPL-3.0
 
 ---
 
+> Email [@rsverma333](rsverma333@gmail.com) &nbsp;&middot;&nbsp;
 > GitHub [@Rsverma](https://github.com/Rsverma) &nbsp;&middot;&nbsp;
 > LinkedIn [@rsverma333](https://www.linkedin.com/in/rsverma333/)
