@@ -89,7 +89,6 @@ This software uses the following open source packages:
 AGPL-3.0 
 
 ---
-
-> Email [@rsverma333](rsverma333@gmail.com) &nbsp;&middot;&nbsp;
+<a href="mailto:rsverma333@gmail.com?"><img src="https://img.shields.io/badge/gmail-%23DD0031.svg?&style=for-the-badge&logo=gmail&logoColor=white"/></a>
 > GitHub [@Rsverma](https://github.com/Rsverma) &nbsp;&middot;&nbsp;
 > LinkedIn [@rsverma333](https://www.linkedin.com/in/rsverma333/)
