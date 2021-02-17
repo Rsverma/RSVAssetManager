@@ -72,7 +72,7 @@
             </ContextMenu>
 
             <Style x:Key="ColumnHeaderStyle" TargetType="DataGridColumnHeader">
-                <Setter Property="ContextMenu" Value="{StaticResource ColumnChooserMenu}" />
+                <!--<Setter Property="ContextMenu" Value="{StaticResource ColumnChooserMenu}" />-->
                 <Setter Property="Background" Value="Silver"/>
                 <Setter Property="Foreground" Value="Black"/>
                 <Setter Property="Padding" Value="5" />
