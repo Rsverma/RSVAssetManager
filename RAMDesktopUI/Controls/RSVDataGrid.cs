@@ -12,7 +12,7 @@ namespace RAMDesktopUI.Controls
     public class RSVDataGrid : DataGrid
     {
         private ObservableCollection<DataGridColumn> _columns;
-        private SortedDictionary<string, bool> _columnsVisiblityMapping = new SortedDictionary<string, bool>();
+        private List<KeyValuePair<string,bool>> _columnsVisiblityMapping = new List<KeyValuePair<string, bool>>();
 
         public RSVDataGrid()
             : base()
@@ -26,7 +26,7 @@ namespace RAMDesktopUI.Controls
             _columns = grid.Columns;
             foreach(var col in _columns)
             {
-                _columnsVisiblityMapping.TryAdd(col.Header.ToString(), col.Visibility == Visibility.Visible);
+                _columnsVisiblityMapping.Add(new KeyValuePair<string, bool>(col.Header.ToString(), col.Visibility == Visibility.Visible));
             }
             ReplaceSelectAllButton(this);
             Loaded -= RSVDataGrid_Loaded;
@@ -46,6 +46,7 @@ namespace RAMDesktopUI.Controls
                     {
                         VerticalAlignment = VerticalAlignment.Center,
                         HorizontalAlignment = HorizontalAlignment.Center,
+                        Margin = new Thickness(1)
                     };
 
                     button.Click += OnColumnChooserClicked;
@@ -62,19 +63,12 @@ namespace RAMDesktopUI.Controls
         //Action when the top left check box checked and unchecked
         void OnColumnChooserClicked(object sender, RoutedEventArgs e)
         { var button = sender as Button;
-            Window win = new Window
+            RSVColumnChooser win = new RSVColumnChooser
             {
-                Height = 100,
-                Width = 50,
-                ShowInTaskbar = false,
                 Owner = Window.GetWindow(this),
-                WindowStartupLocation = WindowStartupLocation.CenterOwner
+                //ColumnsVisiblityMapping = _columnsVisiblityMapping
             };
-            win.Content = new ListBox
-            {
-                ItemsSource = _columnsVisiblityMapping.Keys
-            };
-            _ = win.ShowDialog();
+            win.Show();
         }
     }
 }
