@@ -13,7 +13,7 @@
         mc:Ignorable="d" WindowStyle="None"
         x:Name="PortfolioManager" Height="450" Width="800" WindowState="{Binding CurWindowState, Mode=TwoWay}">
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="29" />
+        <WindowChrome CaptionHeight="25" />
     </WindowChrome.WindowChrome>
 
     <!--Title bar button commands-->
@@ -66,8 +66,7 @@
         <DataGrid x:Name="Positions" Grid.Row="1" Grid.Column="1" Margin="0 10"
                   AlternatingRowBackground="#78909C" CanUserAddRows="False" 
                   CanUserDeleteRows="False" IsReadOnly="True"
-                  CanUserResizeRows="False" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
-                  ContextMenu="{StaticResource GridItemsContextMenu}"
+                  CanUserResizeRows="False"
                   AutoGenerateColumns="True"
                   >
         </DataGrid>

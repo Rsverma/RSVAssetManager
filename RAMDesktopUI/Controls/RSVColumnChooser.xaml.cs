@@ -20,13 +20,8 @@ namespace RAMDesktopUI.Controls
     /// </summary>
     public partial class RSVColumnChooser : Window, INotifyPropertyChanged
     {
-        public class ColumnVisibility
-        {
-            public string Name { get; set; }
-            public bool IsVisible { get; set; }
-        }
-        private List<ColumnVisibility> _columnsVisiblityMapping;
-        public List<ColumnVisibility> ColumnsVisiblityMapping
+        private BindingList<ColumnVisibility> _columnsVisiblityMapping = new BindingList<ColumnVisibility>();
+        public BindingList<ColumnVisibility> ColumnsVisiblityMapping
         {
             get
             {
@@ -39,20 +34,34 @@ namespace RAMDesktopUI.Controls
             }
         }
 
-
         public RSVColumnChooser()
         {
-            ColumnsVisiblityMapping = new List<ColumnVisibility> { new ColumnVisibility { Name = "RSV", IsVisible = true } };
             InitializeComponent();
             DataContext = this;
         }
+
+        public event RoutedEventHandler CheckedUnChecked;
+
+        private void CheckBoxChanged(object sender, RoutedEventArgs e)
+        {
+            CheckedUnChecked?.Invoke(sender, e);
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(String name)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        // Close
+        private void CommandBinding_Executed_Close(object sender, ExecutedRoutedEventArgs e)
+        {
+            SystemCommands.CloseWindow(this);
+        }
+        // Can execute
+        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
         }
     }
 }

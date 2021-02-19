@@ -14,7 +14,7 @@
         mc:Ignorable="d" WindowStyle="None" x:Name="OrderManager"
         Title="Order Manager" Height="600" Width="1000" WindowState="{Binding CurWindowState, Mode=TwoWay}">
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="29" />
+        <WindowChrome CaptionHeight="25" />
     </WindowChrome.WindowChrome>
 
     <!--Title bar button commands-->
@@ -66,9 +66,7 @@
         <controls:RSVDataGrid x:Name="Orders" Grid.Row="1" Grid.Column="1" Margin="0 10"
                   AlternatingRowBackground="#78909C" CanUserAddRows="False" 
                   CanUserDeleteRows="False" IsReadOnly="True"
-                  CanUserResizeRows="False" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
-                  ContextMenu="{StaticResource GridItemsContextMenu}"
-                  AutoGenerateColumns="False"
+                  CanUserResizeRows="False" AutoGenerateColumns="False"
                   >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Ticker Symbol" Binding="{Binding Path=TickerSymbol}"/>
