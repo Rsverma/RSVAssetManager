@@ -55,7 +55,23 @@ namespace RAMDesktopUI.ViewModels
                 };
                 Orders.Add(orderRow);
             }
+            Status = "Data Initialized";
         }
+
+        private string _status = string.Empty;
+        public string Status
+        {
+            get
+            {
+                return _status;
+            }
+            set
+            {
+                _status = value;
+                NotifyOfPropertyChange(() => Status);
+            }
+        }
+
         private BindingList<OrderManagerRowModel> _orders = new BindingList<OrderManagerRowModel>();
 
         public BindingList<OrderManagerRowModel> Orders

@@ -26,7 +26,7 @@ namespace RAMDesktopUI.ViewModels
         protected override void OnViewLoaded(object view)
         {
             _symbols = _marketData.GetWatchlistSymbols();
-            _timer = new Timer(3000);
+            _timer = new Timer(30000);
             // Hook up the Elapsed event for the timer. 
             _timer.Elapsed += OnTimedEventAsync;
             _timer.AutoReset = true;

@@ -38,6 +38,20 @@ namespace RAMDesktopUI.ViewModels
             AvgPrice = 0;
         }
 
+        private string _status = string.Empty;
+        public string Status
+        {
+            get
+            {
+                return _status;
+            }
+            set
+            {
+                _status = value;
+                NotifyOfPropertyChange(() => Status);
+            }
+        }
+
         private string _symbol = string.Empty;
 
         public string Symbol
@@ -167,7 +181,15 @@ namespace RAMDesktopUI.ViewModels
                 LimitPrice = LimitPrice,
                 AvgPrice = AvgPrice
             };
-            await _orderEndpoint.PostOrder(order); 
+            try
+            {
+                await _orderEndpoint.PostOrder(order);
+                Status = "Order Saved";
+            }
+            catch(Exception ex)
+            {
+                Status = ex.Message;
+            }
             ResetOrderViewModel();
         }
         private void ResetOrderViewModel()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RAMDesktopUI.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -80,6 +81,7 @@ namespace RAMDesktopUI.Controls
 
                     if (child is Button button)
                     {
+                        button.Command = null;
                         button.Click += OnColumnChooserClicked;
                     }
                     else
@@ -90,32 +92,40 @@ namespace RAMDesktopUI.Controls
             }
         }
 
+        private RSVColumnChooser columnChooser;
         //Action when the top left check box checked and unchecked
         void OnColumnChooserClicked(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
-            BindingList<ColumnVisibility> columnsVisiblityMapping = new BindingList<ColumnVisibility>();
-            foreach (var col in _columns)
+            if (columnChooser == null)
             {
-                columnsVisiblityMapping.Add(new ColumnVisibility { Name = col.Header.ToString(), IsVisible = col.Visibility == Visibility.Visible });
-            }
-            RSVColumnChooser win = new RSVColumnChooser
-            {
-                Owner = Window.GetWindow(this),
-                ColumnsVisiblityMapping = columnsVisiblityMapping
-            };
+                var button = sender as Button;
+                BindingList<ColumnVisibility> columnsVisiblityMapping = new BindingList<ColumnVisibility>();
+                foreach (var col in _columns)
+                {
+                    columnsVisiblityMapping.Add(new ColumnVisibility { Name = col.Header.ToString(), IsVisible = col.Visibility == Visibility.Visible });
+                }
+                columnChooser = new RSVColumnChooser
+                {
+                    Owner = Window.GetWindow(this),
+                    ColumnsVisiblityMapping = columnsVisiblityMapping
+                };
 
-            win.CheckedUnChecked += Win_CheckedUnChecked;
-            win.Closing += Win_Closing;
-            win.Show();
+                columnChooser.CheckedUnChecked += Win_CheckedUnChecked;
+                columnChooser.Closing += Win_Closing;
+                columnChooser.Show();
+            }
+            else
+            {
+                columnChooser.Activate();
+            }
             e.Handled = true;
         }
 
         private void Win_Closing(object sender, CancelEventArgs e)
         {
-            RSVColumnChooser win = sender as RSVColumnChooser;
-            win.CheckedUnChecked -= Win_CheckedUnChecked;
-            win.Closing -= Win_Closing;
+            columnChooser.CheckedUnChecked -= Win_CheckedUnChecked;
+            columnChooser.Closing -= Win_Closing;
+            columnChooser = null;
         }
 
         private void Win_CheckedUnChecked(object sender, RoutedEventArgs e)
