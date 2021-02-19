@@ -72,18 +72,20 @@ namespace RAMDesktopUI.Controls
 
         void ReplaceSelectAllButton(DependencyObject dependencyObject)
         {
-            if (dependencyObject == null) return;
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(dependencyObject); i++)
             {
                 var child = VisualTreeHelper.GetChild(dependencyObject, i);
+                if(child!=null)
+                {
 
-                if ((child != null) && child is Button button)
-                {
-                    button.Click += OnColumnChooserClicked;
-                }
-                else if (child != null)
-                {
-                    ReplaceSelectAllButton(child);
+                    if (child is Button button)
+                    {
+                        button.Click += OnColumnChooserClicked;
+                    }
+                    else
+                    {
+                        ReplaceSelectAllButton(child);
+                    }
                 }
             }
         }
