@@ -3,6 +3,9 @@
     @OrderSide int,
     @Quantity int,
     @OrderType int,
+    @Broker int,
+    @Allocation int,
+    @StopPrice money,
     @LimitPrice money,
     @AvgPrice money,
     @CommissionAndFees money,
@@ -12,9 +15,9 @@
 AS
 BEGIN
 	SET NOCOUNT ON;
-	Insert into dbo.[Order] (TickerSymbol, Side, Quantity, Type, LimitPrice, AvgPrice, CommissionAndFees
+	Insert into dbo.[Order] (TickerSymbol, Side, Quantity, [Type], [Broker], Allocation, StopPrice, LimitPrice, AvgPrice, CommissionAndFees
     , TotalCost, TraderId, OrderDate)
-	Values (@TickerSymbol, @OrderSide, @Quantity, @OrderType, @LimitPrice,@AvgPrice, @CommissionAndFees
+	Values (@TickerSymbol, @OrderSide, @Quantity, @OrderType, @Broker, @Allocation, @StopPrice, @LimitPrice,@AvgPrice, @CommissionAndFees
     , @CommissionAndFees + @AvgPrice,@TraderId,@OrderDate);
 
 	Select @@IDENTITY;

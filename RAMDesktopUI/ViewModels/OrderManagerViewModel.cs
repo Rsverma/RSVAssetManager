@@ -28,30 +28,48 @@ namespace RAMDesktopUI.ViewModels
 
         private async Task LoadOrders()
         {
-            var orderDetails = await _orderEndpoint.GetAll();
-            foreach(var order in orderDetails)
+            List<OrderDetailModel> orderDetails = await _orderEndpoint.GetAll();
+            foreach (OrderDetailModel order in orderDetails)
             {
                 OrderManagerRowModel orderRow = new OrderManagerRowModel
                 {
                     TickerSymbol = order.TickerSymbol,
                     AvgPrice = order.AvgPrice,
+                    StopPrice = order.StopPrice,
                     LimitPrice = order.LimitPrice,
                     OrderDate = order.OrderDate,
                     CommissionAndFees = order.CommissionAndFees,
                     TotalQuantity = order.Quantity,
                     ExecutedQuantity = order.Quantity,
                     RemainingQuantity = 0,
-                    OrderType = order.OrderType == 0 ? "Market" : "Limit",
                     TraderName = "Ramesh Verma"
                 };
                 orderRow.TotalCost = order.AvgPrice + order.CommissionAndFees;
 
+                orderRow.OrderType = order.OrderType switch
+                {
+                    1 => "Limit",
+                    2 => "Stoploss",
+                    _ => "Market",
+                };
                 orderRow.OrderSide = order.OrderSide switch
                 {
                     1 => "Sell",
                     2 => "SellShort",
                     3 => "BuyToClose",
                     _ => "Buy"
+                };
+                orderRow.Broker = order.Broker switch
+                {
+                    1 => "GS",
+                    _ => "MS",
+                };
+                orderRow.Allocation = order.Allocation switch
+                {
+                    1 => "Acc1",
+                    2 => "Acc2",
+                    3 => "Acc3",
+                    _ => "Unallocated",
                 };
                 Orders.Add(orderRow);
             }

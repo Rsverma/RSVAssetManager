@@ -35,8 +35,14 @@ namespace RAMApi.Controllers
                 AvgPrice = order.AvgPrice,
                 TraderId = traderId,
                 LimitPrice = order.LimitPrice,
+                StopPrice = order.StopPrice,
                 Quantity = (int)order.Quantity,
-                OrderType = order.OrderType.Equals("Market") ? 0 : 1
+            };
+            orderDetails.OrderType = order.OrderType switch
+            {
+                "Limit" => 1,
+                "Stoploss" => 2,
+                _ => 0,
             };
             orderDetails.OrderSide = order.OrderSide switch
             {
@@ -45,6 +51,19 @@ namespace RAMApi.Controllers
                 "BuyToClose" => 3,
                 _ => 0,
             };
+            orderDetails.Broker = order.Broker switch
+            {
+                "GS" => 1,
+                _ => 0,
+            };
+            orderDetails.Allocation = order.Allocation switch
+            {
+                "Acc1" => 1,
+                "Acc2" => 2,
+                "Acc3" => 3,
+                _ => 0,
+            };
+
             _orderData.SaveOrder(orderDetails);
         }
 

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace RAMDesktopUI.ViewModels
 {
@@ -70,6 +71,14 @@ namespace RAMDesktopUI.ViewModels
             get
             {
                 return !String.IsNullOrEmpty(UserName) && !String.IsNullOrEmpty(Password);
+            }
+        }
+
+        public async Task ExecuteFilterView(KeyEventArgs keyArgs)
+        {
+            if (keyArgs.Key == Key.Enter && CanLogIn)
+            {
+                await LogIn();
             }
         }
 

@@ -17,6 +17,9 @@
         
         Title="RSV Asset Manager" Height="300" Width="500">
 
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="10" />
+    </WindowChrome.WindowChrome>
     <Grid>
         <ContentControl x:Name="ActiveItem"/>
     </Grid>

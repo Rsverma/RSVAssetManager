@@ -74,4 +74,7 @@
     <Build Include="dbo\Stored Procedures\spOrder_Insert.sql" />
     <Build Include="dbo\Stored Procedures\spOrder_GetAll.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="RAMData.refactorlog" />
+  </ItemGroup>
 </Project>

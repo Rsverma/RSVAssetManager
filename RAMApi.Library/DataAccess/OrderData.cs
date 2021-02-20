@@ -24,5 +24,10 @@ namespace RAMApi.Library.DataAccess
         {
             _sql.SaveData("dbo.spOrder_Insert", orderInfo, "RAMData");
         }
+
+        public void SendOrder(OrderDBModel orderInfo)
+        {
+            
+        }
     }
 }

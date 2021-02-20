@@ -29,11 +29,16 @@ namespace RAMDesktopUI.ViewModels
         {
             Securities = new BindingList<string>() { "AAPL", "MSFT", "GOOG" };
             OrderSides = new BindingList<string>() { "Buy", "Sell", "SellShort", "BuyToClose" };
-            OrderTypes = new BindingList<string>() { "Market", "Limit"};
+            OrderTypes = new BindingList<string>() { "Market", "Limit", "Stoploss" };
+            Brokers = new BindingList<string>() { "GS", "MS" };
+            Allocations = new BindingList<string>() { "Unallocated", "Acc1", "Acc2", "Acc3" };
             Symbol = string.Empty;
             SelectedOrderSide = "Buy";
             SelectedOrderType = "Market";
+            SelectedBroker = string.Empty;
+            SelectedAllocation = "Unallocated";
             Quantity = 1;
+            StopPrice = 0;
             LimitPrice = 0;
             AvgPrice = 0;
         }
@@ -106,6 +111,7 @@ namespace RAMDesktopUI.ViewModels
                 _selectedOrderType = value;
                 NotifyOfPropertyChange(() => SelectedOrderType);
                 NotifyOfPropertyChange(() => LimitPriceEnabled);
+                NotifyOfPropertyChange(() => StopPriceEnabled);
             }
         }
 
@@ -125,7 +131,75 @@ namespace RAMDesktopUI.ViewModels
         {
             get
             {
-                return (bool)(SelectedOrderType?.Equals("Limit"));
+                return (bool)(SelectedOrderType?.Equals("Limit")) || (bool)(SelectedOrderType?.Equals("Stoploss"));
+            }
+        }
+
+        private string _selecteBroker = string.Empty;
+
+        public string SelectedBroker
+        {
+            get { return _selecteBroker; }
+            set
+            {
+                _selecteBroker = value;
+                NotifyOfPropertyChange(() => SelectedBroker);
+            }
+        }
+
+        private BindingList<string> _brokers;
+
+        public BindingList<string> Brokers
+        {
+            get { return _brokers; }
+            set
+            {
+                _brokers = value;
+                NotifyOfPropertyChange(() => Brokers);
+            }
+        }
+
+        private string _selectedAllocation = "Unallocated";
+
+        public string SelectedAllocation
+        {
+            get { return _selectedAllocation; }
+            set
+            {
+                _selectedAllocation = value;
+                NotifyOfPropertyChange(() => SelectedAllocation);
+            }
+        }
+
+        private BindingList<string> _allocations;
+
+        public BindingList<string> Allocations
+        {
+            get { return _allocations; }
+            set
+            {
+                _allocations = value;
+                NotifyOfPropertyChange(() => Allocations);
+            }
+        }
+
+        public bool StopPriceEnabled
+        {
+            get
+            {
+                return (bool)(SelectedOrderType?.Equals("Stoploss"));
+            }
+        }
+
+        private decimal _stopPrice = 0;
+
+        public decimal StopPrice
+        {
+            get { return _stopPrice; }
+            set
+            {
+                _stopPrice = value;
+                NotifyOfPropertyChange(() => StopPrice);
             }
         }
 
@@ -178,6 +252,9 @@ namespace RAMDesktopUI.ViewModels
                 OrderSide = SelectedOrderSide,
                 Quantity = Quantity,
                 OrderType = SelectedOrderType,
+                Broker = SelectedBroker,
+                Allocation = SelectedAllocation,
+                StopPrice = StopPrice,
                 LimitPrice = LimitPrice,
                 AvgPrice = AvgPrice
             };

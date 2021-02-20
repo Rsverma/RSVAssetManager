@@ -10,6 +10,9 @@ namespace RAMDesktopUI.Library.Models
         public int OrderSide { get; set; }
         public int Quantity { get; set; }
         public int OrderType { get; set; }
+        public int Broker { get; set; }
+        public int Allocation { get; set; }
+        public decimal StopPrice { get; set; }
         public decimal LimitPrice { get; set; }
         public decimal AvgPrice { get; set; }
         public decimal CommissionAndFees { get; set; } = 0;

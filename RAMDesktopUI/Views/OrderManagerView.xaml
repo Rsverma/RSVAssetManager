@@ -72,10 +72,13 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Ticker Symbol" Binding="{Binding Path=TickerSymbol}"/>
                 <DataGridTextColumn Header="Order Side" Binding="{Binding Path=OrderSide}"/>
+                <DataGridTextColumn Header="Broker" Binding="{Binding Path=Broker}"/>
+                <DataGridTextColumn Header="Allocation" Binding="{Binding Path=Allocation}"/>
                 <DataGridTextColumn Header="Total Quantity" Binding="{Binding Path=TotalQuantity}"/>
                 <DataGridTextColumn Header="Executed Quantity" Binding="{Binding Path=ExecutedQuantity}"/>
                 <DataGridTextColumn Header="Remaining Quantity" Binding="{Binding Path=RemainingQuantity}"/>
                 <DataGridTextColumn Header="Order Type" Binding="{Binding Path=OrderType}"/>
+                <DataGridTextColumn Header="Stop Price" Binding="{Binding Path=StopPrice}"/>
                 <DataGridTextColumn Header="Limit Price" Binding="{Binding Path=LimitPrice}"/>
                 <DataGridTextColumn Header="Avg Price" Binding="{Binding Path=AvgPrice}"/>
                 <DataGridTextColumn Header="Commission And Fees" Binding="{Binding Path=CommissionAndFees}"/>
