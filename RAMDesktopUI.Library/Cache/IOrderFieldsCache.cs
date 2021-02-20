@@ -7,6 +7,7 @@ namespace RAMDesktopUI.Library.Cache
     {
         List<AccountModel> Accounts { get; }
         List<BrokerModel> Brokers { get; }
+        List<SecurityModel> Securities { get; }
         List<UserModel> Users { get; }
     }
 }

@@ -31,16 +31,16 @@ namespace RAMDesktopUI.ViewModels
 
         private void InitializeData()
         {
-            Securities = new BindingList<string>() { "AAPL", "MSFT", "GOOG" };
+            Symbols = new BindingList<SecurityModel>(_fieldsCache.Securities);
             OrderSides = new BindingList<string>() { "Buy", "Sell", "SellShort", "BuyToClose" };
             OrderTypes = new BindingList<string>() { "Market", "Limit", "Stoploss" };
-            Brokers = new BindingList<string>() { "GS", "MS" };
-            Allocations = new BindingList<string>() { "Unallocated", "Acc1", "Acc2", "Acc3" };
-            Symbol = string.Empty;
+            Brokers = new BindingList<BrokerModel>(_fieldsCache.Brokers);
+            Allocations = new BindingList<AccountModel>(_fieldsCache.Accounts);
+            SelectedSymbol = _fieldsCache.Securities.First();
             SelectedOrderSide = "Buy";
             SelectedOrderType = "Market";
-            SelectedBroker = string.Empty;
-            SelectedAllocation = "Unallocated";
+            SelectedBroker = _fieldsCache.Brokers.First();
+            SelectedAllocation = _fieldsCache.Accounts.First();
             Quantity = 1;
             StopPrice = 0;
             LimitPrice = 0;
@@ -61,23 +61,23 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
-        private string _symbol = string.Empty;
+        private SecurityModel _selectedSymbol;
 
-        public string Symbol
+        public SecurityModel SelectedSymbol
         {
-            get { return _symbol; }
-            set { _symbol = value; }
+            get { return _selectedSymbol; }
+            set { _selectedSymbol = value; }
         }
 
-        private BindingList<string> _securities = new BindingList<string>();
+        private BindingList<SecurityModel> _symbols;
 
-        public BindingList<string> Securities
+        public BindingList<SecurityModel> Symbols
         {
-            get { return _securities; }
+            get { return _symbols; }
             set
             {
-                _securities = value;
-                NotifyOfPropertyChange(() => Securities);
+                _symbols = value;
+                NotifyOfPropertyChange(() => Symbols);
             }
         }
 
@@ -139,9 +139,9 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
-        private string _selecteBroker = string.Empty;
+        private BrokerModel _selecteBroker;
 
-        public string SelectedBroker
+        public BrokerModel SelectedBroker
         {
             get { return _selecteBroker; }
             set
@@ -151,9 +151,9 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
-        private BindingList<string> _brokers;
+        private BindingList<BrokerModel> _brokers;
 
-        public BindingList<string> Brokers
+        public BindingList<BrokerModel> Brokers
         {
             get { return _brokers; }
             set
@@ -163,9 +163,9 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
-        private string _selectedAllocation = "Unallocated";
+        private AccountModel _selectedAllocation;
 
-        public string SelectedAllocation
+        public AccountModel SelectedAllocation
         {
             get { return _selectedAllocation; }
             set
@@ -175,9 +175,9 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
-        private BindingList<string> _allocations;
+        private BindingList<AccountModel> _allocations;
 
-        public BindingList<string> Allocations
+        public BindingList<AccountModel> Allocations
         {
             get { return _allocations; }
             set
@@ -244,20 +244,20 @@ namespace RAMDesktopUI.ViewModels
         }
         public bool IsValidOrder(bool isSaveOnly)
         {
-            return !string.IsNullOrEmpty(Symbol) && OrderTypes.Contains(SelectedOrderType)
-                && OrderSides.Contains(SelectedOrderSide) && Quantity>0 && LimitPrice>=0 && (!isSaveOnly || AvgPrice >= 0);
+            return SelectedSymbol.Id <= 0 && OrderTypes.Contains(SelectedOrderType)
+                && OrderSides.Contains(SelectedOrderSide) && Quantity > 0 && LimitPrice >= 0 && (!isSaveOnly || AvgPrice >= 0); ;
         }
 
         public async Task SaveOrder()
         {
             OrderModel order = new OrderModel
             {
-                Symbol = Symbol,
+                Symbol = SelectedSymbol.TickerSymbol,
                 OrderSide = SelectedOrderSide,
                 Quantity = Quantity,
                 OrderType = SelectedOrderType,
-                Broker = SelectedBroker,
-                Allocation = SelectedAllocation,
+                Broker = SelectedBroker.Name,
+                Allocation = SelectedAllocation.Name,
                 StopPrice = StopPrice,
                 LimitPrice = LimitPrice,
                 AvgPrice = AvgPrice

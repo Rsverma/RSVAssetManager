@@ -13,20 +13,20 @@ namespace RAMApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class SecurityController : ControllerBase
+    public class AccountController : ControllerBase
     {
-        private readonly ISecurityData _securityData;
+        private readonly IAccountData _accountData;
 
-        public SecurityController(ISecurityData securityData)
+        public AccountController(IAccountData accountData)
         {
-            _securityData = securityData;
+            _accountData = accountData;
         }
 
-        [Route("GetAllSecurities")]
+        [Route("GetAllAccounts")]
         [HttpGet]
-        public List<SecurityModel> GetAllSecurities()
+        public List<AccountModel> GetAllAccounts()
         {
-            return _securityData.GetAllSecurities();
+            return _accountData.GetAllAccounts();
         }
     }
 }

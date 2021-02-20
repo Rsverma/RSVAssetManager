@@ -13,20 +13,20 @@ namespace RAMApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class SecurityController : ControllerBase
+    public class BrokerController : ControllerBase
     {
-        private readonly ISecurityData _securityData;
+        private readonly IBrokerData _brokerData;
 
-        public SecurityController(ISecurityData securityData)
+        public BrokerController(IBrokerData brokerData)
         {
-            _securityData = securityData;
+            _brokerData = brokerData;
         }
 
-        [Route("GetAllSecurities")]
+        [Route("GetAllBrokers")]
         [HttpGet]
-        public List<SecurityModel> GetAllSecurities()
+        public List<BrokerModel> GetAllBrokers()
         {
-            return _securityData.GetAllSecurities();
+            return _brokerData.GetAllBrokers();
         }
     }
 }

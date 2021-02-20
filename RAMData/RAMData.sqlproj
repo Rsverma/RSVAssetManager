@@ -73,6 +73,11 @@
     <Build Include="dbo\Stored Procedures\spUserLookup.sql" />
     <Build Include="dbo\Stored Procedures\spOrder_Insert.sql" />
     <Build Include="dbo\Stored Procedures\spOrder_GetAll.sql" />
+    <Build Include="dbo\Tables\Broker.sql" />
+    <Build Include="dbo\Tables\Account.sql" />
+    <Build Include="dbo\Stored Procedures\spAccount_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spSecurity_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spBroker_GetAll.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="RAMData.refactorlog" />
