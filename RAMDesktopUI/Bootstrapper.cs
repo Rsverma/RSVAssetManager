@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using RAMDesktopUI.Helpers;
 using RAMDesktopUI.Library.Api;
+using RAMDesktopUI.Library.Cache;
 using RAMDesktopUI.Library.Models;
 using RAMDesktopUI.ViewModels;
 using System;
@@ -61,11 +62,13 @@ namespace RAMDesktopUI
             _container.Instance(_container)
                 .PerRequest<IUserEndpoint, UserEndpoint>()
                 .PerRequest<IMarketDataEndpoint, MarketDataEndpoint>()
-                .PerRequest<IOrderEndpoint, OrderEndpoint>();
+                .PerRequest<IOrderEndpoint, OrderEndpoint>()
+                .PerRequest<IOrderFieldsEndpoint, OrderFieldsEndpoint>();
             _ = _container
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()
                 .Singleton<ILoggedInUserModel, LoggedInUserModel>()
+                .Singleton<IOrderFieldsCache, OrderFieldsCache>()
                 .Singleton<IAPIHelper, APIHelper>();
 
             GetType().Assembly.GetTypes()

@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using RAMDesktopUI.Library.Api;
+using RAMDesktopUI.Library.Cache;
 using RAMDesktopUI.Library.Models;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,12 @@ namespace RAMDesktopUI.ViewModels
     public class CreateOrderViewModel : ModuleBase
     {
         private readonly IOrderEndpoint _orderEndpoint;
-        public CreateOrderViewModel(IOrderEndpoint orderEndpoint)
+        private readonly IOrderFieldsCache _fieldsCache;
+
+        public CreateOrderViewModel(IOrderEndpoint orderEndpoint, IOrderFieldsCache fieldsCache)
         {
             _orderEndpoint = orderEndpoint;
+            _fieldsCache = fieldsCache;
         }
 
         protected override void OnViewLoaded(object view)

@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using RAMDesktopUI.Library.Api;
+using RAMDesktopUI.Library.Cache;
 using RAMDesktopUI.Library.Models;
 using RAMDesktopUI.Models;
 using System;
@@ -23,6 +24,7 @@ namespace RAMDesktopUI.ViewModels
         protected override async void OnViewLoaded(object view)
         {
             base.OnViewLoaded(view);
+            OrderFieldsCache.InitializeCache();
             await LoadOrders();
         }
 
