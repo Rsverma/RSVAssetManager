@@ -70,38 +70,36 @@ namespace RAMApi.Library.Internal.FixAccess
             Console.WriteLine("OUT: " + message.ToString());
         }
 
-        public void OnMessage(
-   QuickFix.FIX44.NewOrderSingle order,
-   SessionID sessionID)
+
+        public void OnMessage(QuickFix.FIX44.ExecutionReport m, SessionID s)
         {
-            ProcessOrder(order.Price, order.OrderQty, order.Account);
+            Console.WriteLine("Received execution report");
         }
 
-        public void OnMessage(
-            QuickFix.FIX44.SecurityDefinition secDef,
-            SessionID sessionID)
+        public void OnMessage(QuickFix.FIX44.OrderCancelReject m, SessionID s)
         {
-            GotSecDef(secDef);
+            Console.WriteLine("Received order cancel reject");
         }
 
-        private void GotSecDef(QuickFix.FIX44.SecurityDefinition secDef)
-        {
-            
-        }
-
-        protected void ProcessOrder(
-        Price price,
-        OrderQty quantity,
-        Account account)
-        {
-            //...
-        }
 
         public void SendOrder(OrderModel order)
         {
-            var orderSingle = new QuickFix.FIX44.NewOrderSingle( new ClOrdID("1234"), new Symbol(order.TickerSymbol),
-                new Side(Side.BUY), new TransactTime(order.OrderDate), new OrdType(OrdType.LIMIT));
+            var orderSingle = new QuickFix.FIX44.NewOrderSingle();
+            orderSingle.ClOrdID = new ClOrdID("1234");
+            orderSingle.Symbol = new Symbol(order.TickerSymbol);
+            orderSingle.Side = new Side(order.OrderSide);
+            orderSingle.OrderQty = new OrderQty(order.Quantity);
+            orderSingle.OrdType = new OrdType(order.OrderType);
+            orderSingle.TimeInForce = new TimeInForce(order.TIF);
+            orderSingle.Account = new Account(order.Allocation.ToString());
+            orderSingle.StopPx = new StopPx(order.StopPrice);
+            orderSingle.Price = new Price(order.LimitPrice);
+            orderSingle.StopPx = new StopPx(order.StopPrice);
+            orderSingle.Commission = new Commission(order.CommissionAndFees);
+            orderSingle.TransactTime = new TransactTime(order.OrderDate);
+
             Session.SendToTarget(orderSingle, SessionID);
+
         }
     }
 }
