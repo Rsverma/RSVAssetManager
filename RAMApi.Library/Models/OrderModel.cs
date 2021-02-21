@@ -8,7 +8,7 @@ namespace RAMApi.Library.Models
     {
         public string TickerSymbol { get; set; }
         public int OrderSide { get; set; }
-        public uint Quantity { get; set; }
+        public int Quantity { get; set; }
         public int OrderType { get; set; }
         public int Broker { get; set; }
         public int Allocation { get; set; }
