@@ -3,7 +3,7 @@
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [TickerSymbol] NVARCHAR(50) NOT NULL, 
     [TraderId] NVARCHAR(128) NOT NULL, 
-    [OrderDate] DATETIME2 NOT NULL, 
+    [OrderDate] DATETIME2 NOT NULL DEFAULT getutcdate(), 
     [Quantity] INT NOT NULL DEFAULT 1, 
     [StopPrice] MONEY NOT NULL DEFAULT 0, 
     [LimitPrice] MONEY NOT NULL DEFAULT 0, 

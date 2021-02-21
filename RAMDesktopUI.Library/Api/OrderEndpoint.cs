@@ -30,13 +30,13 @@ namespace RAMDesktopUI.Library.Api
             }
         }
 
-        public async Task<List<OrderDetailModel>> GetAll()
+        public async Task<List<OrderModel>> GetAll()
         {
             using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync("/api/Order/GetAllOrders"))
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    var result = await response.Content.ReadAsAsync<List<OrderDetailModel>>();
+                    var result = await response.Content.ReadAsAsync<List<OrderModel>>();
                     return result;
                 }
                 else

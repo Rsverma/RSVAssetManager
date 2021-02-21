@@ -8,7 +8,7 @@ namespace RAMDesktopUI.Library.Api
 {
     public interface IOrderEndpoint
     {
-        Task<List<OrderDetailModel>> GetAll();
+        Task<List<OrderModel>> GetAll();
         Task PostOrder(OrderModel sale);
     }
 }

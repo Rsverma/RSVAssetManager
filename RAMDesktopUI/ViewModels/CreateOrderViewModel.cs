@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using RAMDesktopUI.Library.Api;
 using RAMDesktopUI.Library.Cache;
+using RAMDesktopUI.Library.Helpers;
 using RAMDesktopUI.Library.Models;
 using System;
 using System.Collections.Generic;
@@ -32,13 +33,18 @@ namespace RAMDesktopUI.ViewModels
         private void InitializeData()
         {
             Symbols = new BindingList<SecurityModel>(_fieldsCache.Securities);
-            OrderSides = new BindingList<string>() { "Buy", "Sell", "SellShort", "BuyToClose" };
-            OrderTypes = new BindingList<string>() { "Market", "Limit", "Stoploss" };
+            OrderSides = new BindingList<OrderSide>(Enum.GetValues(typeof(OrderSide)).Cast<OrderSide>().ToList());
+            OrderTypes = new BindingList<OrderType>(Enum.GetValues(typeof(OrderType)).Cast<OrderType>().ToList());
             Brokers = new BindingList<BrokerModel>(_fieldsCache.Brokers);
             Allocations = new BindingList<AccountModel>(_fieldsCache.Accounts);
+            SetDefaultValues();
+        }
+
+        private void SetDefaultValues()
+        {
             SelectedSymbol = _fieldsCache.Securities.First();
-            SelectedOrderSide = "Buy";
-            SelectedOrderType = "Market";
+            SelectedOrderSide = OrderSide.Buy;
+            SelectedOrderType = OrderType.Market;
             SelectedBroker = _fieldsCache.Brokers.First();
             SelectedAllocation = _fieldsCache.Accounts.First();
             Quantity = 1;
@@ -81,9 +87,9 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
-        private string _selectedOrderSide = "Buy";
+        private OrderSide _selectedOrderSide;
 
-        public string SelectedOrderSide
+        public OrderSide SelectedOrderSide
         {
             get { return _selectedOrderSide; }
             set
@@ -93,9 +99,9 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
-        private BindingList<string> _orderSides;
+        private BindingList<OrderSide> _orderSides;
 
-        public BindingList<string> OrderSides
+        public BindingList<OrderSide> OrderSides
         {
             get { return _orderSides; }
             set
@@ -105,9 +111,9 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
-        private string _selectedOrderType = "Market";
+        private OrderType _selectedOrderType;
 
-        public string SelectedOrderType
+        public OrderType SelectedOrderType
         {
             get { return _selectedOrderType; }
             set
@@ -119,9 +125,9 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
-        private BindingList<string> _orderTypes;
+        private BindingList<OrderType> _orderTypes;
 
-        public BindingList<string> OrderTypes
+        public BindingList<OrderType> OrderTypes
         {
             get { return _orderTypes; }
             set
@@ -135,7 +141,7 @@ namespace RAMDesktopUI.ViewModels
         {
             get
             {
-                return (bool)(SelectedOrderType?.Equals("Limit")) || (bool)(SelectedOrderType?.Equals("Stoploss"));
+                return SelectedOrderType == OrderType.Limit || SelectedOrderType == OrderType.Stoploss;
             }
         }
 
@@ -191,7 +197,7 @@ namespace RAMDesktopUI.ViewModels
         {
             get
             {
-                return (bool)(SelectedOrderType?.Equals("Stoploss"));
+                return SelectedOrderType == OrderType.Stoploss;
             }
         }
 
@@ -245,19 +251,19 @@ namespace RAMDesktopUI.ViewModels
         public bool IsValidOrder(bool isSaveOnly)
         {
             return SelectedSymbol.Id <= 0 && OrderTypes.Contains(SelectedOrderType)
-                && OrderSides.Contains(SelectedOrderSide) && Quantity > 0 && LimitPrice >= 0 && (!isSaveOnly || AvgPrice >= 0); ;
+                && OrderSides.Contains(SelectedOrderSide) && Quantity > 0 && LimitPrice >= 0 && (!isSaveOnly || AvgPrice >= 0);
         }
 
         public async Task SaveOrder()
         {
             OrderModel order = new OrderModel
             {
-                Symbol = SelectedSymbol.TickerSymbol,
-                OrderSide = SelectedOrderSide,
+                TickerSymbol = SelectedSymbol.TickerSymbol,
+                OrderSide = (int)SelectedOrderSide,
                 Quantity = Quantity,
-                OrderType = SelectedOrderType,
-                Broker = SelectedBroker.Name,
-                Allocation = SelectedAllocation.Name,
+                OrderType = (int)SelectedOrderType,
+                Broker = SelectedBroker.Id,
+                Allocation = SelectedAllocation.Id,
                 StopPrice = StopPrice,
                 LimitPrice = LimitPrice,
                 AvgPrice = AvgPrice

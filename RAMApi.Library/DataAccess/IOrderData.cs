@@ -7,7 +7,7 @@ namespace RAMApi.Library.DataAccess
 {
     public interface IOrderData
     {
-        void SaveOrder(OrderDBModel order);
-        List<OrderDBModel> GetAllOrders();
+        void SaveOrder(OrderModel order);
+        List<OrderModel> GetAllOrders();
     }
 }

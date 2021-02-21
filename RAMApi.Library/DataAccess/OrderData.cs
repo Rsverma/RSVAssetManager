@@ -14,18 +14,18 @@ namespace RAMApi.Library.DataAccess
         {
             _sql = sql;
         }
-        public List<OrderDBModel> GetAllOrders()
+        public List<OrderModel> GetAllOrders()
         {
-            var output = _sql.LoadData<OrderDBModel, dynamic>("dbo.spOrder_GetAll", new { }, "RAMData");
+            var output = _sql.LoadData<OrderModel, dynamic>("dbo.spOrder_GetAll", new { }, "RAMData");
             return output;
         }
 
-        public void SaveOrder(OrderDBModel orderInfo)
+        public void SaveOrder(OrderModel orderInfo)
         {
             _sql.SaveData("dbo.spOrder_Insert", orderInfo, "RAMData");
         }
 
-        public void SendOrder(OrderDBModel orderInfo)
+        public void SendOrder(OrderModel orderInfo)
         {
             
         }

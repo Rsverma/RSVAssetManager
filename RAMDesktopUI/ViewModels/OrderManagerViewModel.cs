@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using RAMDesktopUI.Library.Api;
 using RAMDesktopUI.Library.Cache;
+using RAMDesktopUI.Library.Helpers;
 using RAMDesktopUI.Library.Models;
 using RAMDesktopUI.Models;
 using System;
@@ -16,22 +17,24 @@ namespace RAMDesktopUI.ViewModels
     public class OrderManagerViewModel : ModuleBase
     {
         private readonly IOrderEndpoint _orderEndpoint;
-        public OrderManagerViewModel(IOrderEndpoint orderEndpoint)
+        private readonly IOrderFieldsCache _fieldsCache;
+
+        public OrderManagerViewModel(IOrderEndpoint orderEndpoint, IOrderFieldsCache fieldsCache)
         {
             _orderEndpoint = orderEndpoint;
+            _fieldsCache = fieldsCache;
         }
 
         protected override async void OnViewLoaded(object view)
         {
             base.OnViewLoaded(view);
-            OrderFieldsCache.InitializeCache();
             await LoadOrders();
         }
 
         private async Task LoadOrders()
         {
-            List<OrderDetailModel> orderDetails = await _orderEndpoint.GetAll();
-            foreach (OrderDetailModel order in orderDetails)
+            List<OrderModel> orderDetails = await _orderEndpoint.GetAll();
+            foreach (OrderModel order in orderDetails)
             {
                 OrderManagerRowModel orderRow = new OrderManagerRowModel
                 {
@@ -47,32 +50,10 @@ namespace RAMDesktopUI.ViewModels
                     TraderName = "Ramesh Verma"
                 };
                 orderRow.TotalCost = order.AvgPrice + order.CommissionAndFees;
-
-                orderRow.OrderType = order.OrderType switch
-                {
-                    1 => "Limit",
-                    2 => "Stoploss",
-                    _ => "Market",
-                };
-                orderRow.OrderSide = order.OrderSide switch
-                {
-                    1 => "Sell",
-                    2 => "SellShort",
-                    3 => "BuyToClose",
-                    _ => "Buy"
-                };
-                orderRow.Broker = order.Broker switch
-                {
-                    1 => "GS",
-                    _ => "MS",
-                };
-                orderRow.Allocation = order.Allocation switch
-                {
-                    1 => "Acc1",
-                    2 => "Acc2",
-                    3 => "Acc3",
-                    _ => "Unallocated",
-                };
+                orderRow.OrderType = ((OrderType)order.OrderType).ToString();
+                orderRow.OrderSide = ((OrderSide)order.OrderSide).ToString();
+                orderRow.Broker = order.Broker > 0 ? _fieldsCache.Brokers.FirstOrDefault(x => x.Id.Equals(order.Broker)).Name : string.Empty;
+                orderRow.Allocation = order.Allocation > 0 ? _fieldsCache.Accounts.FirstOrDefault(x => x.Id.Equals(order.Allocation)).Name : "Unallocated";
                 Orders.Add(orderRow);
             }
             Status = "Data Initialized";
