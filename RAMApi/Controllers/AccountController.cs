@@ -26,7 +26,16 @@ namespace RAMApi.Controllers
         [HttpGet]
         public List<AccountModel> GetAllAccounts()
         {
-            return _accountData.GetAllAccounts();
+            List<AccountModel> accounts = new List<AccountModel> 
+            { 
+                new AccountModel 
+                { 
+                    Id = 0,
+                    Name = "Unallocated" 
+                } 
+            };
+            accounts.AddRange(_accountData.GetAllAccounts());
+            return accounts;
         }
     }
 }

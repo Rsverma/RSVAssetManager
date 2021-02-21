@@ -19,6 +19,7 @@ namespace RAMDesktopUI.ViewModels
         }
         public bool CanLaunchFundAllocater { get { return false; } }
         public bool CanLaunchImport { get { return false; } }
+        public bool CanLaunchPortfolioManager { get { return false; } }
         public async Task LogOut()
         {
             await _events.PublishOnUIThreadAsync(new LogInOutEvent { IsLogin = false });

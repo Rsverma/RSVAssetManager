@@ -65,10 +65,9 @@
         </Grid>
 
         <controls:RSVDataGrid x:Name="SymbolMarketData" Grid.Row="1" Grid.Column="1" Margin="0 10"
-                  AlternatingRowBackground="#78909C" CanUserAddRows="False" 
+                  AlternatingRowBackground="Black" CanUserAddRows="False" 
                   CanUserDeleteRows="False" IsReadOnly="True"
-                  CanUserResizeRows="False" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
-                  AutoGenerateColumns="True"
+                  CanUserResizeRows="False" AutoGenerateColumns="True"
                   >
         </controls:RSVDataGrid>
     </Grid>

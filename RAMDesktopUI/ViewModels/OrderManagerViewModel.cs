@@ -52,8 +52,8 @@ namespace RAMDesktopUI.ViewModels
                 orderRow.TotalCost = order.AvgPrice + order.CommissionAndFees;
                 orderRow.OrderType = ((OrderType)order.OrderType).ToString();
                 orderRow.OrderSide = ((OrderSide)order.OrderSide).ToString();
-                orderRow.Broker = order.Broker > 0 ? _fieldsCache.Brokers.FirstOrDefault(x => x.Id.Equals(order.Broker)).Name : string.Empty;
-                orderRow.Allocation = order.Allocation > 0 ? _fieldsCache.Accounts.FirstOrDefault(x => x.Id.Equals(order.Allocation)).Name : "Unallocated";
+                orderRow.Broker = _fieldsCache.Brokers.First(x => x.Id.Equals(order.Broker)).Name;
+                orderRow.Allocation = _fieldsCache.Accounts.First(x => x.Id.Equals(order.Allocation)).Name;
                 Orders.Add(orderRow);
             }
             Status = "Data Initialized";

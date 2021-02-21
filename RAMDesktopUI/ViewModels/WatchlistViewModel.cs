@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
+using System.Windows;
 
 namespace RAMDesktopUI.ViewModels
 {
@@ -26,21 +27,27 @@ namespace RAMDesktopUI.ViewModels
         protected override void OnViewLoaded(object view)
         {
             _symbols = _marketData.GetWatchlistSymbols();
-            _timer = new Timer(30000);
-            // Hook up the Elapsed event for the timer. 
-            _timer.Elapsed += OnTimedEventAsync;
-            _timer.AutoReset = true;
-            _timer.Enabled = true;
+            _timer = new Timer(OnTimedEventAsync,null,0,5000);
             base.OnViewLoaded(view);
         }
 
-        private async void OnTimedEventAsync(object sender, ElapsedEventArgs e)
+        private async void OnTimedEventAsync(object state)
         {
             List<LiveFeedDataModel> marketData = await _marketData.GetSymbolMarketData(_symbols);
-            SymbolMarketData = new BindingList<LiveFeedDataModel>(marketData);
-            //Newtonsoft.Json.
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                foreach (var data in marketData)
+                {
+                    int index = SymbolMarketData.IndexOf(data);
+                    if (index < 0)
+                    {
+                        SymbolMarketData.Add(data);
+                    }
+                    else
+                        SymbolMarketData[index] = data;
+                }
+            });
         }
-
 
         public BindingList<LiveFeedDataModel> SymbolMarketData
         {
