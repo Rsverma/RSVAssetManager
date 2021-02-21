@@ -52,6 +52,8 @@ namespace RAMDesktopUI.ViewModels
                 orderRow.TotalCost = order.AvgPrice + order.CommissionAndFees;
                 orderRow.OrderType = ((OrderType)order.OrderType).ToString();
                 orderRow.OrderSide = ((OrderSide)order.OrderSide).ToString();
+                orderRow.TIF = ((TimeInForce)order.TIF).ToString();
+                orderRow.OrderStatus = ((OrderStatus)order.OrderStatus).ToString();
                 orderRow.Broker = _fieldsCache.Brokers.First(x => x.Id.Equals(order.Broker)).Name;
                 orderRow.Allocation = _fieldsCache.Accounts.First(x => x.Id.Equals(order.Allocation)).Name;
                 Orders.Add(orderRow);

@@ -6,9 +6,8 @@ namespace RAMDesktopUI.Library.Helpers
 {
     public enum OrderSide
     {
-        Buy,
-        Sell,
-        Sellshort,
-        BuyToClose
+        Buy = '1',
+        Sell = '2',
+        Sellshort = '5'
     }
 }

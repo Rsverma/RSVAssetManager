@@ -6,8 +6,9 @@ namespace RAMDesktopUI.Library.Helpers
 {
     public enum OrderType
     {
-        Market,
-        Limit,
-        Stoploss
+        Market = '1',
+        Limit = '2',
+        Stop = '3',
+        StopLimit ='4'
     }
 }

@@ -35,6 +35,7 @@ namespace RAMDesktopUI.ViewModels
             Symbols = new BindingList<SecurityModel>(_fieldsCache.Securities);
             OrderSides = new BindingList<OrderSide>(Enum.GetValues(typeof(OrderSide)).Cast<OrderSide>().ToList());
             OrderTypes = new BindingList<OrderType>(Enum.GetValues(typeof(OrderType)).Cast<OrderType>().ToList());
+            TIFs = new BindingList<TimeInForce>(Enum.GetValues(typeof(TimeInForce)).Cast<TimeInForce>().ToList());
             Brokers = new BindingList<BrokerModel>(_fieldsCache.Brokers);
             Allocations = new BindingList<AccountModel>(_fieldsCache.Accounts);
             SetDefaultValues();
@@ -45,6 +46,7 @@ namespace RAMDesktopUI.ViewModels
             SelectedSymbol = _fieldsCache.Securities.First();
             SelectedOrderSide = OrderSide.Buy;
             SelectedOrderType = OrderType.Market;
+            SelectedTIF = TimeInForce.Day;
             SelectedBroker = _fieldsCache.Brokers.First();
             SelectedAllocation = _fieldsCache.Accounts.First();
             Quantity = 1;
@@ -137,11 +139,35 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
+        private TimeInForce _selectedTIF;
+
+        public TimeInForce SelectedTIF
+        {
+            get { return _selectedTIF; }
+            set
+            {
+                _selectedTIF = value;
+                NotifyOfPropertyChange(() => SelectedTIF);
+            }
+        }
+
+        private BindingList<TimeInForce> _tifs;
+
+        public BindingList<TimeInForce> TIFs
+        {
+            get { return _tifs; }
+            set
+            {
+                _tifs = value;
+                NotifyOfPropertyChange(() => TIFs);
+            }
+        }
+
         public bool LimitPriceEnabled
         {
             get
             {
-                return SelectedOrderType == OrderType.Limit || SelectedOrderType == OrderType.Stoploss;
+                return SelectedOrderType == OrderType.Limit || SelectedOrderType == OrderType.StopLimit;
             }
         }
 
@@ -197,7 +223,7 @@ namespace RAMDesktopUI.ViewModels
         {
             get
             {
-                return SelectedOrderType == OrderType.Stoploss;
+                return SelectedOrderType == OrderType.Stop || SelectedOrderType == OrderType.StopLimit;
             }
         }
 
@@ -253,35 +279,58 @@ namespace RAMDesktopUI.ViewModels
             return SelectedSymbol.Id <= 0 && OrderTypes.Contains(SelectedOrderType)
                 && OrderSides.Contains(SelectedOrderSide) && Quantity > 0 && LimitPrice >= 0 && (!isSaveOnly || AvgPrice >= 0);
         }
-
         public async Task SaveOrder()
         {
-            OrderModel order = new OrderModel
+            OrderModel order = GetOrderFromUI();
+            order.OrderStatus = (char)OrderStatus.Filled;
+            try
+            {
+                await _orderEndpoint.PostOrder(order);
+                Status = "Order saved.";
+            }
+            catch (Exception ex)
+            {
+                Status = ex.Message;
+            }
+            ResetOrderViewModel();
+        }
+
+        public async Task SendToBroker()
+        {
+            OrderModel order = GetOrderFromUI();
+            order.OrderStatus = (char)OrderStatus.PendingNew;
+            try
+            {
+                await _orderEndpoint.PostOrder(order);
+                Status = "Order sent to broker.";
+            }
+            catch (Exception ex)
+            {
+                Status = ex.Message;
+            }
+            ResetOrderViewModel();
+        }
+
+        private OrderModel GetOrderFromUI()
+        {
+            return new OrderModel
             {
                 TickerSymbol = SelectedSymbol.TickerSymbol,
-                OrderSide = (int)SelectedOrderSide,
+                OrderSide = (Char)SelectedOrderSide,
                 Quantity = Quantity,
-                OrderType = (int)SelectedOrderType,
+                OrderType = (Char)SelectedOrderType,
+                TIF = (Char)SelectedTIF,
                 Broker = SelectedBroker.Id,
                 Allocation = SelectedAllocation.Id,
                 StopPrice = StopPrice,
                 LimitPrice = LimitPrice,
                 AvgPrice = AvgPrice
             };
-            try
-            {
-                await _orderEndpoint.PostOrder(order);
-                Status = "Order Saved";
-            }
-            catch(Exception ex)
-            {
-                Status = ex.Message;
-            }
-            ResetOrderViewModel();
         }
+
         private void ResetOrderViewModel()
         {
-            InitializeData();
+            SetDefaultValues();
         }
 
     }

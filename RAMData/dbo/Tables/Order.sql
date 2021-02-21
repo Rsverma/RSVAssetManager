@@ -10,8 +10,10 @@
     [AvgPrice] MONEY NOT NULL, 
     [CommissionAndFees] MONEY NOT NULL DEFAULT 0, 
     [TotalCost] MONEY NOT NULL, 
-    [Side] INT NOT NULL DEFAULT 0, 
-    [Type] INT NOT NULL DEFAULT 0, 
+    [Side] CHAR NOT NULL DEFAULT '1', 
+    [Type] CHAR NOT NULL DEFAULT '1', 
+    [TIF] CHAR NOT NULL DEFAULT '0', 
+    [OrderStatus] CHAR NOT NULL DEFAULT '2', 
     [Broker] INT NOT NULL DEFAULT 0, 
     [Allocation] INT NOT NULL DEFAULT 0
 )

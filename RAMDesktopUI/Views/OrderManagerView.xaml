@@ -78,6 +78,8 @@
                 <DataGridTextColumn Header="Executed Quantity" Binding="{Binding Path=ExecutedQuantity}"/>
                 <DataGridTextColumn Header="Remaining Quantity" Binding="{Binding Path=RemainingQuantity}"/>
                 <DataGridTextColumn Header="Order Type" Binding="{Binding Path=OrderType}"/>
+                <DataGridTextColumn Header="Time in Force" Binding="{Binding Path=TIF}"/>
+                <DataGridTextColumn Header="Order Status" Binding="{Binding Path=OrderStatus}"/>
                 <DataGridTextColumn Header="Stop Price" Binding="{Binding Path=StopPrice}"/>
                 <DataGridTextColumn Header="Limit Price" Binding="{Binding Path=LimitPrice}"/>
                 <DataGridTextColumn Header="Avg Price" Binding="{Binding Path=AvgPrice}"/>

@@ -16,6 +16,8 @@ namespace RAMDesktopUI.Models
         public uint ExecutedQuantity { get; set; }
         public uint RemainingQuantity { get; set; }
         public string OrderType { get; set; }
+        public string TIF { get; set; }
+        public string OrderStatus { get; set; }
         public decimal StopPrice { get; set; }
         public decimal LimitPrice { get; set; }
         public decimal AvgPrice { get; set; }

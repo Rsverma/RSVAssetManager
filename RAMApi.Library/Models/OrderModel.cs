@@ -7,9 +7,11 @@ namespace RAMApi.Library.Models
     public class OrderModel
     {
         public string TickerSymbol { get; set; }
-        public int OrderSide { get; set; }
+        public char OrderSide { get; set; }
         public int Quantity { get; set; }
-        public int OrderType { get; set; }
+        public char OrderType { get; set; }
+        public char TIF { get; set; }
+        public char OrderStatus { get; set; }
         public int Broker { get; set; }
         public int Allocation { get; set; }
         public decimal StopPrice { get; set; }
