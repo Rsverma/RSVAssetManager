@@ -1,7 +1,11 @@
 ﻿CREATE TABLE [dbo].[Order]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [TickerSymbol] NVARCHAR(50) NOT NULL, 
+    [TickerSymbol] NVARCHAR(50) NOT NULL,
+    [OrigClOrderId] NVARCHAR(128) NOT NULL, 
+    [ClOrderId] NVARCHAR(128) NOT NULL, 
+    [StageOrderId] NVARCHAR(128) NULL, 
+    [InternalOrderType] INT NOT NULL, 
     [TraderId] NVARCHAR(128) NOT NULL, 
     [OrderDate] DATETIME2 NOT NULL DEFAULT getutcdate(), 
     [Quantity] INT NOT NULL DEFAULT 1, 

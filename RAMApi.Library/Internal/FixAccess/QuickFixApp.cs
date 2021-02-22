@@ -73,6 +73,8 @@ namespace RAMApi.Library.Internal.FixAccess
 
         public void OnMessage(QuickFix.FIX44.ExecutionReport m, SessionID s)
         {
+            OrderModel order = new OrderModel();
+            //order.AvgPrice = 
             Console.WriteLine("Received execution report");
         }
 
@@ -81,11 +83,10 @@ namespace RAMApi.Library.Internal.FixAccess
             Console.WriteLine("Received order cancel reject");
         }
 
-
         public void SendOrder(OrderModel order)
         {
             var orderSingle = new QuickFix.FIX44.NewOrderSingle();
-            orderSingle.ClOrdID = new ClOrdID("1234");
+            orderSingle.ClOrdID = new ClOrdID(order.ClOrderId);
             orderSingle.Symbol = new Symbol(order.TickerSymbol);
             orderSingle.Side = new Side(order.OrderSide);
             orderSingle.OrderQty = new OrderQty(order.Quantity);

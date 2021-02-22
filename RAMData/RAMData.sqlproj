@@ -78,8 +78,6 @@
     <Build Include="dbo\Stored Procedures\spAccount_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\spSecurity_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\spBroker_GetAll.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="RAMData.refactorlog" />
+    <Build Include="dbo\Tables\Fill.sql" />
   </ItemGroup>
 </Project>

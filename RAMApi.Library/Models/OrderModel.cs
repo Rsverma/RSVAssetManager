@@ -6,6 +6,11 @@ namespace RAMApi.Library.Models
 {
     public class OrderModel
     {
+        public int Id { get; set; }
+        public string OrigClOrderId { get; set; }
+        public string ClOrderId { get; set; }
+        public int StageOrderId { get; set; }
+        public int InternalOrderType { get; set; }
         public string TickerSymbol { get; set; }
         public char OrderSide { get; set; }
         public int Quantity { get; set; }
