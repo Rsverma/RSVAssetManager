@@ -18,24 +18,28 @@ namespace RAMDesktopUI.ViewModels
         private bool _isFieldCacheInitialized = false;
         private bool _isOrderCacheInitialized = false;
 
-        public HomeViewModel(IEventAggregator events, IOrderCache orderCache, IOrderFieldsCache fieldsCache)
+        public HomeViewModel(IEventAggregator events, IOrderFieldsCache fieldsCache, IOrderCache orderCache)
         {
-            orderCache.InitializationCompleted += OrderCache_InitializationCompleted;
             fieldsCache.InitializationCompleted += FieldsCache_InitializationCompleted;
-            _events = events;
-            _orderCache = orderCache;
             _fieldsCache = fieldsCache;
+            orderCache.InitializationCompleted += OrderCache_InitializationCompleted;
+            _orderCache = orderCache;
+            _events = events;
         }
 
         private void FieldsCache_InitializationCompleted(object sender, EventArgs e)
         {
             _isFieldCacheInitialized = true;
+            NotifyOfPropertyChange(() => CanLaunchCreateOrder);
+            NotifyOfPropertyChange(() => CanLaunchOrderManager);
             _fieldsCache.InitializationCompleted -= FieldsCache_InitializationCompleted;
         }
 
         private void OrderCache_InitializationCompleted(object sender, EventArgs e)
         {
             _isOrderCacheInitialized = true;
+            NotifyOfPropertyChange(() => CanLaunchCreateOrder);
+            NotifyOfPropertyChange(() => CanLaunchOrderManager);
             _orderCache.InitializationCompleted -= OrderCache_InitializationCompleted;
         }
 

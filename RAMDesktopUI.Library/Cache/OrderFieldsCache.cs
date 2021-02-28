@@ -14,9 +14,7 @@ namespace RAMDesktopUI.Library.Cache
         public OrderFieldsCache(IOrderFieldsEndpoint orderFields)
         {
             _orderFields = orderFields;
-            _accounts = Task.Run(() => _orderFields.GetAccounts()).Result;
-            _brokers = Task.Run(() => _orderFields.GetBrokers()).Result;
-            _securities = Task.Run(() => _orderFields.GetSecurities()).Result;
+            _ = InitializeCache();
         }
 
         private async Task InitializeCache()
