@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spOrder_GetAll]
 AS
-	SELECT TickerSymbol, Side as OrderSide, Quantity, [Type] as OrderType, TIF, OrderStatus, [Broker], Allocation, StopPrice, LimitPrice, AvgPrice, CommissionAndFees
-    , TotalCost, TraderId, OrderDate FROM dbo.[Order]
+	SELECT Id, OrigClOrderId, ClOrderId, StageOrderId, InternalOrderType, TraderId, OrderDate, Quantity, StopPrice, LimitPrice,
+    AvgPrice, CommissionAndFees, TotalCost, Side, [Type], TIF, OrderStatus, [Broker], Allocation FROM dbo.[Order]
 RETURN 0

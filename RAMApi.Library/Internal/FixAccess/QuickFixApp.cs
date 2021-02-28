@@ -85,19 +85,20 @@ namespace RAMApi.Library.Internal.FixAccess
 
         public void SendOrder(OrderModel order)
         {
-            var orderSingle = new QuickFix.FIX44.NewOrderSingle();
-            orderSingle.ClOrdID = new ClOrdID(order.ClOrderId);
-            orderSingle.Symbol = new Symbol(order.TickerSymbol);
-            orderSingle.Side = new Side(order.OrderSide);
-            orderSingle.OrderQty = new OrderQty(order.Quantity);
-            orderSingle.OrdType = new OrdType(order.OrderType);
-            orderSingle.TimeInForce = new TimeInForce(order.TIF);
-            orderSingle.Account = new Account(order.Allocation.ToString());
-            orderSingle.StopPx = new StopPx(order.StopPrice);
-            orderSingle.Price = new Price(order.LimitPrice);
-            orderSingle.StopPx = new StopPx(order.StopPrice);
-            orderSingle.Commission = new Commission(order.CommissionAndFees);
-            orderSingle.TransactTime = new TransactTime(order.OrderDate);
+            var orderSingle = new QuickFix.FIX44.NewOrderSingle
+            {
+                Symbol = new Symbol(order.TickerSymbol),
+                ClOrdID = new ClOrdID(order.ClOrderId),
+                Side = new Side(order.Side),
+                OrderQty = new OrderQty(order.Quantity),
+                OrdType = new OrdType(order.Type),
+                TimeInForce = new TimeInForce(order.TIF),
+                Account = new Account(order.Allocation.ToString()),
+                StopPx = new StopPx(order.StopPrice),
+                Price = new Price(order.LimitPrice),
+                Commission = new Commission(order.CommissionAndFees),
+                TransactTime = new TransactTime(order.OrderDate)
+            };
 
             Session.SendToTarget(orderSingle, SessionID);
 

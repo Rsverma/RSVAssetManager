@@ -8,9 +8,9 @@ using System.Text;
 
 namespace RAMApi.Library.Internal.FixAccess
 {
-    public class FixDataAccess
+    public class FixDataAccess : IFixDataAccess
     {
-        private QuickFixApp fixApp;
+        private readonly QuickFixApp fixApp;
         public FixDataAccess()
         {
             string file = AppDomain.CurrentDomain.BaseDirectory + @"\Internal\FixAccess\tradeclient.cfg";

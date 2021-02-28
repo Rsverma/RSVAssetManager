@@ -79,5 +79,7 @@
     <Build Include="dbo\Stored Procedures\spSecurity_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\spBroker_GetAll.sql" />
     <Build Include="dbo\Tables\Fill.sql" />
+    <Build Include="dbo\Stored Procedures\spFill_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spFill_GetByClOrderID.sql" />
   </ItemGroup>
 </Project>
