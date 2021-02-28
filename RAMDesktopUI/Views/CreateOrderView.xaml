@@ -39,6 +39,8 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -107,10 +109,20 @@
         <TextBlock Grid.Row="4" Grid.Column="4" Margin="10 10 10 0">Limit Price</TextBlock>
         <TextBox x:Name="LimitPrice" Grid.Row="5" Grid.Column="4" Margin="10 0 10 10" Width="100"/>
 
-        <Button x:Name="SaveOrder" Grid.Row="7" Grid.Column="2" Margin="20">Save</Button>
-        <Button x:Name="SendToBroker" Grid.Row="7" Grid.Column="3" Margin="20">Send</Button>
+        <TextBlock Grid.Row="6" Grid.Column="1" Margin="10 10 10 0">Order Date</TextBlock>
+        <DatePicker x:Name="Date" Grid.Row="7" Grid.Column="1" Margin="10 0 10 10" Width="100" />
 
-        <StatusBar Grid.Row="9" Grid.ColumnSpan="7" 
+        <TextBlock Grid.Row="6" Grid.Column="2" Margin="10 10 10 0">Commission</TextBlock>
+        <TextBox x:Name="Commission" Grid.Row="7" Grid.Column="2" Margin="10 0 10 10" Width="100" />
+
+        <TextBlock Grid.Row="6" Grid.Column="3" Margin="10 10 10 0">Fees</TextBlock>
+        <TextBox x:Name="Fees" Grid.Row="7" Grid.Column="3" Margin="10 0 10 10" Width="100" />
+
+        <Button x:Name="CreateStage" Grid.Row="9" Grid.Column="2" Margin="20">Stage</Button>
+        <Button x:Name="SaveManual" Grid.Row="9" Grid.Column="3" Margin="20">Manual</Button>
+        <Button x:Name="SendLive" Grid.Row="9" Grid.Column="4" Margin="20">Live</Button>
+
+        <StatusBar Grid.Row="11" Grid.ColumnSpan="7" 
                    Background="{Binding RelativeSource={RelativeSource Self},Path=Parent.Foreground}" 
                    Foreground="Cornsilk" >
 

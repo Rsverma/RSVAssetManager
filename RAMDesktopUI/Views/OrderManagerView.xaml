@@ -63,32 +63,132 @@
                             Command="{x:Static SystemCommands.CloseWindowCommand}"/>
             </StackPanel>
         </Grid>
-
-        <controls:RSVDataGrid x:Name="Orders" Grid.Row="1" Grid.Column="1" Margin="0 10"
-                  AlternatingRowBackground="Black" CanUserAddRows="False" 
-                  CanUserDeleteRows="False" IsReadOnly="True"
-                  CanUserResizeRows="False" AutoGenerateColumns="False"
-                  >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Ticker Symbol" Binding="{Binding Path=TickerSymbol}"/>
-                <DataGridTextColumn Header="Order Side" Binding="{Binding Path=OrderSide}"/>
-                <DataGridTextColumn Header="Broker" Binding="{Binding Path=Broker}"/>
-                <DataGridTextColumn Header="Allocation" Binding="{Binding Path=Allocation}"/>
-                <DataGridTextColumn Header="Total Quantity" Binding="{Binding Path=TotalQuantity}"/>
-                <DataGridTextColumn Header="Executed Quantity" Binding="{Binding Path=ExecutedQuantity}"/>
-                <DataGridTextColumn Header="Remaining Quantity" Binding="{Binding Path=RemainingQuantity}"/>
-                <DataGridTextColumn Header="Order Type" Binding="{Binding Path=OrderType}"/>
-                <DataGridTextColumn Header="Time in Force" Binding="{Binding Path=TIF}"/>
-                <DataGridTextColumn Header="Order Status" Binding="{Binding Path=OrderStatus}"/>
-                <DataGridTextColumn Header="Stop Price" Binding="{Binding Path=StopPrice}"/>
-                <DataGridTextColumn Header="Limit Price" Binding="{Binding Path=LimitPrice}"/>
-                <DataGridTextColumn Header="Avg Price" Binding="{Binding Path=AvgPrice}"/>
-                <DataGridTextColumn Header="Commission And Fees" Binding="{Binding Path=CommissionAndFees}"/>
-                <DataGridTextColumn Header="Total Cost" Binding="{Binding Path=TotalCost}"/>
-                <DataGridTextColumn Header="Trader Name" Binding="{Binding Path=TraderName}"/>
-                <DataGridTextColumn Header="Order Date" Binding="{Binding Path=OrderDate}"/>
-            </DataGrid.Columns>
-        </controls:RSVDataGrid>
+        <TabControl  Grid.Row="1" Grid.Column="1" Background="Black">
+            <TabItem Header="Stage/Subs">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <controls:RSVDataGrid x:Name="Stages" Grid.Row="0"
+                            AlternatingRowBackground="Black" CanUserAddRows="False" 
+                            CanUserDeleteRows="False" IsReadOnly="True"
+                            CanUserResizeRows="False" AutoGenerateColumns="False"
+                              >
+                            <controls:RSVDataGrid.Columns>
+                                <DataGridTextColumn Header="Ticker Symbol" Binding="{Binding TickerSymbol}"/>
+                                <DataGridTextColumn Header="Order Side" Binding="{Binding OrderSide}"/>
+                                <DataGridTextColumn Header="Broker" Binding="{Binding Broker}"/>
+                                <DataGridTextColumn Header="Allocation" Binding="{Binding Allocation}"/>
+                                <DataGridTextColumn Header="Total Quantity" Binding="{Binding TotalQuantity}"/>
+                                <DataGridTextColumn Header="Executed Quantity" Binding="{Binding ExecutedQuantity}"/>
+                                <DataGridTextColumn Header="Remaining Quantity" Binding="{Binding RemainingQuantity}"/>
+                                <DataGridTextColumn Header="Order Type" Binding="{Binding OrderType}"/>
+                                <DataGridTextColumn Header="Time in Force" Binding="{Binding TIF}"/>
+                                <DataGridTextColumn Header="Manual Or Live" Binding="{Binding InternalOrderType}"/>
+                                <DataGridTextColumn Header="Order Status" Binding="{Binding OrderStatus}"/>
+                                <DataGridTextColumn Header="Stop Price" Binding="{Binding StopPrice}"/>
+                                <DataGridTextColumn Header="Limit Price" Binding="{Binding LimitPrice}"/>
+                                <DataGridTextColumn Header="Avg Price" Binding="{Binding AvgPrice}"/>
+                                <DataGridTextColumn Header="Commission And Fees" Binding="{Binding CommissionAndFees}"/>
+                                <DataGridTextColumn Header="Total Cost" Binding="{Binding TotalCost}"/>
+                                <DataGridTextColumn Header="Trader Name" Binding="{Binding TraderName}"/>
+                                <DataGridTextColumn Header="Order Date" Binding="{Binding OrderDate}"/>
+                            </controls:RSVDataGrid.Columns>
+                        </controls:RSVDataGrid>
+                    <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" Background="Black"/>
+                    <controls:RSVDataGrid x:Name="Subs" Grid.Row="2" 
+                            AlternatingRowBackground="Black" CanUserAddRows="False" 
+                            CanUserDeleteRows="False" IsReadOnly="True"
+                            CanUserResizeRows="False" AutoGenerateColumns="False"
+                              >
+                        <controls:RSVDataGrid.Columns>
+                            <DataGridTextColumn Header="Ticker Symbol" Binding="{Binding TickerSymbol}"/>
+                            <DataGridTextColumn Header="Order Side" Binding="{Binding OrderSide}"/>
+                            <DataGridTextColumn Header="Broker" Binding="{Binding Broker}"/>
+                            <DataGridTextColumn Header="Allocation" Binding="{Binding Allocation}"/>
+                            <DataGridTextColumn Header="Total Quantity" Binding="{Binding TotalQuantity}"/>
+                            <DataGridTextColumn Header="Executed Quantity" Binding="{Binding ExecutedQuantity}"/>
+                            <DataGridTextColumn Header="Remaining Quantity" Binding="{Binding RemainingQuantity}"/>
+                            <DataGridTextColumn Header="Order Type" Binding="{Binding OrderType}"/>
+                            <DataGridTextColumn Header="Time in Force" Binding="{Binding TIF}"/>
+                            <DataGridTextColumn Header="Manual Or Live" Binding="{Binding InternalOrderType}"/>
+                            <DataGridTextColumn Header="Order Status" Binding="{Binding OrderStatus}"/>
+                            <DataGridTextColumn Header="Stop Price" Binding="{Binding StopPrice}"/>
+                            <DataGridTextColumn Header="Limit Price" Binding="{Binding LimitPrice}"/>
+                            <DataGridTextColumn Header="Avg Price" Binding="{Binding AvgPrice}"/>
+                            <DataGridTextColumn Header="Commission And Fees" Binding="{Binding CommissionAndFees}"/>
+                            <DataGridTextColumn Header="Total Cost" Binding="{Binding TotalCost}"/>
+                            <DataGridTextColumn Header="Trader Name" Binding="{Binding TraderName}"/>
+                            <DataGridTextColumn Header="Order Date" Binding="{Binding OrderDate}"/>
+                        </controls:RSVDataGrid.Columns>
+                    </controls:RSVDataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Order/Fills">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <controls:RSVDataGrid x:Name="Orders" Grid.Row="0"
+                            AlternatingRowBackground="Black" CanUserAddRows="False" 
+                            CanUserDeleteRows="False" IsReadOnly="True"
+                            CanUserResizeRows="False" AutoGenerateColumns="False"
+                              >
+                        <controls:RSVDataGrid.Columns>
+                            <DataGridTextColumn Header="Ticker Symbol" Binding="{Binding TickerSymbol}"/>
+                            <DataGridTextColumn Header="Order Side" Binding="{Binding OrderSide}"/>
+                            <DataGridTextColumn Header="Broker" Binding="{Binding Broker}"/>
+                            <DataGridTextColumn Header="Allocation" Binding="{Binding Allocation}"/>
+                            <DataGridTextColumn Header="Total Quantity" Binding="{Binding TotalQuantity}"/>
+                            <DataGridTextColumn Header="Executed Quantity" Binding="{Binding ExecutedQuantity}"/>
+                            <DataGridTextColumn Header="Remaining Quantity" Binding="{Binding RemainingQuantity}"/>
+                            <DataGridTextColumn Header="Order Type" Binding="{Binding OrderType}"/>
+                            <DataGridTextColumn Header="Time in Force" Binding="{Binding TIF}"/>
+                            <DataGridTextColumn Header="Manual Or Live" Binding="{Binding InternalOrderType}"/>
+                            <DataGridTextColumn Header="Order Status" Binding="{Binding OrderStatus}"/>
+                            <DataGridTextColumn Header="Stop Price" Binding="{Binding StopPrice}"/>
+                            <DataGridTextColumn Header="Limit Price" Binding="{Binding LimitPrice}"/>
+                            <DataGridTextColumn Header="Avg Price" Binding="{Binding AvgPrice}"/>
+                            <DataGridTextColumn Header="Commission And Fees" Binding="{Binding CommissionAndFees}"/>
+                            <DataGridTextColumn Header="Total Cost" Binding="{Binding TotalCost}"/>
+                            <DataGridTextColumn Header="Trader Name" Binding="{Binding TraderName}"/>
+                            <DataGridTextColumn Header="Order Date" Binding="{Binding OrderDate}"/>
+                        </controls:RSVDataGrid.Columns>
+                    </controls:RSVDataGrid>
+                    <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
+                    <controls:RSVDataGrid x:Name="Fills" Grid.Row="2" 
+                            AlternatingRowBackground="Black" CanUserAddRows="False" 
+                            CanUserDeleteRows="False" IsReadOnly="True"
+                            CanUserResizeRows="False" AutoGenerateColumns="False"
+                              >
+                        <controls:RSVDataGrid.Columns>
+                            <DataGridTextColumn Header="Ticker Symbol" Binding="{Binding TickerSymbol}"/>
+                            <DataGridTextColumn Header="Order Side" Binding="{Binding OrderSide}"/>
+                            <DataGridTextColumn Header="Broker" Binding="{Binding Broker}"/>
+                            <DataGridTextColumn Header="Allocation" Binding="{Binding Allocation}"/>
+                            <DataGridTextColumn Header="Total Quantity" Binding="{Binding TotalQuantity}"/>
+                            <DataGridTextColumn Header="Executed Quantity" Binding="{Binding ExecutedQuantity}"/>
+                            <DataGridTextColumn Header="Remaining Quantity" Binding="{Binding RemainingQuantity}"/>
+                            <DataGridTextColumn Header="Order Type" Binding="{Binding OrderType}"/>
+                            <DataGridTextColumn Header="Time in Force" Binding="{Binding TIF}"/>
+                            <DataGridTextColumn Header="Manual Or Live" Binding="{Binding InternalOrderType}"/>
+                            <DataGridTextColumn Header="Order Status" Binding="{Binding OrderStatus}"/>
+                            <DataGridTextColumn Header="Stop Price" Binding="{Binding StopPrice}"/>
+                            <DataGridTextColumn Header="Limit Price" Binding="{Binding LimitPrice}"/>
+                            <DataGridTextColumn Header="Avg Price" Binding="{Binding AvgPrice}"/>
+                            <DataGridTextColumn Header="Commission And Fees" Binding="{Binding CommissionAndFees}"/>
+                            <DataGridTextColumn Header="Total Cost" Binding="{Binding TotalCost}"/>
+                            <DataGridTextColumn Header="Trader Name" Binding="{Binding TraderName}"/>
+                            <DataGridTextColumn Header="Order Date" Binding="{Binding OrderDate}"/>
+                        </controls:RSVDataGrid.Columns>
+                    </controls:RSVDataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
         <StatusBar Grid.Row="3" Grid.ColumnSpan="3" 
                    Background="{Binding RelativeSource={RelativeSource Self},Path=Parent.Foreground}" 
                    Foreground="Cornsilk" >
@@ -101,7 +201,7 @@
                                 <DoubleAnimation Storyboard.TargetProperty="Opacity"
                               Duration="0:0:0" To="1.0" BeginTime="0:0:0.5"/>
                                 <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                              Duration="0:0:10" From="1.0" To="0.0" BeginTime="0:0:0.5" />
+                              Duration="0:0:5" From="1.0" To="0.0" BeginTime="0:0:0.5" />
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger>

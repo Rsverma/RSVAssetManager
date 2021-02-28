@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using RAMApi.Data;
 using RAMApi.Library.DataAccess;
 using RAMApi.Library.Internal.DataAccess;
+using RAMApi.Library.Internal.FixAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,10 +44,12 @@ namespace RAMApi
 
             //Personal Services
             services.AddTransient<IUserData, UserData>();
+            services.AddTransient<IFillData, FillData>();
             services.AddTransient<IOrderData, OrderData>();
             services.AddTransient<IAccountData, AccountData>();
             services.AddTransient<IBrokerData, BrokerData>();
             services.AddTransient<ISecurityData, SecurityData>();
+            services.AddSingleton<IFixDataAccess, FixDataAccess>();
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
 
 

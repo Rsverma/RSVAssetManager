@@ -50,9 +50,10 @@ namespace RAMDesktopUI.ViewModels
                     TraderName = "Ramesh Verma"
                 };
                 orderRow.TotalCost = order.AvgPrice + order.CommissionAndFees;
-                orderRow.OrderType = ((OrderType)order.OrderType).ToString();
-                orderRow.OrderSide = ((OrderSide)order.OrderSide).ToString();
+                orderRow.OrderType = ((OrderType)order.Type).ToString();
+                orderRow.OrderSide = ((OrderSide)order.Side).ToString();
                 orderRow.TIF = ((TimeInForce)order.TIF).ToString();
+                orderRow.InternalOrderType = ((InternalOrderType)order.InternalOrderType).ToString();
                 orderRow.OrderStatus = ((OrderStatus)order.OrderStatus).ToString();
                 orderRow.Broker = _fieldsCache.Brokers.First(x => x.Id.Equals(order.Broker)).Name;
                 orderRow.Allocation = _fieldsCache.Accounts.First(x => x.Id.Equals(order.Allocation)).Name;
@@ -80,9 +81,49 @@ namespace RAMDesktopUI.ViewModels
         public BindingList<OrderManagerRowModel> Orders
         {
             get { return _orders; }
-            set { _orders = value;
+            set
+            {
+                _orders = value;
 
                 NotifyOfPropertyChange(() => Orders);
+            }
+        }
+        
+        private BindingList<OrderManagerRowModel> _stages = new BindingList<OrderManagerRowModel>();
+
+        public BindingList<OrderManagerRowModel> Stages
+        {
+            get { return _stages; }
+            set
+            {
+                _stages = value;
+
+                NotifyOfPropertyChange(() => Stages);
+            }
+        }
+        
+        private BindingList<OrderManagerRowModel> _subs = new BindingList<OrderManagerRowModel>();
+
+        public BindingList<OrderManagerRowModel> Subs
+        {
+            get { return _subs; }
+            set
+            {
+                _subs = value;
+
+                NotifyOfPropertyChange(() => Subs);
+            }
+        }
+        private BindingList<OrderManagerRowModel> _fills = new BindingList<OrderManagerRowModel>();
+
+        public BindingList<OrderManagerRowModel> Fills
+        {
+            get { return _fills; }
+            set
+            {
+                _fills = value;
+
+                NotifyOfPropertyChange(() => Fills);
             }
         }
 

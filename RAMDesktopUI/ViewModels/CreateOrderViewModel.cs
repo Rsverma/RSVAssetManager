@@ -53,6 +53,9 @@ namespace RAMDesktopUI.ViewModels
             StopPrice = 0;
             LimitPrice = 0;
             AvgPrice = 0;
+            Date = DateTime.Now;
+            Commission = 0;
+            Fees = 0;
         }
 
         private string _status = string.Empty;
@@ -274,19 +277,76 @@ namespace RAMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => AvgPrice);
             }
         }
+
+        private DateTime _date;
+
+        public DateTime Date
+        {
+            get { return _date; }
+            set
+            {
+                _date = value;
+                NotifyOfPropertyChange(() => Date);
+            }
+        }
+
+        private decimal _commission = 0;
+
+        public decimal Commission
+        {
+            get { return _commission; }
+            set
+            {
+                _commission = value;
+                NotifyOfPropertyChange(() => Commission);
+            }
+        }
+
+        private decimal _fees = 0;
+
+        public decimal Fees
+        {
+            get { return _fees; }
+            set
+            {
+                _fees = value;
+                NotifyOfPropertyChange(() => Fees);
+            }
+        }
+
         public bool IsValidOrder(bool isSaveOnly)
         {
-            return SelectedSymbol.Id <= 0 && OrderTypes.Contains(SelectedOrderType)
-                && OrderSides.Contains(SelectedOrderSide) && Quantity > 0 && LimitPrice >= 0 && (!isSaveOnly || AvgPrice >= 0);
+            return SelectedSymbol.Id > 0 && OrderTypes.Contains(SelectedOrderType)
+                && OrderSides.Contains(SelectedOrderSide) && Quantity > 0 && LimitPrice >= 0 && (!isSaveOnly || AvgPrice >= 0)
+                && Commission >= 0 && Fees >= 0;
         }
-        public async Task SaveOrder()
+
+        public async Task CreateStage()
         {
             OrderModel order = GetOrderFromUI();
-            order.OrderStatus = (char)OrderStatus.Filled;
+            order.OrderStatus = (char)OrderStatus.New;
+            order.InternalOrderType = (int)InternalOrderType.Stage;
             try
             {
                 await _orderEndpoint.PostOrder(order);
-                Status = "Order saved.";
+                Status = "Stage order saved.";
+            }
+            catch (Exception ex)
+            {
+                Status = ex.Message;
+            }
+            ResetOrderViewModel();
+        }
+
+        public async Task SaveManual()
+        {
+            OrderModel order = GetOrderFromUI();
+            order.OrderStatus = (char)OrderStatus.Filled;
+            order.InternalOrderType = (int)InternalOrderType.Manual;
+            try
+            {
+                await _orderEndpoint.PostOrder(order);
+                Status = "Manual order saved.";
             }
             catch (Exception ex)
             {
@@ -299,10 +359,11 @@ namespace RAMDesktopUI.ViewModels
         {
             OrderModel order = GetOrderFromUI();
             order.OrderStatus = (char)OrderStatus.PendingNew;
+            order.InternalOrderType = (int)InternalOrderType.Live;
             try
             {
                 await _orderEndpoint.PostOrder(order);
-                Status = "Order sent to broker.";
+                Status = "Live order sent to broker.";
             }
             catch (Exception ex)
             {
@@ -316,9 +377,11 @@ namespace RAMDesktopUI.ViewModels
             return new OrderModel
             {
                 TickerSymbol = SelectedSymbol.TickerSymbol,
-                OrderSide = (Char)SelectedOrderSide,
-                Quantity = Quantity,
-                OrderType = (Char)SelectedOrderType,
+                OrderDate = Date,
+                CommissionAndFees = Commission + Fees,
+                Side = (Char)SelectedOrderSide,
+                Quantity = (int)Quantity,
+                Type = (Char)SelectedOrderType,
                 TIF = (Char)SelectedTIF,
                 Broker = SelectedBroker.Id,
                 Allocation = SelectedAllocation.Id,
