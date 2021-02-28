@@ -5,7 +5,7 @@ namespace RAMApi.Library.DataAccess
 {
     public interface IFillData
     {
-        List<FillModel> GetFillsByClOrderID(string clOrderIds);
+        List<FillModel> GetFillsByClOrderID();
         void SaveFill(FillModel fillInfo);
     }
 }

@@ -26,5 +26,7 @@ namespace RAMDesktopUI.Library.Models
         public char OrderStatus { get; set; }
         public int Broker { get; set; }
         public int Allocation { get; set; }
+        public List<OrderModel> SubOrders { get; set; }
+        public List<FillModel> Fills { get; set; }
     }
 }

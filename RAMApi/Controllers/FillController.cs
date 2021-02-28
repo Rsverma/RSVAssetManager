@@ -30,11 +30,11 @@ namespace RAMApi.Controllers
             _fillData.SaveFill(fill);
         }
 
-        [Route("GetFillsforOrders")]
+        [Route("GetAllFills")]
         [HttpGet]
-        public List<FillModel> GetFillsByClOrderID(string clOrderIds)
+        public List<FillModel> GetAllFills()
         {
-            return _fillData.GetFillsByClOrderID(clOrderIds);
+            return _fillData.GetFillsByClOrderID();
         }
 
     }

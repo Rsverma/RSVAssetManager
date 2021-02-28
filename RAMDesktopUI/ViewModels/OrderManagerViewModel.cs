@@ -16,25 +16,24 @@ namespace RAMDesktopUI.ViewModels
 {
     public class OrderManagerViewModel : ModuleBase
     {
-        private readonly IOrderEndpoint _orderEndpoint;
+        private readonly IOrderCache _orderCache;
         private readonly IOrderFieldsCache _fieldsCache;
 
-        public OrderManagerViewModel(IOrderEndpoint orderEndpoint, IOrderFieldsCache fieldsCache)
+        public OrderManagerViewModel(IOrderCache orderCache, IOrderFieldsCache fieldsCache)
         {
-            _orderEndpoint = orderEndpoint;
+            _orderCache = orderCache;
             _fieldsCache = fieldsCache;
         }
 
-        protected override async void OnViewLoaded(object view)
+        protected override void OnViewLoaded(object view)
         {
+            LoadOrders();
             base.OnViewLoaded(view);
-            await LoadOrders();
         }
 
-        private async Task LoadOrders()
+        private void LoadOrders()
         {
-            List<OrderModel> orderDetails = await _orderEndpoint.GetAll();
-            foreach (OrderModel order in orderDetails)
+            foreach (OrderModel order in _orderCache.StageOrders)
             {
                 OrderManagerRowModel orderRow = new OrderManagerRowModel
                 {
@@ -44,12 +43,38 @@ namespace RAMDesktopUI.ViewModels
                     LimitPrice = order.LimitPrice,
                     OrderDate = order.OrderDate,
                     CommissionAndFees = order.CommissionAndFees,
+                    TotalCost = order.AvgPrice + order.CommissionAndFees,
                     TotalQuantity = order.Quantity,
                     ExecutedQuantity = order.Quantity,
                     RemainingQuantity = 0,
                     TraderName = "Ramesh Verma"
                 };
-                orderRow.TotalCost = order.AvgPrice + order.CommissionAndFees;
+                orderRow.OrderType = ((OrderType)order.Type).ToString();
+                orderRow.OrderSide = ((OrderSide)order.Side).ToString();
+                orderRow.TIF = ((TimeInForce)order.TIF).ToString();
+                orderRow.InternalOrderType = ((InternalOrderType)order.InternalOrderType).ToString();
+                orderRow.OrderStatus = ((OrderStatus)order.OrderStatus).ToString();
+                orderRow.Broker = _fieldsCache.Brokers.First(x => x.Id.Equals(order.Broker)).Name;
+                orderRow.Allocation = _fieldsCache.Accounts.First(x => x.Id.Equals(order.Allocation)).Name;
+                Stages.Add(orderRow);
+            }
+
+            foreach (OrderModel order in _orderCache.SubOrders)
+            {
+                OrderManagerRowModel orderRow = new OrderManagerRowModel
+                {
+                    TickerSymbol = order.TickerSymbol,
+                    AvgPrice = order.AvgPrice,
+                    StopPrice = order.StopPrice,
+                    LimitPrice = order.LimitPrice,
+                    OrderDate = order.OrderDate,
+                    CommissionAndFees = order.CommissionAndFees,
+                    TotalCost = order.AvgPrice + order.CommissionAndFees,
+                    TotalQuantity = order.Quantity,
+                    ExecutedQuantity = order.Quantity,
+                    RemainingQuantity = 0,
+                    TraderName = "Ramesh Verma"
+                };
                 orderRow.OrderType = ((OrderType)order.Type).ToString();
                 orderRow.OrderSide = ((OrderSide)order.Side).ToString();
                 orderRow.TIF = ((TimeInForce)order.TIF).ToString();
@@ -59,6 +84,7 @@ namespace RAMDesktopUI.ViewModels
                 orderRow.Allocation = _fieldsCache.Accounts.First(x => x.Id.Equals(order.Allocation)).Name;
                 Orders.Add(orderRow);
             }
+            
             Status = "Data Initialized";
         }
 
@@ -114,9 +140,10 @@ namespace RAMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => Subs);
             }
         }
-        private BindingList<OrderManagerRowModel> _fills = new BindingList<OrderManagerRowModel>();
+        
+        private BindingList<FillModel> _fills = new BindingList<FillModel>();
 
-        public BindingList<OrderManagerRowModel> Fills
+        public BindingList<FillModel> Fills
         {
             get { return _fills; }
             set

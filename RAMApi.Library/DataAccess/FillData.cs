@@ -14,9 +14,9 @@ namespace RAMApi.Library.DataAccess
         {
             _sql = sql;
         }
-        public List<FillModel> GetFillsByClOrderID(string clOrderIds)
+        public List<FillModel> GetFillsByClOrderID()
         {
-            List<FillModel> output = _sql.LoadData<FillModel, dynamic>("dbo.spFill_GetByClOrderID", new { ClOrderIDs = clOrderIds }, "RAMData");
+            List<FillModel> output = _sql.LoadData<FillModel, dynamic>("dbo.spFill_GetByClOrderID", new { ClOrderIDs = "" }, "RAMData");
             return output;
         }
 

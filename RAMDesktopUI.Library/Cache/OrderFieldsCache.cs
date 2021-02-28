@@ -10,6 +10,7 @@ namespace RAMDesktopUI.Library.Cache
     public class OrderFieldsCache : IOrderFieldsCache
     {
         private readonly IOrderFieldsEndpoint _orderFields;
+        public event EventHandler InitializationCompleted;
         public OrderFieldsCache(IOrderFieldsEndpoint orderFields)
         {
             _orderFields = orderFields;
@@ -18,20 +19,28 @@ namespace RAMDesktopUI.Library.Cache
             _securities = Task.Run(() => _orderFields.GetSecurities()).Result;
         }
 
-        private readonly List<SecurityModel> _securities;
+        private async Task InitializeCache()
+        {
+            _accounts = await _orderFields.GetAccounts();
+            _brokers = await _orderFields.GetBrokers();
+            _securities = await _orderFields.GetSecurities();
+            InitializationCompleted?.Invoke(this, null);
+        }
+
+        private List<SecurityModel> _securities;
 
         public List<SecurityModel> Securities
         {
             get { return _securities; }
         }
-        private readonly List<AccountModel> _accounts;
+        private List<AccountModel> _accounts;
 
         public List<AccountModel> Accounts
         {
             get { return _accounts; }
         }
 
-        private readonly List<BrokerModel> _brokers;
+        private List<BrokerModel> _brokers;
 
         public List<BrokerModel> Brokers
         {
