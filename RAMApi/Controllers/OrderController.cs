@@ -30,8 +30,6 @@ namespace RAMApi.Controllers
         {
             string traderId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             order.TraderId = traderId;
-            if(order.InternalOrderType == 2)
-
             _orderData.SaveOrder(order);
         }
 

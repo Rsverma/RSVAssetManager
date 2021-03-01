@@ -25,9 +25,31 @@ namespace RAMApi.Library.DataAccess
 
         public void SaveOrder(OrderModel orderInfo)
         {
-            if (orderInfo.InternalOrderType == 2)
+            if(orderInfo.InternalOrderType == 2)
                 _fix.SendOrder(orderInfo);
-            _sql.SaveData("dbo.spOrder_Insert", orderInfo, "RAMData");
+            _sql.StartTransaction("RAMData");
+            try
+            {
+                switch (orderInfo.InternalOrderType)
+                {
+                    case 1:
+                    case 2:
+                        {
+                            OrderModel stage = orderInfo.ShallowCopy();
+                            _sql.SaveDataInTransaction("dbo.spOrder_Insert", orderInfo);
+                            _sql.SaveDataInTransaction("dbo.spOrder_Insert", orderInfo);
+                        }
+                        break;
+                    default:
+                        _sql.SaveDataInTransaction("dbo.spOrder_Insert", orderInfo);
+                        break;
+                }
+                _sql.CommitTransaction();
+            }
+            catch
+            {
+                _sql.RollbackTransaction();
+            }
         }
     }
 }

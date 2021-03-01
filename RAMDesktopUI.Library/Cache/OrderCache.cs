@@ -41,14 +41,14 @@ namespace RAMDesktopUI.Library.Cache
             InitializationCompleted?.Invoke(this, null);
         }
 
-        private List<OrderModel> _stageOrders = new List<OrderModel>();
+        private readonly List<OrderModel> _stageOrders = new List<OrderModel>();
 
         public List<OrderModel> StageOrders
         {
             get { return _stageOrders; }
         }
 
-        private List<OrderModel> _subOrders = new List<OrderModel>();
+        private readonly List<OrderModel> _subOrders = new List<OrderModel>();
 
         public List<OrderModel> SubOrders
         {
