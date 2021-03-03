@@ -11,6 +11,7 @@ namespace RAMApi.Library.Internal.FixAccess
     public class FixDataAccess : IFixDataAccess
     {
         private readonly QuickFixApp fixApp;
+        private int count = 0;
         public FixDataAccess()
         {
             string file = AppDomain.CurrentDomain.BaseDirectory + @"\Internal\FixAccess\tradeclient.cfg";
@@ -30,6 +31,12 @@ namespace RAMApi.Library.Internal.FixAccess
         public void SendOrder(OrderModel order)
         {
             fixApp.SendOrder(order);
+        }
+
+        public string GetNewClOrderID()
+        {
+            count++;
+            return DateTimeOffset.Now.ToUnixTimeSeconds().ToString() + count.ToString("D3");
         }
 
     }

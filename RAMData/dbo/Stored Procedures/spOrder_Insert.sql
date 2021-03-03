@@ -1,4 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spOrder_Insert]
+    @Id INT, 
     @OrigClOrderId NVARCHAR(128), 
     @ClOrderId NVARCHAR(128), 
     @StageOrderId NVARCHAR(128), 
@@ -16,7 +17,8 @@
     @TIF CHAR, 
     @OrderStatus CHAR, 
     @Broker INT, 
-    @Allocation INT
+    @Allocation INT,
+    @ShallowCopy
 	
 AS
 BEGIN
