@@ -5,19 +5,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RAMDesktopUI.Views"
-        ResizeMode="NoResize"
-        mc:Ignorable="d" WindowStyle="None" x:Name="CreateOrder" 
-        MinHeight="450" MinWidth="800" WindowState="{Binding CurWindowState, Mode=TwoWay}">
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="25" />
-    </WindowChrome.WindowChrome>
+        ResizeMode="NoResize" mc:Ignorable="d" x:Name="CreateOrder" 
+        MinHeight="450" MinWidth="800" Title=" "
+            WindowState="{Binding CurWindowState, Mode=TwoWay}">
 
-    <!--Title bar button commands-->
-    <Window.CommandBindings>
-        <CommandBinding Command="{x:Static SystemCommands.CloseWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Close" />
-        <CommandBinding Command="{x:Static SystemCommands.MinimizeWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Minimize" />
-    </Window.CommandBindings>
-
+    <hc:Window.NonClientAreaContent>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1" Text="Create Order" VerticalAlignment="Center"/>
+        </Grid>
+    </hc:Window.NonClientAreaContent>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -34,36 +35,11 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="7*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
-
-        <!--Window chrome-->
-        <Grid Grid.Row="0" Grid.ColumnSpan="7" Height="25" Background="Gray">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <!--App icon-->
-            <Image Grid.Column="0" Source="/Resources/CreateOrder.ico" Margin="2"
-                       VerticalAlignment="Center" />
-            <TextBlock Grid.Column="1" Text="Create Order" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-
-
-            <!--Caption buttons-->
-            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Button Style="{StaticResource MinimizeButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Minimize"
-                            Command="{x:Static SystemCommands.MinimizeWindowCommand}"/>
-                <Button Style="{StaticResource CloseButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Close"
-                            Command="{x:Static SystemCommands.CloseWindowCommand}"/>
-            </StackPanel>
-        </Grid>
 
         <!--App content-->
         <TextBlock Grid.Row="1" Grid.Column="1" Margin="10">Symbol:</TextBlock>
@@ -72,53 +48,63 @@
 
         <TextBlock x:Name="SymbolDetail" Grid.Row="1" Grid.Column="3" Margin="10" Grid.ColumnSpan="3"/>
 
-
-        <TextBlock Grid.Row="2" Grid.Column="1" Margin="10 10 10 0">Order Side</TextBlock>
-        <ComboBox x:Name="OrderSides" Grid.Row="3" Grid.Column="1" Margin="10 0 10 10" 
+        <hc:ComboBox x:Name="OrderSides" hc:InfoElement.Title="Order Side" hc:InfoElement.TitlePlacement="Top"
+                     Grid.Row="2" Grid.Column="1" Margin="10"
                   Width="100" IsTextSearchEnabled="True" IsEditable="True"/>
 
-        <TextBlock Grid.Row="2" Grid.Column="2" Margin="10 10 10 0">Quantity</TextBlock>
-        <TextBox x:Name="Quantity" Grid.Row="3" Grid.Column="2" Margin="10 0 10 10" Width="100" />
+        <hc:NumericUpDown x:Name="Quantity" Grid.Row="2" Grid.Column="2" Minimum="0" DecimalPlaces="0" Increment="1" 
+                          hc:InfoElement.Title="Quantity" hc:InfoElement.TitlePlacement="Top" 
+                          Width="100" Style="{StaticResource NumericUpDownExtend}"  Margin="10"/>
 
-        <TextBlock Grid.Row="2" Grid.Column="3" Margin="10 10 10 0">Allocation</TextBlock>
-        <ComboBox x:Name="Allocations" Grid.Row="3" Grid.Column="3" Margin="10 0 10 10" Width="100"
+        <hc:ComboBox x:Name="Allocations" Grid.Row="2" Grid.Column="3" Margin="10" Width="100"
+                  hc:InfoElement.Title="Allocation" hc:InfoElement.TitlePlacement="Top"
                   IsTextSearchEnabled="True" IsEditable="True" DisplayMemberPath="Name"/>
 
-        <TextBlock Grid.Row="2" Grid.Column="4" Margin="10 10 10 0">Broker</TextBlock>
-        <ComboBox x:Name="Brokers" Grid.Row="3" Grid.Column="4" Margin="10 0 10 10" Width="100"
+        <hc:ComboBox x:Name="Brokers" Grid.Row="2" Grid.Column="4" Margin="10" Width="100"
+                  hc:InfoElement.Title="Broker" hc:InfoElement.TitlePlacement="Top"
                   IsTextSearchEnabled="True" IsEditable="True" DisplayMemberPath="Name"/>
 
-        <TextBlock Grid.Row="2" Grid.Column="5" Margin="10 10 10 0">Avg Price</TextBlock>
-        <TextBox x:Name="AvgPrice" Grid.Row="3" Grid.Column="5" Margin="10 0 10 10" Width="100" />
+        <hc:NumericUpDown x:Name="AvgPrice" Grid.Row="2" Grid.Column="5" Minimum="0" DecimalPlaces="4" 
+                          Increment="1" Style="{StaticResource NumericUpDownExtend}" 
+                          hc:InfoElement.Title="Avg Price" hc:InfoElement.TitlePlacement="Top" 
+                          Width="100" Margin="10"/>
 
-        <TextBlock Grid.Row="4" Grid.Column="1" Margin="10 10 10 0">Order Type</TextBlock>
-        <ComboBox x:Name="OrderTypes" Grid.Row="5" Grid.Column="1" Margin="10 0 10 10" 
+        <hc:ComboBox x:Name="OrderTypes" Grid.Row="3" Grid.Column="1" Margin="10" 
+                  hc:InfoElement.Title="Order Type" hc:InfoElement.TitlePlacement="Top"
                   Width="100" IsTextSearchEnabled="True" IsEditable="True"/>
 
-        <TextBlock Grid.Row="4" Grid.Column="2" Margin="10 10 10 0">Time In Force</TextBlock>
-        <ComboBox x:Name="TIFs" Grid.Row="5" Grid.Column="2" Margin="10 0 10 10" 
+        <hc:ComboBox x:Name="TIFs" Grid.Row="3" Grid.Column="2" Margin="10" 
+                     hc:InfoElement.Title="Time In Force" hc:InfoElement.TitlePlacement="Top"
                   Width="100" IsTextSearchEnabled="True" IsEditable="True"/>
 
-        <TextBlock Grid.Row="4" Grid.Column="3" Margin="10 10 10 0">Stop Price</TextBlock>
-        <TextBox x:Name="StopPrice" Grid.Row="5" Grid.Column="3" Margin="10 0 10 10" Width="100" />
+        <hc:NumericUpDown x:Name="StopPrice" Grid.Row="3" Grid.Column="3" Minimum="0" DecimalPlaces="4" 
+                          Increment="1" Style="{StaticResource NumericUpDownExtend}" 
+                          hc:InfoElement.Title="Stop Price" hc:InfoElement.TitlePlacement="Top" 
+                          Width="100" Margin="10"/>
 
-        <TextBlock Grid.Row="4" Grid.Column="4" Margin="10 10 10 0">Limit Price</TextBlock>
-        <TextBox x:Name="LimitPrice" Grid.Row="5" Grid.Column="4" Margin="10 0 10 10" Width="100"/>
+        <hc:NumericUpDown x:Name="LimitPrice" Grid.Row="3" Grid.Column="4" Minimum="0" DecimalPlaces="4" 
+                          Increment="1" Style="{StaticResource NumericUpDownExtend}" 
+                          hc:InfoElement.Title="Limit Price" hc:InfoElement.TitlePlacement="Top" 
+                          Width="100" Margin="10"/>
 
-        <TextBlock Grid.Row="6" Grid.Column="1" Margin="10 10 10 0">Order Date</TextBlock>
-        <DatePicker x:Name="Date" Grid.Row="7" Grid.Column="1" Margin="10 0 10 10" Width="100" />
+        <hc:DatePicker x:Name="Date" Grid.Row="4" Grid.Column="1" Width="100" Margin="10"
+                       hc:InfoElement.Title="Order Date" hc:InfoElement.TitlePlacement="Top" />
 
-        <TextBlock Grid.Row="6" Grid.Column="2" Margin="10 10 10 0">Commission</TextBlock>
-        <TextBox x:Name="Commission" Grid.Row="7" Grid.Column="2" Margin="10 0 10 10" Width="100" />
+        <hc:NumericUpDown x:Name="Commission" Grid.Row="4" Grid.Column="2" Minimum="0" DecimalPlaces="4" 
+                          Increment="1" Style="{StaticResource NumericUpDownExtend}" 
+                          hc:InfoElement.Title="Commission" hc:InfoElement.TitlePlacement="Top" 
+                          Width="100" Margin="10"/>
 
-        <TextBlock Grid.Row="6" Grid.Column="3" Margin="10 10 10 0">Fees</TextBlock>
-        <TextBox x:Name="Fees" Grid.Row="7" Grid.Column="3" Margin="10 0 10 10" Width="100" />
+        <hc:NumericUpDown x:Name="Fees" Grid.Row="4" Grid.Column="3" Minimum="0" DecimalPlaces="4" 
+                          Increment="1" Style="{StaticResource NumericUpDownExtend}" 
+                          hc:InfoElement.Title="Fees" hc:InfoElement.TitlePlacement="Top" 
+                          Width="100" Margin="10"/>
 
-        <Button x:Name="CreateStage" Grid.Row="9" Grid.Column="2" Margin="20">Stage</Button>
-        <Button x:Name="SaveManual" Grid.Row="9" Grid.Column="3" Margin="20">Manual</Button>
-        <Button x:Name="SendLive" Grid.Row="9" Grid.Column="4" Margin="20">Live</Button>
+        <Button x:Name="CreateStage" Width="100" hc:BorderElement.CornerRadius="5" Grid.Row="6" Grid.Column="2" Margin="20">Stage</Button>
+        <Button x:Name="SaveManual" Width="100"  hc:BorderElement.CornerRadius="5"  Grid.Row="6" Grid.Column="3" Margin="20">Manual</Button>
+        <Button x:Name="SendLive" Width="100" hc:BorderElement.CornerRadius="5"  Grid.Row="6" Grid.Column="4" Margin="20">Live</Button>
 
-        <StatusBar Grid.Row="11" Grid.ColumnSpan="7" 
+        <StatusBar Grid.Row="8" Grid.ColumnSpan="7" 
                    Background="{Binding RelativeSource={RelativeSource Self},Path=Parent.Foreground}" 
                    Foreground="Cornsilk" >
 
