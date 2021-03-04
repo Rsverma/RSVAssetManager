@@ -11,7 +11,7 @@ namespace RAMApi.Library.Models
         public string OrderId { get; set; }
         public string ExecId { get; set; }
         public int ExecType { get; set; }
-        public char OrderStatus { get; set; }
+        public char OrdStatus { get; set; }
         public string TickerSymbol { get; set; }
         public char Side { get; set; }
         public int OrderQty { get; set; }

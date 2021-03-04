@@ -1,5 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[spOrder_Insert]
     @Id INT, 
+    @TickerSymbol NVARCHAR(50), 
     @OrigClOrderId NVARCHAR(128), 
     @ClOrderId NVARCHAR(128), 
     @StageOrderId NVARCHAR(128), 
@@ -17,15 +18,14 @@
     @TIF CHAR, 
     @OrderStatus CHAR, 
     @Broker INT, 
-    @Allocation INT,
-    @ShallowCopy
+    @Allocation INT
 	
 AS
 BEGIN
 	SET NOCOUNT ON;
-	Insert into dbo.[Order] (OrigClOrderId, ClOrderId, StageOrderId, InternalOrderType, TraderId, OrderDate, Quantity, StopPrice, LimitPrice,
+	Insert into dbo.[Order] (TickerSymbol, OrigClOrderId, ClOrderId, StageOrderId, InternalOrderType, TraderId, OrderDate, Quantity, StopPrice, LimitPrice,
     AvgPrice, CommissionAndFees, TotalCost, Side, [Type], TIF, OrderStatus, [Broker], Allocation)
-	Values (@OrigClOrderId, @ClOrderId, @StageOrderId, @InternalOrderType, @TraderId, @OrderDate, @Quantity, @StopPrice, @LimitPrice,
+	Values (@TickerSymbol, @OrigClOrderId, @ClOrderId, @StageOrderId, @InternalOrderType, @TraderId, @OrderDate, @Quantity, @StopPrice, @LimitPrice,
     @AvgPrice, @CommissionAndFees, @TotalCost, @Side, @Type, @TIF, @OrderStatus, @Broker, @Allocation);
 
 	Select @@IDENTITY;

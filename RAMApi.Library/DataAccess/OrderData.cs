@@ -1,6 +1,7 @@
 ﻿using RAMApi.Library.Internal.DataAccess;
 using RAMApi.Library.Internal.FixAccess;
 using RAMApi.Library.Models;
+using RAMApi.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -34,7 +35,7 @@ namespace RAMApi.Library.DataAccess
                 {
                     case 1:
                         {
-                            OrderModel stage = orderInfo.ShallowCopy();
+                            OrderModel stage = CloneHelper.ShallowClone(orderInfo);
                             stage.InternalOrderType = 0;
                             stage.ClOrderId = _fix.GetNewClOrderID();
                             stage.OrigClOrderId = stage.ClOrderId;
@@ -48,7 +49,7 @@ namespace RAMApi.Library.DataAccess
                                 LeavesQty = 0,
                                 OrderQty = orderInfo.Quantity,
                                 Side = orderInfo.Side,
-                                OrderStatus = orderInfo.OrderStatus,
+                                OrdStatus = orderInfo.OrderStatus,
                                 TickerSymbol = orderInfo.TickerSymbol,
                                 ExecId = _fix.GetNewClOrderID(),
                                 ExecType = 2,
@@ -63,7 +64,7 @@ namespace RAMApi.Library.DataAccess
                     case 2:
                         {
                             _fix.SendOrder(orderInfo);
-                            OrderModel stage = orderInfo.ShallowCopy();
+                            OrderModel stage = CloneHelper.ShallowClone(orderInfo);
                             stage.InternalOrderType = 0;
                             stage.ClOrderId = _fix.GetNewClOrderID();
                             stage.OrigClOrderId = stage.ClOrderId;

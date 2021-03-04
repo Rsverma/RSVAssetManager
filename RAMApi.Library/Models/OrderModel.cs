@@ -26,9 +26,5 @@ namespace RAMApi.Library.Models
         public char OrderStatus { get; set; }
         public int Broker { get; set; }
         public int Allocation { get; set; }
-        public OrderModel ShallowCopy()
-        {
-            return (OrderModel)this.MemberwiseClone();
-        }
     }
 }

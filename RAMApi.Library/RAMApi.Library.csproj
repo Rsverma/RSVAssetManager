@@ -16,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RAMApi.Utilities\RAMApi.Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Internal\FixAccess\FIX44.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
