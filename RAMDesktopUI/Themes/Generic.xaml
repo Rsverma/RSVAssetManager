@@ -1,15 +1,12 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:controls="clr-namespace:RAMDesktopUI.Controls">
     <ResourceDictionary.MergedDictionaries>
-        <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="Grey" SecondaryColor="DeepPurple" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" >
-            <Style x:Key="RSVDataGridStyle" TargetType="{x:Type controls:RSVDataGrid}" BasedOn="{StaticResource MaterialDesignDataGrid}">
-                <Setter Property="HeadersVisibility" Value="All" />
-            </Style>
-        </ResourceDictionary>
+        <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDark.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
+
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <!--Base style for title bar buttons-->

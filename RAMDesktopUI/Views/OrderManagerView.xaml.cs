@@ -17,7 +17,7 @@ namespace RAMDesktopUI.Views
     /// <summary>
     /// Interaction logic for OrderManagerView.xaml
     /// </summary>
-    public partial class OrderManagerView : Window
+    public partial class OrderManagerView : HandyControl.Controls.Window
     {
         public OrderManagerView()
         {

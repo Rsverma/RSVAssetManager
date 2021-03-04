@@ -59,7 +59,7 @@ namespace RAMDesktopUI.Controls
         public RSVDataGrid()
             : base()
         {
-            Style = FindResource("RSVDataGridStyle") as Style;
+            //Style = FindResource("RSVDataGridStyle") as Style;
             Loaded += RSVDataGrid_Loaded;
         }
 

@@ -17,7 +17,7 @@ namespace RAMDesktopUI.Views
     /// <summary>
     /// Interaction logic for WatchlistView.xaml
     /// </summary>
-    public partial class WatchlistView : Window
+    public partial class WatchlistView : HandyControl.Controls.Window
     {
         public WatchlistView()
         {

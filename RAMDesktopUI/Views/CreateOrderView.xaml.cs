@@ -17,7 +17,7 @@ namespace RAMDesktopUI.Views
     /// <summary>
     /// Interaction logic for CreateOrderView.xaml
     /// </summary>
-    public partial class CreateOrderView : Window
+    public partial class CreateOrderView : HandyControl.Controls.Window
     {
         public CreateOrderView()
         {
