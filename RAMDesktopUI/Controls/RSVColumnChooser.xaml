@@ -8,30 +8,13 @@
         TextElement.FontSize="14"
         mc:Ignorable="d" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner"
         Title=" Column Chooser" Height="400"  WindowStyle="None" Width="250"  WindowState="{Binding CurWindowState, Mode=TwoWay}">
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="24" />
-    </WindowChrome.WindowChrome>
 
-    <!--Title bar button commands-->
-    <Window.CommandBindings>
-        <CommandBinding Command="{x:Static SystemCommands.CloseWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Close" />
-    </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <!--Window chrome-->
-        <Grid Grid.Row="0" Height="20" Background="Gray">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Column Chooser" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Button Grid.Column="1" Style="{StaticResource CloseButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Close"
-                            Command="{x:Static SystemCommands.CloseWindowCommand}"/>
-        </Grid>
-
+       
         <ListBox Grid.Row="1" x:Name="ColumnList" ItemsSource="{Binding ColumnsVisiblityMapping, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>

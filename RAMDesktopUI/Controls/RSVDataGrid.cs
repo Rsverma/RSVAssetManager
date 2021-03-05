@@ -59,15 +59,16 @@ namespace RAMDesktopUI.Controls
         public RSVDataGrid()
             : base()
         {
-            //Style = FindResource("RSVDataGridStyle") as Style;
+            Style = FindResource("RSVDataGridStyle") as Style;
             Loaded += RSVDataGrid_Loaded;
+            ColumnChooserClicked = new RelayCommand(OnColumnChooserClicked, CanChooseColumns);
         }
 
         private void RSVDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
             var grid = sender as RSVDataGrid;
             _columns = grid.Columns;
-            ReplaceSelectAllButton(this);
+            //ReplaceSelectAllButton(this);
             Loaded -= RSVDataGrid_Loaded;
         }
 
@@ -79,10 +80,9 @@ namespace RAMDesktopUI.Controls
                 if(child!=null)
                 {
 
-                    if (child is Button button)
+                    if (child is Button button && button.Name.Equals("SelectAll"))
                     {
-                        button.Command = null;
-                        button.Click += OnColumnChooserClicked;
+                        button.Command = ColumnChooserClicked;
                     }
                     else
                     {
@@ -91,14 +91,18 @@ namespace RAMDesktopUI.Controls
                 }
             }
         }
-
+        public static ICommand ColumnChooserClicked { get; set; }
         private RSVColumnChooser columnChooser;
-        //Action when the top left check box checked and unchecked
-        void OnColumnChooserClicked(object sender, RoutedEventArgs e)
+        private bool CanChooseColumns(object value)
+        {
+            return true;
+        }
+
+
+        void OnColumnChooserClicked(object value)
         {
             if (columnChooser == null)
             {
-                var button = sender as Button;
                 BindingList<ColumnVisibility> columnsVisiblityMapping = new BindingList<ColumnVisibility>();
                 foreach (var col in _columns)
                 {
@@ -118,7 +122,6 @@ namespace RAMDesktopUI.Controls
             {
                 columnChooser.Activate();
             }
-            e.Handled = true;
         }
 
         private void Win_Closing(object sender, CancelEventArgs e)

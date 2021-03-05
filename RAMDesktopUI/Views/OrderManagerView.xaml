@@ -33,11 +33,9 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <controls:RSVDataGrid x:Name="Stages" Grid.Row="0"
-                            AlternatingRowBackground="Black" CanUserAddRows="False" 
-                            CanUserDeleteRows="False" IsReadOnly="True"
-                            CanUserResizeRows="False" AutoGenerateColumns="False"
-                              >
-                            <controls:RSVDataGrid.Columns>
+                                         HeadersVisibility="All" RowHeaderWidth="50" AutoGenerateColumns="False">
+                        
+                        <controls:RSVDataGrid.Columns>
                                 <DataGridTextColumn Header="Ticker Symbol" Binding="{Binding TickerSymbol}"/>
                                 <DataGridTextColumn Header="Order Side" Binding="{Binding OrderSide}"/>
                                 <DataGridTextColumn Header="Broker" Binding="{Binding Broker}"/>
@@ -94,7 +92,7 @@
                         <RowDefinition Height="5" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <DataGrid x:Name="Orders" Grid.Row="0"
+                    <DataGrid x:Name="Orders" Grid.Row="0" HeadersVisibility="All"
                             AlternatingRowBackground="Black" CanUserAddRows="False" 
                             CanUserDeleteRows="False" IsReadOnly="True"
                             CanUserResizeRows="False" AutoGenerateColumns="False"

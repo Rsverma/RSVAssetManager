@@ -53,15 +53,5 @@ namespace RAMDesktopUI.Controls
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        // Close
-        private void CommandBinding_Executed_Close(object sender, ExecutedRoutedEventArgs e)
-        {
-            SystemCommands.CloseWindow(this);
-        }
-        // Can execute
-        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
     }
 }

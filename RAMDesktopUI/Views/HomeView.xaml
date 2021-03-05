@@ -9,13 +9,13 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem x:Name="Exit" Header="E_xit"/>
+                <MenuItem x:Name="Exit" Header="E_xit" Width="50"/>
             </MenuItem>
             <MenuItem Header="_Users"  Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
                 <MenuItem x:Name="UserManagement" Header="User_Management"/>
             </MenuItem>
             <MenuItem Header="_Account">
-                <MenuItem x:Name="LogOut" Header="_Log Out"/>
+                <MenuItem x:Name="LogOut" Header="_Log Out" Width="50"/>
             </MenuItem>
         </Menu>
         <Grid Margin="10">
@@ -36,24 +36,24 @@
                    HorizontalAlignment="Center" FontSize="30">
             RSV Asset Manager
             </TextBlock>
-            <Button x:Name="LaunchCreateOrder" Grid.Column="1" Grid.Row="1" Margin="10">
+            <Button x:Name="LaunchCreateOrder" Grid.Column="1" Grid.Row="1" Width="100" Margin="10">
                 Create Order
             </Button>
 
-            <Button x:Name="LaunchOrderManager" Grid.Column="2" Grid.Row="1" Margin="10">
+            <Button x:Name="LaunchOrderManager" Grid.Column="2" Grid.Row="1" Width="100" Margin="10">
                 View Orders
             </Button>
 
-            <Button x:Name="LaunchPortfolioManager" Grid.Column="3" Grid.Row="1" Margin="10">
+            <Button x:Name="LaunchPortfolioManager" Grid.Column="3" Grid.Row="1" Width="100" Margin="10">
                 View Positions
             </Button>
-            <Button x:Name="LaunchFundAllocater" Grid.Column="1" Grid.Row="2" Margin="10">
+            <Button x:Name="LaunchFundAllocater" Grid.Column="1" Grid.Row="2" Width="100" Margin="10">
                 Allocate Orders
             </Button>
-            <Button x:Name="LaunchWatchlist" Grid.Column="2" Grid.Row="2" Margin="10">
+            <Button x:Name="LaunchWatchlist" Grid.Column="2" Grid.Row="2" Width="100" Margin="10">
                 Watchlist
             </Button>
-            <Button x:Name="LaunchImport" Grid.Column="3" Grid.Row="2" Margin="10">
+            <Button x:Name="LaunchImport" Grid.Column="3" Grid.Row="2" Width="100" Margin="10">
                 Import Trades
             </Button>
         </Grid>
