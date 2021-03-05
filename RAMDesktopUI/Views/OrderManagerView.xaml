@@ -7,8 +7,11 @@
         xmlns:local="clr-namespace:RAMDesktopUI.Views"
         xmlns:controls="clr-namespace:RAMDesktopUI.Controls"
         mc:Ignorable="d" x:Name="OrderManager"
-        Title="Order Manager" Height="600" Width="1000" WindowState="{Binding CurWindowState, Mode=TwoWay}">
-  
+        Title=" " Height="600" Width="1000" WindowState="{Binding CurWindowState, Mode=TwoWay}">
+
+    <hc:Window.NonClientAreaContent>
+        <TextBlock Text="Order Manager" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </hc:Window.NonClientAreaContent>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -21,19 +24,18 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-
-      
         
-        <TabControl  Grid.Row="1" Grid.Column="1" Background="Black">
-            <TabItem Header="Stage/Subs">
+        <hc:TabControl  Grid.Row="1" Grid.Column="1">
+            <hc:TabItem Header="Stage/Subs">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="5" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <controls:RSVDataGrid x:Name="Stages" Grid.Row="0"
-                                         HeadersVisibility="All" RowHeaderWidth="50" AutoGenerateColumns="False">
+                    <controls:RSVDataGrid x:Name="Stages" Grid.Row="0" HeadersVisibility="All" 
+                                          RowHeaderWidth="10" AutoGenerateColumns="False"
+                                          CanUserSortColumns="True">
                         
                         <controls:RSVDataGrid.Columns>
                                 <DataGridTextColumn Header="Ticker Symbol" Binding="{Binding TickerSymbol}"/>
@@ -55,13 +57,11 @@
                                 <DataGridTextColumn Header="Trader Name" Binding="{Binding TraderName}"/>
                                 <DataGridTextColumn Header="Order Date" Binding="{Binding OrderDate}"/>
                             </controls:RSVDataGrid.Columns>
-                        </controls:RSVDataGrid>
-                    <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" Background="Black"/>
-                    <controls:RSVDataGrid x:Name="Subs" Grid.Row="2" 
-                            AlternatingRowBackground="Black" CanUserAddRows="False" 
-                            CanUserDeleteRows="False" IsReadOnly="True"
-                            CanUserResizeRows="False" AutoGenerateColumns="False"
-                              >
+                     </controls:RSVDataGrid>
+                    <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
+                    <controls:RSVDataGrid x:Name="Subs" Grid.Row="2" HeadersVisibility="All" 
+                                          RowHeaderWidth="10" AutoGenerateColumns="False"
+                                          CanUserSortColumns="True">
                         <controls:RSVDataGrid.Columns>
                             <DataGridTextColumn Header="Ticker Symbol" Binding="{Binding TickerSymbol}"/>
                             <DataGridTextColumn Header="Order Side" Binding="{Binding OrderSide}"/>
@@ -84,19 +84,17 @@
                         </controls:RSVDataGrid.Columns>
                     </controls:RSVDataGrid>
                 </Grid>
-            </TabItem>
-            <TabItem Header="Order/Fills">
+            </hc:TabItem>
+            <hc:TabItem Header="Order/Fills">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="5" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <DataGrid x:Name="Orders" Grid.Row="0" HeadersVisibility="All"
-                            AlternatingRowBackground="Black" CanUserAddRows="False" 
-                            CanUserDeleteRows="False" IsReadOnly="True"
-                            CanUserResizeRows="False" AutoGenerateColumns="False"
-                              >
+                    <controls:RSVDataGrid x:Name="Orders" Grid.Row="0" HeadersVisibility="All" 
+                                          RowHeaderWidth="10" AutoGenerateColumns="False"
+                                          CanUserSortColumns="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Ticker Symbol" Binding="{Binding TickerSymbol}"/>
                             <DataGridTextColumn Header="Order Side" Binding="{Binding OrderSide}"/>
@@ -117,13 +115,11 @@
                             <DataGridTextColumn Header="Trader Name" Binding="{Binding TraderName}"/>
                             <DataGridTextColumn Header="Order Date" Binding="{Binding OrderDate}"/>
                         </DataGrid.Columns>
-                    </DataGrid>
+                    </controls:RSVDataGrid>
                     <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
-                    <controls:RSVDataGrid x:Name="Fills" Grid.Row="2" 
-                            AlternatingRowBackground="Black" CanUserAddRows="False" 
-                            CanUserDeleteRows="False" IsReadOnly="True"
-                            CanUserResizeRows="False" AutoGenerateColumns="False"
-                              >
+                    <controls:RSVDataGrid x:Name="Fills" Grid.Row="2" HeadersVisibility="All" 
+                                          RowHeaderWidth="10" AutoGenerateColumns="False"
+                                          CanUserSortColumns="True">
                         <controls:RSVDataGrid.Columns>
                             <DataGridTextColumn Header="Ticker Symbol" Binding="{Binding TickerSymbol}"/>
                             <DataGridTextColumn Header="Order Side" Binding="{Binding OrderSide}"/>
@@ -146,8 +142,8 @@
                         </controls:RSVDataGrid.Columns>
                     </controls:RSVDataGrid>
                 </Grid>
-            </TabItem>
-        </TabControl>
+            </hc:TabItem>
+        </hc:TabControl>
         <StatusBar Grid.Row="3" Grid.ColumnSpan="3" 
                    Background="{Binding RelativeSource={RelativeSource Self},Path=Parent.Foreground}" 
                    Foreground="Cornsilk" >

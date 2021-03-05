@@ -68,7 +68,7 @@ namespace RAMDesktopUI.Controls
         {
             var grid = sender as RSVDataGrid;
             _columns = grid.Columns;
-            //ReplaceSelectAllButton(this);
+            ReplaceSelectAllButton(this);
             Loaded -= RSVDataGrid_Loaded;
         }
 
@@ -80,7 +80,7 @@ namespace RAMDesktopUI.Controls
                 if(child!=null)
                 {
 
-                    if (child is Button button && button.Name.Equals("SelectAll"))
+                    if (child is Button button)
                     {
                         button.Command = ColumnChooserClicked;
                     }
@@ -91,7 +91,7 @@ namespace RAMDesktopUI.Controls
                 }
             }
         }
-        public static ICommand ColumnChooserClicked { get; set; }
+        public ICommand ColumnChooserClicked { get; set; }
         private RSVColumnChooser columnChooser;
         private bool CanChooseColumns(object value)
         {

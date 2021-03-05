@@ -6,6 +6,13 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDark.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" >
+            <Style x:Key="RSVDataGridRowStyle" BasedOn="{StaticResource DataGridRowStyle}" TargetType="DataGridRow">
+                <Setter Property="MinHeight" Value="25"/>
+                <Setter Property="Height" Value="25"/>
+            </Style>
+            <Style x:Key="RSVDataGridCellStyle" BasedOn="{StaticResource DataGridCellStyle}" TargetType="DataGridCell">
+                <Setter Property="Padding" Value="0"/>
+            </Style>
             <Style x:Key="RSVDataGridStyle" TargetType="{ x:Type controls:RSVDataGrid}">
                 <Setter Property="Background" Value="{DynamicResource SecondaryRegionBrush}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
@@ -22,9 +29,8 @@
                 <Setter Property="CanUserResizeRows" Value="False" />
                 <Setter Property="ColumnHeaderStyle" Value="{StaticResource DataGridColumnHeaderStyle}" />
                 <Setter Property="RowHeaderStyle" Value="{StaticResource DataGridRowHeaderStyle}" />
-                <Setter Property="RowStyle" Value="{StaticResource DataGridRowStyle}" />
-                <Setter Property="CellStyle" Value="{StaticResource DataGridCellStyle}" />
-                <Setter Property="Padding" Value="1" />
+                <Setter Property="RowStyle" Value="{StaticResource RSVDataGridRowStyle}" />
+                <Setter Property="CellStyle" Value="{StaticResource RSVDataGridCellStyle}" />
                 <Setter Property="hc:DataGridAttach.TextColumnStyle" Value="{StaticResource DataGridTextColumnStyle}" />
                 <Setter Property="hc:DataGridAttach.EditingTextColumnStyle" Value="{StaticResource TextBoxBaseStyle}" />
                 <Setter Property="hc:DataGridAttach.ComboBoxColumnStyle" Value="{StaticResource TextBlockComboBoxStyle}" />
@@ -32,71 +38,7 @@
                 <Setter Property="hc:DataGridAttach.CheckBoxColumnStyle" Value="{StaticResource CheckBoxBaseStyle}" />
                 <Setter Property="hc:DataGridAttach.EditingCheckBoxColumnStyle" Value="{StaticResource CheckBoxBaseStyle}" />
                 <Setter Property="hc:DataGridAttach.ApplyDefaultStyle" Value="True" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="DataGrid">
-                            <ControlTemplate.Resources>
-                                <Storyboard x:Key="Storyboard1">
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_VerticalScrollBar">
-                                        <EasingDoubleKeyFrame KeyTime="0:0:.2" Value=".8" />
-                                    </DoubleAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_HorizontalScrollBar">
-                                        <EasingDoubleKeyFrame KeyTime="0:0:.2" Value=".8" />
-                                    </DoubleAnimationUsingKeyFrames>
-                                </Storyboard>
-                                <Storyboard x:Key="Storyboard2">
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_VerticalScrollBar">
-                                        <EasingDoubleKeyFrame KeyTime="0:0:.2" Value="0" />
-                                    </DoubleAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_HorizontalScrollBar">
-                                        <EasingDoubleKeyFrame KeyTime="0:0:.2" Value="0" />
-                                    </DoubleAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </ControlTemplate.Resources>
-                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
-                                <hc:ToggleBlock IsChecked="{Binding HasItems,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                                    <hc:ToggleBlock.CheckedContent>
-                                        <ScrollViewer x:Name="DG_ScrollViewer" Focusable="false">
-                                            <ScrollViewer.Template>
-                                                <ControlTemplate TargetType="ScrollViewer">
-                                                    <Grid>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="Auto" />
-                                                            <ColumnDefinition Width="*" />
-                                                            <ColumnDefinition Width="Auto" />
-                                                        </Grid.ColumnDefinitions>
-                                                        <Grid.RowDefinitions>
-                                                            <RowDefinition Height="Auto" />
-                                                            <RowDefinition Height="*" />
-                                                        </Grid.RowDefinitions>
-                                                        <Button x:Name="SelectAll" Command="{x:Static controls:RSVDataGrid.ColumnChooserClicked}" 
-                                                                Margin="0,0,0,6" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType=DataGrid}}" Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource AncestorType=DataGrid},Converter={StaticResource DoubleMinConverter}}" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource AllGeometry}" Foreground="{DynamicResource PrimaryBrush}" />
-                                                        <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="1" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                                                        <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}" Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1" />
-                                                        <ScrollBar Style="{StaticResource ScrollBarBaseStyle}" Opacity="0" x:Name="PART_VerticalScrollBar" Grid.Column="2" Maximum="{TemplateBinding ScrollableHeight}" Orientation="Vertical" Grid.Row="1" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportHeight}" />
-                                                        <ScrollBar Style="{StaticResource ScrollBarBaseStyle}" Opacity="0" x:Name="PART_HorizontalScrollBar" Grid.Column="1" Maximum="{TemplateBinding ScrollableWidth}" Orientation="Horizontal" VerticalAlignment="Bottom" Grid.Row="1" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportWidth}" />
-                                                    </Grid>
-                                                    <ControlTemplate.Triggers>
-                                                        <EventTrigger RoutedEvent="MouseEnter">
-                                                            <BeginStoryboard Storyboard="{StaticResource Storyboard1}" />
-                                                        </EventTrigger>
-                                                        <EventTrigger RoutedEvent="MouseLeave">
-                                                            <BeginStoryboard Storyboard="{StaticResource Storyboard2}" />
-                                                        </EventTrigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </ScrollViewer.Template>
-                                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                        </ScrollViewer>
-                                    </hc:ToggleBlock.CheckedContent>
-                                    <hc:ToggleBlock.UnCheckedContent>
-                                        <hc:SimpleText/>
-                                    </hc:ToggleBlock.UnCheckedContent>
-                                </hc:ToggleBlock>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
+                
                 <Style.Triggers>
                     <MultiTrigger>
                         <MultiTrigger.Conditions>
