@@ -388,7 +388,7 @@ namespace RAMDesktopUI.ViewModels
                 Status = "Invalid Order";
         }
 
-        public async Task SendToBroker()
+        public async Task SendLive()
         {
             if (IsValidOrder(false))
             {

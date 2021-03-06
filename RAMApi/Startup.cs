@@ -43,12 +43,12 @@ namespace RAMApi
             services.AddControllersWithViews();
 
             //Personal Services
-            services.AddTransient<IUserData, UserData>();
-            services.AddTransient<IFillData, FillData>();
-            services.AddTransient<IOrderData, OrderData>();
-            services.AddTransient<IAccountData, AccountData>();
-            services.AddTransient<IBrokerData, BrokerData>();
-            services.AddTransient<ISecurityData, SecurityData>();
+            services.AddSingleton<IUserData, UserData>();
+            services.AddSingleton<IFillData, FillData>();
+            services.AddSingleton<IOrderData, OrderData>();
+            services.AddSingleton<IAccountData, AccountData>();
+            services.AddSingleton<IBrokerData, BrokerData>();
+            services.AddSingleton<ISecurityData, SecurityData>();
             services.AddSingleton<IFixDataAccess, FixDataAccess>();
             services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 

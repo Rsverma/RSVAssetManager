@@ -24,7 +24,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Internal\FixAccess\tradeclient.cfg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Internal\FixAccess\tradeclient_ssl.cfg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -28,10 +28,10 @@ namespace RAMApi.Library.Internal.FixAccess
                 Console.WriteLine(ex.StackTrace);
             }
         }
-        private SessionID SessionID { get; set; }
+        Session _session = null;
         public void OnCreate(SessionID sessionID)
         {
-            SessionID = sessionID;
+            _session = Session.LookupSession(sessionID);
         }
 
         public void OnLogon(SessionID sessionID)
@@ -108,7 +108,8 @@ namespace RAMApi.Library.Internal.FixAccess
                 TransactTime = new TransactTime(order.OrderDate)
             };
 
-                Session.SendToTarget(orderSingle, SessionID);
+            if (_session != null)
+                _ = _session.Send(orderSingle);
 
         }
     }
