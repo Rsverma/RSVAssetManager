@@ -34,7 +34,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <controls:RSVDataGrid x:Name="Stages" Grid.Row="0" HeadersVisibility="All" 
-                                          RowHeaderWidth="10" AutoGenerateColumns="False"
+                                          RowHeaderWidth="30" AutoGenerateColumns="False"
                                           CanUserSortColumns="True">
                         
                         <controls:RSVDataGrid.Columns>
@@ -58,9 +58,9 @@
                                 <DataGridTextColumn Header="Order Date" Binding="{Binding OrderDate}"/>
                             </controls:RSVDataGrid.Columns>
                      </controls:RSVDataGrid>
-                    <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
+                    <GridSplitter Grid.Row="1" Height="1" Background="Black" HorizontalAlignment="Stretch"/>
                     <controls:RSVDataGrid x:Name="Subs" Grid.Row="2" HeadersVisibility="All" 
-                                          RowHeaderWidth="10" AutoGenerateColumns="False"
+                                          RowHeaderWidth="30" AutoGenerateColumns="False"
                                           CanUserSortColumns="True">
                         <controls:RSVDataGrid.Columns>
                             <DataGridTextColumn Header="Ticker Symbol" Binding="{Binding TickerSymbol}"/>
@@ -93,7 +93,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <controls:RSVDataGrid x:Name="Orders" Grid.Row="0" HeadersVisibility="All" 
-                                          RowHeaderWidth="10" AutoGenerateColumns="False"
+                                          RowHeaderWidth="30" AutoGenerateColumns="False"
                                           CanUserSortColumns="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Ticker Symbol" Binding="{Binding TickerSymbol}"/>
@@ -116,9 +116,9 @@
                             <DataGridTextColumn Header="Order Date" Binding="{Binding OrderDate}"/>
                         </DataGrid.Columns>
                     </controls:RSVDataGrid>
-                    <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
+                    <GridSplitter Grid.Row="1" Height="1" Background="Black" HorizontalAlignment="Stretch" />
                     <controls:RSVDataGrid x:Name="Fills" Grid.Row="2" HeadersVisibility="All" 
-                                          RowHeaderWidth="10" AutoGenerateColumns="False"
+                                          RowHeaderWidth="30" AutoGenerateColumns="False"
                                           CanUserSortColumns="True">
                         <controls:RSVDataGrid.Columns>
                             <DataGridTextColumn Header="Ticker Symbol" Binding="{Binding TickerSymbol}"/>

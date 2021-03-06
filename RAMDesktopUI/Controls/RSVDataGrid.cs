@@ -59,9 +59,9 @@ namespace RAMDesktopUI.Controls
         public RSVDataGrid()
             : base()
         {
+            ColumnChooserClicked = new RelayCommand(OnColumnChooserClicked, CanChooseColumns);
             Style = FindResource("RSVDataGridStyle") as Style;
             Loaded += RSVDataGrid_Loaded;
-            ColumnChooserClicked = new RelayCommand(OnColumnChooserClicked, CanChooseColumns);
         }
 
         private void RSVDataGrid_Loaded(object sender, RoutedEventArgs e)

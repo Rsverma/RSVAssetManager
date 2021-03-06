@@ -6,6 +6,7 @@ using RAMDesktopUI.Library.Models;
 using RAMDesktopUI.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -102,9 +103,9 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
-        private BindingList<OrderManagerRowModel> _orders = new BindingList<OrderManagerRowModel>();
+        private ObservableCollection<OrderManagerRowModel> _orders = new ObservableCollection<OrderManagerRowModel>();
 
-        public BindingList<OrderManagerRowModel> Orders
+        public ObservableCollection<OrderManagerRowModel> Orders
         {
             get { return _orders; }
             set
@@ -115,9 +116,9 @@ namespace RAMDesktopUI.ViewModels
             }
         }
         
-        private BindingList<OrderManagerRowModel> _stages = new BindingList<OrderManagerRowModel>();
+        private ObservableCollection<OrderManagerRowModel> _stages = new ObservableCollection<OrderManagerRowModel>();
 
-        public BindingList<OrderManagerRowModel> Stages
+        public ObservableCollection<OrderManagerRowModel> Stages
         {
             get { return _stages; }
             set
@@ -128,9 +129,9 @@ namespace RAMDesktopUI.ViewModels
             }
         }
         
-        private BindingList<OrderManagerRowModel> _subs = new BindingList<OrderManagerRowModel>();
+        private ObservableCollection<OrderManagerRowModel> _subs = new ObservableCollection<OrderManagerRowModel>();
 
-        public BindingList<OrderManagerRowModel> Subs
+        public ObservableCollection<OrderManagerRowModel> Subs
         {
             get { return _subs; }
             set
@@ -141,9 +142,9 @@ namespace RAMDesktopUI.ViewModels
             }
         }
         
-        private BindingList<FillModel> _fills = new BindingList<FillModel>();
+        private ObservableCollection<FillModel> _fills = new ObservableCollection<FillModel>();
 
-        public BindingList<FillModel> Fills
+        public ObservableCollection<FillModel> Fills
         {
             get { return _fills; }
             set
