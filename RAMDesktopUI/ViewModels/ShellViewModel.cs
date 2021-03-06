@@ -57,14 +57,14 @@ namespace RAMDesktopUI.ViewModels
                 ModuleBase viewModel = null;
                 switch (moduleEvent.ModuleType)
                 {
-                    case ModuleTypes.CreateOrder:
-                        viewModel = IoC.Get<CreateOrderViewModel>();
+                    case ModuleTypes.OrderTicket:
+                        viewModel = IoC.Get<OrderTicketViewModel>();
                         break;
-                    case ModuleTypes.OrderManager:
-                        viewModel = IoC.Get<OrderManagerViewModel>();
+                    case ModuleTypes.TradeBlotter:
+                        viewModel = IoC.Get<TradeBlotterViewModel>();
                         break;
-                    case ModuleTypes.PortfolioManager:
-                        viewModel = IoC.Get<PortfolioManagerViewModel>();
+                    case ModuleTypes.PortfolioMonitor:
+                        viewModel = IoC.Get<PortfolioMonitorViewModel>();
                         break;
                     case ModuleTypes.Watchlist:
                         viewModel = IoC.Get<WatchlistViewModel>();

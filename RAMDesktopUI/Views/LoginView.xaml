@@ -16,7 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -31,7 +31,7 @@
         <!--Error Message row-->
         <TextBlock x:Name="ErrorMessage" Grid.Row="2" Grid.Column="1" 
                    Grid.ColumnSpan="2" Margin="0 0 0 20" Visibility="{Binding IsErrorVisible, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}"
-                   Foreground="Red" MaxWidth="300" TextWrapping="Wrap"/>
+                   Foreground="Red" MaxWidth="300" TextWrapping="Wrap" />
 
 
         <!--Username row-->

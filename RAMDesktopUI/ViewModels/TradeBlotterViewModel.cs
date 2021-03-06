@@ -15,12 +15,12 @@ using System.Windows;
 
 namespace RAMDesktopUI.ViewModels
 {
-    public class OrderManagerViewModel : ModuleBase
+    public class TradeBlotterViewModel : ModuleBase
     {
         private readonly IOrderCache _orderCache;
         private readonly IOrderFieldsCache _fieldsCache;
 
-        public OrderManagerViewModel(IOrderCache orderCache, IOrderFieldsCache fieldsCache)
+        public TradeBlotterViewModel(IOrderCache orderCache, IOrderFieldsCache fieldsCache)
         {
             _orderCache = orderCache;
             _fieldsCache = fieldsCache;

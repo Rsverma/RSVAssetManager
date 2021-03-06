@@ -10,9 +10,9 @@ using System.Windows;
 
 namespace RAMDesktopUI.ViewModels
 {
-    public class PortfolioManagerViewModel : ModuleBase
+    public class PortfolioMonitorViewModel : ModuleBase
     {
-        public PortfolioManagerViewModel()
+        public PortfolioMonitorViewModel()
         {
 
         }

@@ -11,7 +11,7 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="12"
         ShowNonClientArea="False" hc:WindowAttach.IsDragElement="True" 
-            Height="300" Width="500">
+            Height="350" Width="500">
 
     <Grid>
         <ContentControl x:Name="ActiveItem"/>

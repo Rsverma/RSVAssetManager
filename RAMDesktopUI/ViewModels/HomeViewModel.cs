@@ -30,25 +30,31 @@ namespace RAMDesktopUI.ViewModels
         private void FieldsCache_InitializationCompleted(object sender, EventArgs e)
         {
             _isFieldCacheInitialized = true;
-            NotifyOfPropertyChange(() => CanLaunchCreateOrder);
-            NotifyOfPropertyChange(() => CanLaunchOrderManager);
+            NotifyOfPropertyChange(() => CanLaunchOrderTicket);
+            NotifyOfPropertyChange(() => CanLaunchTradeBlotter);
             _fieldsCache.InitializationCompleted -= FieldsCache_InitializationCompleted;
         }
 
         private void OrderCache_InitializationCompleted(object sender, EventArgs e)
         {
             _isOrderCacheInitialized = true;
-            NotifyOfPropertyChange(() => CanLaunchCreateOrder);
-            NotifyOfPropertyChange(() => CanLaunchOrderManager);
+            NotifyOfPropertyChange(() => CanLaunchOrderTicket);
+            NotifyOfPropertyChange(() => CanLaunchTradeBlotter);
             _orderCache.InitializationCompleted -= OrderCache_InitializationCompleted;
         }
 
-        public bool CanLaunchFundAllocater { get { return false; } }
-        public bool CanLaunchImport { get { return false; } }
-        public bool CanLaunchPortfolioManager { get { return false; } }
-        public bool CanLaunchCreateOrder { get { return _isFieldCacheInitialized; } }
-        public bool CanLaunchOrderManager { get { return _isOrderCacheInitialized && _isFieldCacheInitialized; } }
+        public bool CanLaunchOrderTicket { get { return _isFieldCacheInitialized; } }
+        public bool CanLaunchTradeBlotter { get { return _isOrderCacheInitialized && _isFieldCacheInitialized; } }
+        public bool CanLaunchPositionManager { get { return false; } }
+        public bool CanLaunchPortfolioMonitor { get { return false; } }
         public bool CanLaunchWatchlist { get { return true; } }
+        public bool CanLaunchImportData { get { return false; } }
+        public bool CanLaunchComplianceManager { get { return false; } }
+        public bool CanLaunchTaxLotManager { get { return false; } }
+        public bool CanLaunchSecurityMaster { get { return false; } }
+        public bool CanLaunchTradeDelivery { get { return false; } }
+        public bool CanLaunchAuditTrail { get { return false; } }
+        public bool CanLaunchUserPreferences { get { return false; } }
         public async Task LogOut()
         {
             await _events.PublishOnUIThreadAsync(new LogInOutEvent { IsLogin = false });
@@ -59,24 +65,24 @@ namespace RAMDesktopUI.ViewModels
             await _events.PublishOnUIThreadAsync(new ExitAppEvent());
         }
 
-        public async Task LaunchCreateOrder()
+        public async Task LaunchOrderTicket()
         {
-            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.CreateOrder));
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.OrderTicket));
         }
 
-        public async Task LaunchOrderManager()
+        public async Task LaunchTradeBlotter()
         {
-            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.OrderManager));
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.TradeBlotter));
         }
 
-        public async Task LaunchPortfolioManager()
+        public async Task LaunchPositionManager()
         {
-            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.PortfolioManager));
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.PositionManager));
         }
 
-        public async Task LaunchFundAllocater()
+        public async Task LaunchPortfolioMonitor()
         {
-            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.FundAllocater));
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.PortfolioMonitor));
         }
 
         public async Task LaunchWatchlist()
@@ -84,9 +90,37 @@ namespace RAMDesktopUI.ViewModels
             await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.Watchlist));
         }
 
-        public async Task LaunchImport()
+        public async Task LaunchImportData()
         {
-            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.Import));
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.ImportData));
+        }
+        public async Task LaunchComplianceManager()
+        {
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.ComplianceManager));
+        }
+
+        public async Task LaunchTaxLotManager()
+        {
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.TaxLotManager));
+        }
+
+        public async Task LaunchSecurityMaster()
+        {
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.SecurityMaster));
+        }
+        public async Task LaunchTradeDelivery()
+        {
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.TradeDelivery));
+        }
+
+        public async Task LaunchAuditTrail()
+        {
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.AuditTrail));
+        }
+
+        public async Task LaunchUserPreferences()
+        {
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.UserPreferences));
         }
     }
 }

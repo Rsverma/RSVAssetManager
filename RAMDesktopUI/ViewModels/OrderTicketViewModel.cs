@@ -13,12 +13,12 @@ using System.Windows;
 
 namespace RAMDesktopUI.ViewModels
 {
-    public class CreateOrderViewModel : ModuleBase
+    public class OrderTicketViewModel : ModuleBase
     {
         private readonly IOrderEndpoint _orderEndpoint;
         private readonly IOrderFieldsCache _fieldsCache;
 
-        public CreateOrderViewModel(IOrderEndpoint orderEndpoint, IOrderFieldsCache fieldsCache)
+        public OrderTicketViewModel(IOrderEndpoint orderEndpoint, IOrderFieldsCache fieldsCache)
         {
             _orderEndpoint = orderEndpoint;
             _fieldsCache = fieldsCache;

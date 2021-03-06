@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HandyControl.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,13 +16,14 @@ using System.Windows.Shapes;
 namespace RAMDesktopUI.Views
 {
     /// <summary>
-    /// Interaction logic for OrderManagerView.xaml
+    /// Interaction logic for CreateOrderView.xaml
     /// </summary>
-    public partial class OrderManagerView : HandyControl.Controls.Window
+    public partial class OrderTicketView : HandyControl.Controls.Window
     {
-        public OrderManagerView()
+        public OrderTicketView()
         {
-            InitializeComponent(); 
+            ConfigHelper.Instance.SetLang("en-us");
+            InitializeComponent();
         }
     }
 }

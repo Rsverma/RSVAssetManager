@@ -31,33 +31,60 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Margin="0 0 0 20"
                    HorizontalAlignment="Center" FontSize="30">
             RSV Asset Manager
             </TextBlock>
-            <Button x:Name="LaunchCreateOrder" Grid.Column="1" Grid.Row="1" Width="100" Margin="10">
-                Create Order
+            <Button x:Name="LaunchOrderTicket" Grid.Column="1" Grid.Row="1" Width="120" Margin="10">
+                Order Ticket
             </Button>
 
-            <Button x:Name="LaunchOrderManager" Grid.Column="2" Grid.Row="1" Width="100" Margin="10">
+            <Button x:Name="LaunchTradeBlotter" Grid.Column="2" Grid.Row="1" Width="120" Margin="10">
                 Trade Blotter
             </Button>
 
-            <Button x:Name="LaunchFundAllocater" Grid.Column="3" Grid.Row="1" Width="100" Margin="10">
-                Allocation
+            <Button x:Name="LaunchPositionManager" Grid.Column="3" Grid.Row="1" Width="120" Margin="10">
+                Position Manager
             </Button>
 
-            <Button x:Name="LaunchPortfolioManager" Grid.Column="1" Grid.Row="2" Width="100" Margin="10">
+            <Button x:Name="LaunchPortfolioMonitor" Grid.Column="1" Grid.Row="2" Width="120" Margin="10">
                 Portfolio Monitor
             </Button>
             
-            <Button x:Name="LaunchWatchlist" Grid.Column="2" Grid.Row="2" Width="100" Margin="10">
+            <Button x:Name="LaunchWatchlist" Grid.Column="2" Grid.Row="2" Width="120" Margin="10">
                 Watchlist
             </Button>
-            <Button x:Name="LaunchImport" Grid.Column="3" Grid.Row="2" Width="100" Margin="10">
-                Import Manager
+
+            <Button x:Name="LaunchImportData" Grid.Column="3" Grid.Row="2" Width="120" Margin="10">
+                Import Data
+            </Button>
+            
+            <Button x:Name="LaunchComplianceManager" Grid.Column="1" Grid.Row="3" Width="120" Margin="10">
+                Compliance Manager
+            </Button>
+
+            <Button x:Name="LaunchTaxLotManager" Grid.Column="2" Grid.Row="3" Width="120" Margin="10">
+                Tax Lot Manager
+            </Button>
+
+            <Button x:Name="LaunchSecurityMaster" Grid.Column="3" Grid.Row="3" Width="120" Margin="10">
+                Security Master
+            </Button>
+            
+            <Button x:Name="LaunchTradeDelivery" Grid.Column="1" Grid.Row="4" Width="120" Margin="10">
+                Trade Delivery
+            </Button>
+
+            <Button x:Name="LaunchAuditTrail" Grid.Column="2" Grid.Row="4" Width="120" Margin="10">
+                Audit Trail
+            </Button>
+            
+            <Button x:Name="LaunchUserPreferences" Grid.Column="3" Grid.Row="4" Width="120" Margin="10">
+                User Preferences
             </Button>
         </Grid>
     </DockPanel>

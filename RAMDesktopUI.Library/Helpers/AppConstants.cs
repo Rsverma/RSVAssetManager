@@ -8,12 +8,18 @@ namespace RAMDesktopUI.Library.Helpers
     {
         public enum ModuleTypes
         {
-            CreateOrder,
-            OrderManager,
-            PortfolioManager,
-            FundAllocater,
+            OrderTicket,
+            TradeBlotter,
+            PositionManager,
+            PortfolioMonitor,
             Watchlist,
-            Import
+            ImportData,
+            ComplianceManager,
+            TaxLotManager,
+            SecurityMaster,
+            TradeDelivery,
+            AuditTrail,
+            UserPreferences
         }
     }
 }

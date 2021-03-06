@@ -1,16 +1,16 @@
 ﻿<hc:Window  xmlns:hc="https://handyorg.github.io/handycontrol" 
-            x:Class="RAMDesktopUI.Views.OrderManagerView"
+            x:Class="RAMDesktopUI.Views.TradeBlotterView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RAMDesktopUI.Views"
         xmlns:controls="clr-namespace:RAMDesktopUI.Controls"
-        mc:Ignorable="d" x:Name="OrderManager"
-        Title=" " Height="600" Width="1000" WindowState="{Binding CurWindowState, Mode=TwoWay}">
+        mc:Ignorable="d" x:Name="TradeBlotter" ShowTitle="False"
+            Height="600" Width="1000" WindowState="{Binding CurWindowState, Mode=TwoWay}">
 
     <hc:Window.NonClientAreaContent>
-        <TextBlock Text="Order Manager" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Trade Blotter" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </hc:Window.NonClientAreaContent>
     <Grid>
         <Grid.ColumnDefinitions>

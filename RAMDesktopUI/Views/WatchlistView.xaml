@@ -6,21 +6,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RAMDesktopUI.Views"
         xmlns:controls="clr-namespace:RAMDesktopUI.Controls"
-        mc:Ignorable="d" WindowStyle="None"
+        mc:Ignorable="d" ShowTitle="False"
         x:Name="Watchlist" Height="450" Width="800" WindowState="{Binding CurWindowState, Mode=TwoWay}">
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="29" />
-    </WindowChrome.WindowChrome>
-
-    <!--Title bar button commands-->
-    <Window.CommandBindings>
-        <CommandBinding Command="{x:Static SystemCommands.CloseWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Close" />
-        <CommandBinding Command="{x:Static SystemCommands.MaximizeWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Maximize" />
-        <CommandBinding Command="{x:Static SystemCommands.MinimizeWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Minimize" />
-        <CommandBinding Command="{x:Static SystemCommands.RestoreWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Restore" />
-    </Window.CommandBindings>
-
-
+    <hc:Window.NonClientAreaContent>
+        <TextBlock Text="Watchlist" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </hc:Window.NonClientAreaContent>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -33,34 +23,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <!--Window chrome-->
-        <Grid Grid.Row="0" Grid.ColumnSpan="7" Height="25" Background="Gray">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <!--App icon-->
-            <Image Grid.Column="0" Source="/Resources/Watchlist.ico" Margin="2"
-                       VerticalAlignment="Center" />
-            <TextBlock Grid.Column="1" Text="Watchlist" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-
-
-            <!--Caption buttons-->
-            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Button Style="{StaticResource MinimizeButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Minimize"
-                            Command="{x:Static SystemCommands.MinimizeWindowCommand}"/>
-                <Button x:Name="RestoreButton" Visibility="Collapsed" Style="{StaticResource RestoreButtonStyle}" 
-                            Command="{x:Static SystemCommands.RestoreWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Restore"/>
-                <Button x:Name="MaximizeButton" Visibility="Visible" Style="{StaticResource MaximizeButtonStyle}" 
-                            Command="{x:Static SystemCommands.MaximizeWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Maximize" />
-                <Button Style="{StaticResource CloseButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Close"
-                            Command="{x:Static SystemCommands.CloseWindowCommand}"/>
-            </StackPanel>
-        </Grid>
-
-        <controls:RSVDataGrid x:Name="SymbolMarketData" Grid.Row="1" Grid.Column="1" Margin="0 10"
-                  AlternatingRowBackground="Black" CanUserAddRows="False" 
+        <controls:RSVDataGrid x:Name="SymbolMarketData" Grid.Row="1" Grid.Column="1" Margin="0 10" CanUserAddRows="False" 
                   CanUserDeleteRows="False" IsReadOnly="True"
                   CanUserResizeRows="False" AutoGenerateColumns="True"
                   >
