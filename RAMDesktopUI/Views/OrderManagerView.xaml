@@ -144,9 +144,7 @@
                 </Grid>
             </hc:TabItem>
         </hc:TabControl>
-        <StatusBar Grid.Row="3" Grid.ColumnSpan="3" 
-                   Background="{Binding RelativeSource={RelativeSource Self},Path=Parent.Foreground}" 
-                   Foreground="Cornsilk" >
+        <StatusBar Grid.Row="3" Grid.ColumnSpan="3" Foreground="Cornsilk">
 
             <TextBlock Text="{Binding Status, NotifyOnTargetUpdated=True}">
                 <TextBlock.Triggers>

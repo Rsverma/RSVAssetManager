@@ -77,7 +77,11 @@ namespace RAMDesktopUI.ViewModels
         public SecurityModel SelectedSymbol
         {
             get { return _selectedSymbol; }
-            set { _selectedSymbol = value; }
+            set
+            {
+                _selectedSymbol = value;
+                NotifyOfPropertyChange(() => SelectedSymbol);
+            }
         }
 
         private BindingList<SecurityModel> _symbols;
@@ -171,6 +175,27 @@ namespace RAMDesktopUI.ViewModels
             get
             {
                 return SelectedOrderType == OrderType.Limit || SelectedOrderType == OrderType.StopLimit;
+            }
+        }
+        public bool AvgPriceEnabled
+        {
+            get
+            {
+                return true;
+            }
+        }
+        public bool CommissionEnabled
+        {
+            get
+            {
+                return true;
+            }
+        }
+        public bool FeesEnabled
+        {
+            get
+            {
+                return true;
             }
         }
 
@@ -314,66 +339,79 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
-        public bool IsValidOrder(bool isSaveOnly)
+        public bool IsValidOrder(bool isManual)
         {
-            return SelectedSymbol.Id > 0 && OrderTypes.Contains(SelectedOrderType)
-                && OrderSides.Contains(SelectedOrderSide) && Quantity > 0 && LimitPrice >= 0 && (!isSaveOnly || AvgPrice >= 0)
-                && Commission >= 0 && Fees >= 0;
+            return SelectedSymbol != null && SelectedAllocation != null && SelectedBroker != null && (!isManual || AvgPrice > 0);
         }
 
         public async Task CreateStage()
         {
-            OrderModel order = GetOrderFromUI();
-            order.OrderStatus = (char)OrderStatus.New;
-            order.InternalOrderType = (int)InternalOrderType.Stage;
-            try
+            if (IsValidOrder(false))
             {
-                await _orderEndpoint.PostOrder(order);
-                Status = "Stage order saved.";
+                OrderModel order = GetOrderFromUI();
+                order.OrderStatus = (char)OrderStatus.New;
+                order.InternalOrderType = (int)InternalOrderType.Stage;
+                try
+                {
+                    await _orderEndpoint.PostOrder(order);
+                    Status = "Stage order saved.";
+                }
+                catch (Exception ex)
+                {
+                    Status = ex.Message;
+                }
+                ResetOrderViewModel();
             }
-            catch (Exception ex)
-            {
-                Status = ex.Message;
-            }
-            ResetOrderViewModel();
+            else
+                Status = "Invalid Order";
         }
 
         public async Task SaveManual()
         {
-            OrderModel order = GetOrderFromUI();
-            order.OrderStatus = (char)OrderStatus.Filled;
-            order.InternalOrderType = (int)InternalOrderType.Manual;
-            try
+            if (IsValidOrder(true))
             {
-                await _orderEndpoint.PostOrder(order);
-                Status = "Manual order saved.";
+                OrderModel order = GetOrderFromUI();
+                order.OrderStatus = (char)OrderStatus.Filled;
+                order.InternalOrderType = (int)InternalOrderType.Manual;
+                try
+                {
+                    await _orderEndpoint.PostOrder(order);
+                    Status = "Manual order saved.";
+                }
+                catch (Exception ex)
+                {
+                    Status = ex.Message;
+                }
+                ResetOrderViewModel();
             }
-            catch (Exception ex)
-            {
-                Status = ex.Message;
-            }
-            ResetOrderViewModel();
+            else
+                Status = "Invalid Order";
         }
 
         public async Task SendToBroker()
         {
-            OrderModel order = GetOrderFromUI();
-            order.OrderStatus = (char)OrderStatus.PendingNew;
-            order.InternalOrderType = (int)InternalOrderType.Live;
-            try
+            if (IsValidOrder(false))
             {
-                await _orderEndpoint.PostOrder(order);
-                Status = "Live order sent to broker.";
+                OrderModel order = GetOrderFromUI();
+                order.OrderStatus = (char)OrderStatus.PendingNew;
+                order.InternalOrderType = (int)InternalOrderType.Live;
+                try
+                {
+                    await _orderEndpoint.PostOrder(order);
+                    Status = "Live order sent to broker.";
+                }
+                catch (Exception ex)
+                {
+                    Status = ex.Message;
+                }
+                ResetOrderViewModel();
             }
-            catch (Exception ex)
-            {
-                Status = ex.Message;
-            }
-            ResetOrderViewModel();
+            else
+                Status = "Invalid Order";
         }
 
         private OrderModel GetOrderFromUI()
-        {
+        {   
             return new OrderModel
             {
                 TickerSymbol = SelectedSymbol.TickerSymbol,

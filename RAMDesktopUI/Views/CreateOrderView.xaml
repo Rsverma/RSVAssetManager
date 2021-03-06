@@ -35,10 +35,10 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="7*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <!--App content-->
@@ -104,9 +104,7 @@
         <Button x:Name="SaveManual" Width="100"  hc:BorderElement.CornerRadius="5"  Grid.Row="6" Grid.Column="3" Margin="20">Manual</Button>
         <Button x:Name="SendLive" Width="100" hc:BorderElement.CornerRadius="5"  Grid.Row="6" Grid.Column="4" Margin="20">Live</Button>
 
-        <StatusBar Grid.Row="8" Grid.ColumnSpan="7" 
-                   Background="{Binding RelativeSource={RelativeSource Self},Path=Parent.Foreground}" 
-                   Foreground="Cornsilk" >
+        <StatusBar Grid.Row="8" Grid.ColumnSpan="7" Foreground="Cornsilk" >
 
             <TextBlock Text="{Binding Status, NotifyOnTargetUpdated=True}">
                 <TextBlock.Triggers>
