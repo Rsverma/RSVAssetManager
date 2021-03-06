@@ -50,7 +50,7 @@ namespace RAMApi
             services.AddTransient<IBrokerData, BrokerData>();
             services.AddTransient<ISecurityData, SecurityData>();
             services.AddSingleton<IFixDataAccess, FixDataAccess>();
-            services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+            services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 
 
             services.AddAuthentication(options =>

@@ -8,6 +8,7 @@ namespace RAMDesktopUI.Models
 {
     public class OrderManagerRowModel
     {
+        public string ClOrderId { get; set; }
         public string TickerSymbol { get; set; }
         public string OrderSide { get; set; }
         public string Broker { get; set; }

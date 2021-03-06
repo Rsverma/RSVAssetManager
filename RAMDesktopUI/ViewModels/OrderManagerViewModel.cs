@@ -38,6 +38,7 @@ namespace RAMDesktopUI.ViewModels
             {
                 OrderManagerRowModel orderRow = new OrderManagerRowModel
                 {
+                    ClOrderId = order.ClOrderId,
                     TickerSymbol = order.TickerSymbol,
                     AvgPrice = order.AvgPrice,
                     StopPrice = order.StopPrice,
@@ -64,6 +65,7 @@ namespace RAMDesktopUI.ViewModels
             {
                 OrderManagerRowModel orderRow = new OrderManagerRowModel
                 {
+                    ClOrderId = order.ClOrderId,
                     TickerSymbol = order.TickerSymbol,
                     AvgPrice = order.AvgPrice,
                     StopPrice = order.StopPrice,
@@ -115,7 +117,27 @@ namespace RAMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => Orders);
             }
         }
-        
+
+        private OrderManagerRowModel _selectedOrder;
+        public OrderManagerRowModel SelectedOrder
+        {
+            get { return _selectedOrder; }
+            set
+            {
+                _selectedOrder = value;
+                Fills.Clear();
+                foreach (FillModel fill in _orderCache.Fills)
+                {
+                    if (fill.ClOrderId.Equals(_selectedOrder.ClOrderId, StringComparison.Ordinal))
+                    {
+                        Fills.Add(fill);
+                    }
+                }
+
+                NotifyOfPropertyChange(() => SelectedStage);
+            }
+        }
+
         private ObservableCollection<OrderManagerRowModel> _stages = new ObservableCollection<OrderManagerRowModel>();
 
         public ObservableCollection<OrderManagerRowModel> Stages
@@ -128,7 +150,49 @@ namespace RAMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => Stages);
             }
         }
-        
+
+        private OrderManagerRowModel _selectedStage;
+        public OrderManagerRowModel SelectedStage
+        {
+            get { return _selectedStage; }
+            set
+            {
+                _selectedStage = value;
+                Subs.Clear();
+                foreach (OrderModel order in _orderCache.SubOrders)
+                {
+                    if (order.StageOrderId.Equals(_selectedStage.ClOrderId, StringComparison.Ordinal))
+                    {
+                        OrderManagerRowModel orderRow = new OrderManagerRowModel
+                        {
+                            ClOrderId = order.ClOrderId,
+                            TickerSymbol = order.TickerSymbol,
+                            AvgPrice = order.AvgPrice,
+                            StopPrice = order.StopPrice,
+                            LimitPrice = order.LimitPrice,
+                            OrderDate = order.OrderDate,
+                            CommissionAndFees = order.CommissionAndFees,
+                            TotalCost = order.AvgPrice + order.CommissionAndFees,
+                            TotalQuantity = order.Quantity,
+                            ExecutedQuantity = order.Quantity,
+                            RemainingQuantity = 0,
+                            TraderName = "Ramesh Verma"
+                        };
+                        orderRow.OrderType = ((OrderType)order.Type).ToString();
+                        orderRow.OrderSide = ((OrderSide)order.Side).ToString();
+                        orderRow.TIF = ((TimeInForce)order.TIF).ToString();
+                        orderRow.InternalOrderType = ((InternalOrderType)order.InternalOrderType).ToString();
+                        orderRow.OrderStatus = ((OrderStatus)order.OrderStatus).ToString();
+                        orderRow.Broker = _fieldsCache.Brokers.First(x => x.Id.Equals(order.Broker)).Name;
+                        orderRow.Allocation = _fieldsCache.Accounts.First(x => x.Id.Equals(order.Allocation)).Name;
+                        Subs.Add(orderRow);
+                    }
+                }
+
+                NotifyOfPropertyChange(() => SelectedStage);
+            }
+        }
+
         private ObservableCollection<OrderManagerRowModel> _subs = new ObservableCollection<OrderManagerRowModel>();
 
         public ObservableCollection<OrderManagerRowModel> Subs

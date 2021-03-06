@@ -122,23 +122,12 @@
                                           CanUserSortColumns="True">
                         <controls:RSVDataGrid.Columns>
                             <DataGridTextColumn Header="Ticker Symbol" Binding="{Binding TickerSymbol}"/>
-                            <DataGridTextColumn Header="Order Side" Binding="{Binding OrderSide}"/>
-                            <DataGridTextColumn Header="Broker" Binding="{Binding Broker}"/>
-                            <DataGridTextColumn Header="Allocation" Binding="{Binding Allocation}"/>
-                            <DataGridTextColumn Header="Total Quantity" Binding="{Binding TotalQuantity}"/>
-                            <DataGridTextColumn Header="Executed Quantity" Binding="{Binding ExecutedQuantity}"/>
-                            <DataGridTextColumn Header="Remaining Quantity" Binding="{Binding RemainingQuantity}"/>
-                            <DataGridTextColumn Header="Order Type" Binding="{Binding OrderType}"/>
-                            <DataGridTextColumn Header="Time in Force" Binding="{Binding TIF}"/>
-                            <DataGridTextColumn Header="Manual Or Live" Binding="{Binding InternalOrderType}"/>
-                            <DataGridTextColumn Header="Order Status" Binding="{Binding OrderStatus}"/>
-                            <DataGridTextColumn Header="Stop Price" Binding="{Binding StopPrice}"/>
-                            <DataGridTextColumn Header="Limit Price" Binding="{Binding LimitPrice}"/>
-                            <DataGridTextColumn Header="Avg Price" Binding="{Binding AvgPrice}"/>
-                            <DataGridTextColumn Header="Commission And Fees" Binding="{Binding CommissionAndFees}"/>
-                            <DataGridTextColumn Header="Total Cost" Binding="{Binding TotalCost}"/>
-                            <DataGridTextColumn Header="Trader Name" Binding="{Binding TraderName}"/>
-                            <DataGridTextColumn Header="Order Date" Binding="{Binding OrderDate}"/>
+                            <DataGridTextColumn Header="Order Side" Binding="{Binding Side}"/>
+                            <DataGridTextColumn Header="Order Quantity" Binding="{Binding OrderQty}"/>
+                            <DataGridTextColumn Header="Last Quantity" Binding="{Binding LastQty}"/>
+                            <DataGridTextColumn Header="Leaves Quantity" Binding="{Binding LeavesQty}"/>
+                            <DataGridTextColumn Header="Executed Quantity" Binding="{Binding CumQty}"/>
+                            <DataGridTextColumn Header="Fill Price" Binding="{Binding AvgPx}"/>
                         </controls:RSVDataGrid.Columns>
                     </controls:RSVDataGrid>
                 </Grid>

@@ -17,7 +17,6 @@ namespace RAMApi.Library.Internal.FixAccess
 
         public void FromApp(Message message, SessionID sessionID)
         {
-            Console.WriteLine("IN:  " + message.ToString());
             try
             {
                 Crack(message, sessionID);
@@ -37,12 +36,10 @@ namespace RAMApi.Library.Internal.FixAccess
 
         public void OnLogon(SessionID sessionID)
         {
-            Console.WriteLine("Logon - " + sessionID.ToString());
         }
 
         public void OnLogout(SessionID sessionID)
         {
-            Console.WriteLine("Logout - " + sessionID.ToString());
         }
 
         public void ToAdmin(Message message, SessionID sessionID)
@@ -65,22 +62,33 @@ namespace RAMApi.Library.Internal.FixAccess
             }
             catch (FieldNotFoundException)
             { }
-
-            Console.WriteLine();
-            Console.WriteLine("OUT: " + message.ToString());
         }
 
 
         public void OnMessage(QuickFix.FIX44.ExecutionReport m, SessionID s)
         {
-            OrderModel order = new OrderModel();
-            //order.AvgPrice = 
-            Console.WriteLine("Received execution report");
+            FillModel fill = new FillModel
+            {
+                AvgPx = m.Price.getValue(),
+                ClOrderId = m.ClOrdID.getValue(),
+                CumQty = (int)m.CumQty.getValue(),
+                LastQty = (int)m.LastQty.getValue(),
+                LeavesQty = (int)m.LeavesQty.getValue(),
+                OrderQty = (int)m.OrderQty.getValue(),
+                Side = m.Side.getValue(),
+                OrdStatus = m.OrdStatus.getValue(),
+                TickerSymbol = m.Symbol.getValue(),
+                ExecId = m.ExecID.getValue(),
+                ExecType = m.ExecType.getValue() - '0',
+                OrderId = m.OrderID.getValue(),
+            };
+            FillReceived?.Invoke(this, fill);
         }
 
+        public event EventHandler<FillModel> FillReceived;
+        
         public void OnMessage(QuickFix.FIX44.OrderCancelReject m, SessionID s)
         {
-            Console.WriteLine("Received order cancel reject");
         }
 
         public void SendOrder(OrderModel order)
@@ -100,7 +108,7 @@ namespace RAMApi.Library.Internal.FixAccess
                 TransactTime = new TransactTime(order.OrderDate)
             };
 
-            Session.SendToTarget(orderSingle, SessionID);
+                Session.SendToTarget(orderSingle, SessionID);
 
         }
     }
