@@ -19,7 +19,7 @@ namespace RAMDesktopUI.Controls
     /// <summary>
     /// Interaction logic for RSVColumnChooser.xaml
     /// </summary>
-    public partial class RSVColumnChooser : Window, INotifyPropertyChanged
+    public partial class RSVColumnChooser : HandyControl.Controls.Window, INotifyPropertyChanged
     {
         private BindingList<ColumnVisibility> _columnsVisiblityMapping = new BindingList<ColumnVisibility>();
         public BindingList<ColumnVisibility> ColumnsVisiblityMapping

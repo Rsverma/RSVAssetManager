@@ -5,8 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RAMDesktopUI.Views"
-        mc:Ignorable="d" ShowTitle="False"
-        x:Name="Watchlist" Height="450" Width="800" WindowState="{Binding CurWindowState, Mode=TwoWay}">
+        mc:Ignorable="d" ShowTitle="False" IsFullScreen="True"
+        x:Name="Watchlist" Height="600" Width="1200" WindowState="{Binding CurWindowState, Mode=TwoWay}">
     <hc:Window.NonClientAreaContent>
         <TextBlock Text="Watchlist" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </hc:Window.NonClientAreaContent>
