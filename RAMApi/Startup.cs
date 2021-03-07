@@ -49,6 +49,7 @@ namespace RAMApi
             services.AddSingleton<IAccountData, AccountData>();
             services.AddSingleton<IBrokerData, BrokerData>();
             services.AddSingleton<ISecurityData, SecurityData>();
+            services.AddSingleton<IWatchlistData, WatchlistData>();
             services.AddSingleton<IFixDataAccess, FixDataAccess>();
             services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 

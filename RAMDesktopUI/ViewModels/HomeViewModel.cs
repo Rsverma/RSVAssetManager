@@ -15,16 +15,27 @@ namespace RAMDesktopUI.ViewModels
         private readonly IEventAggregator _events;
         private readonly IOrderCache _orderCache;
         private readonly IOrderFieldsCache _fieldsCache;
+        private readonly IWatchlistCache _watchlistCache;
         private bool _isFieldCacheInitialized = false;
         private bool _isOrderCacheInitialized = false;
+        private bool _isWatchlistCacheInitialized = false;
 
-        public HomeViewModel(IEventAggregator events, IOrderFieldsCache fieldsCache, IOrderCache orderCache)
+        public HomeViewModel(IEventAggregator events, IOrderFieldsCache fieldsCache, IOrderCache orderCache, IWatchlistCache watchlistCache)
         {
             fieldsCache.InitializationCompleted += FieldsCache_InitializationCompleted;
             _fieldsCache = fieldsCache;
             orderCache.InitializationCompleted += OrderCache_InitializationCompleted;
             _orderCache = orderCache;
+            watchlistCache.InitializationCompleted += WatchlistCache_InitializationCompleted;
+            _watchlistCache = watchlistCache;
             _events = events;
+        }
+
+        private void WatchlistCache_InitializationCompleted(object sender, EventArgs e)
+        {
+            _isWatchlistCacheInitialized = true;
+            NotifyOfPropertyChange(() => CanLaunchWatchlist);
+            _watchlistCache.InitializationCompleted -= WatchlistCache_InitializationCompleted;
         }
 
         private void FieldsCache_InitializationCompleted(object sender, EventArgs e)
@@ -47,7 +58,7 @@ namespace RAMDesktopUI.ViewModels
         public bool CanLaunchTradeBlotter { get { return _isOrderCacheInitialized && _isFieldCacheInitialized; } }
         public bool CanLaunchPositionManager { get { return false; } }
         public bool CanLaunchPortfolioMonitor { get { return false; } }
-        public bool CanLaunchWatchlist { get { return true; } }
+        public bool CanLaunchWatchlist { get { return _isWatchlistCacheInitialized; } }
         public bool CanLaunchImportData { get { return false; } }
         public bool CanLaunchComplianceManager { get { return false; } }
         public bool CanLaunchTaxLotManager { get { return false; } }

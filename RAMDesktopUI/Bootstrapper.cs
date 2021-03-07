@@ -64,13 +64,15 @@ namespace RAMDesktopUI
                 .PerRequest<IMarketDataEndpoint, MarketDataEndpoint>()
                 .PerRequest<IOrderEndpoint, OrderEndpoint>()
                 .PerRequest<IFillEndpoint, FillEndpoint>()
-                .PerRequest<IOrderFieldsEndpoint, OrderFieldsEndpoint>();
+                .PerRequest<IOrderFieldsEndpoint, OrderFieldsEndpoint>()
+                .PerRequest<IWatchlistDataEndpoint, WatchlistDataEndpoint>();
             _ = _container
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()
                 .Singleton<ILoggedInUserModel, LoggedInUserModel>()
                 .Singleton<IOrderFieldsCache, OrderFieldsCache>()
                 .Singleton<IOrderCache, OrderCache>()
+                .Singleton<IWatchlistCache, WatchlistCache>()
                 .Singleton<IAPIHelper, APIHelper>();
 
             GetType().Assembly.GetTypes()

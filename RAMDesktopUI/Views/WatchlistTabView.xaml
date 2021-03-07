@@ -7,7 +7,6 @@
              xmlns:hc="https://handyorg.github.io/handycontrol" 
              xmlns:controls="clr-namespace:RAMDesktopUI.Controls"
              mc:Ignorable="d" 
-             x:Name="{Binding TabIndex}"
              d:DesignHeight="600" d:DesignWidth="1100">
 
     <Grid>
@@ -32,32 +31,32 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Orientation="Vertical"  Grid.Column="0" HorizontalAlignment="Center">
-                    <TextBlock Text="S&amp;P 500" Foreground="DeepSkyBlue" FontSize="20"/>
+                    <TextBlock x:Name="Index1" Foreground="DeepSkyBlue" FontSize="20"/>
                     <TextBlock Text="3,841.94"/>
                     <TextBlock Text="+73.47(+1.95%)"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center">
-                    <TextBlock Text="Dow 30" Foreground="DeepSkyBlue" FontSize="20"/>
+                    <TextBlock x:Name="Index2" Foreground="DeepSkyBlue" FontSize="20"/>
                     <TextBlock Text="3,841.94"/>
                     <TextBlock Text="+73.47(+1.95%)"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Column="2" HorizontalAlignment="Center">
-                    <TextBlock Text="Nasdaq" Foreground="DeepSkyBlue" FontSize="20"/>
+                    <TextBlock x:Name="Index3" Foreground="DeepSkyBlue" FontSize="20"/>
                     <TextBlock Text="3,841.94"/>
                     <TextBlock Text="+73.47(+1.95%)"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Column="3" HorizontalAlignment="Center">
-                    <TextBlock Text="Russell 2000" Foreground="DeepSkyBlue" FontSize="20"/>
+                    <TextBlock x:Name="Index4" Foreground="DeepSkyBlue" FontSize="20"/>
                     <TextBlock Text="3,841.94"/>
                     <TextBlock Text="+73.47(+1.95%)"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Column="4" HorizontalAlignment="Center">
-                    <TextBlock Text="Crude Oil" Foreground="DeepSkyBlue" FontSize="20"/>
+                    <TextBlock x:Name="Index5" Foreground="DeepSkyBlue" FontSize="20"/>
                     <TextBlock Text="3,841.94"/>
                     <TextBlock Text="+73.47(+1.95%)"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Column="5" HorizontalAlignment="Center">
-                    <TextBlock Text="Gold" Foreground="DeepSkyBlue" FontSize="20"/>
+                    <TextBlock x:Name="Index6" Foreground="DeepSkyBlue" FontSize="20"/>
                     <TextBlock Text="3,841.94"/>
                     <TextBlock Text="+73.47(+1.95%)"/>
                 </StackPanel>

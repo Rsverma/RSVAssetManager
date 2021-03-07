@@ -6,6 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RAMDesktopUI.Views"
         mc:Ignorable="d" ShowTitle="False"
+        xmlns:cal="http://www.caliburnproject.org"
         x:Name="Watchlist" Height="600" Width="1200" WindowState="{Binding CurWindowState, Mode=TwoWay}">
     <hc:Window.NonClientAreaContent>
         <TextBlock Text="Watchlist" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -21,23 +22,19 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <hc:TabControl Grid.Row="1" Grid.Column="1" TabItemWidth="100">
-            <hc:TabItem Header="{Binding Tab1Header}">
-                <local:WatchlistTabView x:Name="Tab1"/>
-            </hc:TabItem>
-            <hc:TabItem Header="{Binding Tab2Header}">
-                <local:WatchlistTabView x:Name="Tab2"/>
-            </hc:TabItem>
-            <hc:TabItem Header="{Binding Tab3Header}">
-                <local:WatchlistTabView x:Name="Tab3"/>
-            </hc:TabItem>
-            <hc:TabItem Header="{Binding Tab4Header}">
-                <local:WatchlistTabView x:Name="Tab4"/>
-            </hc:TabItem>
-            <hc:TabItem Header="{Binding Tab5Header}">
-                <local:WatchlistTabView x:Name="Tab5"/>
-            </hc:TabItem>
-        </hc:TabControl>
+        <TabControl Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Tabs}">
+            <TabControl.ItemTemplate>
+                <!-- this is the header template-->
+                <DataTemplate>
+                    <TextBlock Text="{Binding Header}" />
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ContentControl cal:View.Model="{Binding}"/>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
         
     </Grid>
 </hc:Window>
