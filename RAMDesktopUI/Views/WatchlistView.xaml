@@ -21,11 +21,11 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <hc:ButtonGroup HorizontalAlignment="Stretch">
-            <RadioButton x:Name="Tab1Checked" Content="{Binding Tab1Name}"/>
-            <RadioButton x:Name="Tab2Checked" Content="{Binding Tab2Name}"/>
-            <RadioButton x:Name="Tab3Checked" Content="{Binding Tab3Name}"/>
-            <RadioButton x:Name="Tab4Checked" Content="{Binding Tab4Name}"/>
-            <RadioButton x:Name="Tab5Checked" Content="{Binding Tab5Name}"/>
+            <RadioButton x:Name="Tab1Checked" Content="{Binding Tab1.Header}"/>
+            <RadioButton x:Name="Tab2Checked" Content="{Binding Tab2.Header}"/>
+            <RadioButton x:Name="Tab3Checked" Content="{Binding Tab3.Header}"/>
+            <RadioButton x:Name="Tab4Checked" Content="{Binding Tab4.Header}"/>
+            <RadioButton x:Name="Tab5Checked" Content="{Binding Tab5.Header}"/>
         </hc:ButtonGroup>
 
         <ContentControl Grid.Row="1" cal:View.Model="{Binding Tab1}" Visibility="{Binding Tab1Checked, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Visible}"/>

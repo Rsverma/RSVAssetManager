@@ -52,5 +52,20 @@ namespace RAMDesktopUI.Library.Cache
             }
             return output;
         }
+
+        public string RenameTab(int tabIndex, string tabName)
+        {
+            string output = string.Empty;
+            try
+            {
+                _tabWiseData[tabIndex].TabName = tabName;
+                _watchlistData.PutTabName(new KeyValuePair<int, string>(tabIndex, tabName));
+            }
+            catch (Exception ex)
+            {
+                output = ex.Message;
+            }
+            return output;
+        }
     }
 }

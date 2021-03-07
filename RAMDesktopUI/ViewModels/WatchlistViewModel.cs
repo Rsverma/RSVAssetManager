@@ -35,31 +35,6 @@ namespace RAMDesktopUI.ViewModels
             Tab1Checked = true;
         }
 
-        public string Tab1Name
-        {
-            get { return _watchlistCache.TabWiseData[1].TabName; }
-        }
-
-        public string Tab2Name
-        {
-            get { return _watchlistCache.TabWiseData[2].TabName; }
-        }
-
-        public string Tab3Name
-        {
-            get { return _watchlistCache.TabWiseData[3].TabName; }
-        }
-
-        public string Tab4Name
-        {
-            get { return _watchlistCache.TabWiseData[4].TabName; }
-        }
-
-        public string Tab5Name
-        {
-            get { return _watchlistCache.TabWiseData[5].TabName; }
-        }
-
         private bool _tab1Checked;
         public bool Tab1Checked
         {

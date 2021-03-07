@@ -23,7 +23,7 @@ namespace RAMDesktopUI.Controls
         public InputBox(string question, string defaultAnswer = "")
         {
             InitializeComponent();
-			lblQuestion.Content = question;
+			lblQuestion.Text = question;
 			txtAnswer.Text = defaultAnswer;
 		}
 

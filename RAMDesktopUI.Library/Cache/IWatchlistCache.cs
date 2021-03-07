@@ -10,5 +10,6 @@ namespace RAMDesktopUI.Library.Cache
 
         event EventHandler InitializationCompleted;
         string AddSymbolToTab(string symbol, int tabIndex);
+        string RenameTab(int tabIndex, string tabName);
     }
 }

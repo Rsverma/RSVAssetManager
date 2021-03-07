@@ -31,6 +31,8 @@ namespace RAMDesktopUI.ViewModels
             {
                 MarketDataRows.Add(new LiveFeedDataModel { Symbol = symbol });
             }
+
+            NotifyOfPropertyChange(() => MarketDataRows);
             Index1 = tabData.Index1;
             Index2 = tabData.Index2;
             Index3 = tabData.Index3;
@@ -103,7 +105,7 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
-        private ObservableCollection<LiveFeedDataModel> _marketDataRows = new ObservableCollection<LiveFeedDataModel>() { new LiveFeedDataModel { Symbol = "AAPL" } };
+        private ObservableCollection<LiveFeedDataModel> _marketDataRows = new ObservableCollection<LiveFeedDataModel>();
         private string header;
         private string index1;
         private string index2;
@@ -142,6 +144,7 @@ namespace RAMDesktopUI.ViewModels
                 if (string.IsNullOrWhiteSpace(errMsg))
                 {
                     _marketDataRows.Add(new LiveFeedDataModel { Symbol = Symbol });
+                    Symbol = string.Empty;
                 }
             }
         }
@@ -156,7 +159,14 @@ namespace RAMDesktopUI.ViewModels
 
             if(popUp.ShowDialog() == true)
             {
-
+                if (!string.IsNullOrWhiteSpace(popUp.Answer) && !Header.Equals(popUp.Answer))
+                {
+                    string errMsg = _watchlistCache.RenameTab(_tabIndex, popUp.Answer);
+                    if (string.IsNullOrWhiteSpace(errMsg))
+                    {
+                        Header = popUp.Answer;
+                    }
+                }
             }
         }
     }

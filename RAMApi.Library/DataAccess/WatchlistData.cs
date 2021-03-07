@@ -21,7 +21,7 @@ namespace RAMApi.Library.DataAccess
             List<WatchlistTabModel> output = _sql.LoadData<WatchlistTabModel, dynamic>("dbo.spWatchlist_GetAllTabsData", new { }, "RAMData");
             for (int i = 0; i < output.Count; i++)
             {
-                List<string> symbols = _sql.LoadData<string, dynamic>("dbo.spWatchlist_GetTabSymbols", new { index = i }, "RAMData");
+                List<string> symbols = _sql.LoadData<string, dynamic>("dbo.spWatchlist_GetTabSymbols", new { index = i + 1 }, "RAMData");
                 WatchlistTabModel tabModel = output[i];
                 tabModel.Symbols = symbols;
             }
