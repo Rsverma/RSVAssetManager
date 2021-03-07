@@ -6,6 +6,7 @@ namespace RAMApi.Library.Models
 {
     public class WatchlistTabModel
     {
+        public int TabIndex { get; set; }
         public string TabName { get; set; }
         public string Index1 { get; set; }
         public string Index2 { get; set; }

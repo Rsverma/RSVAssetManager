@@ -1,0 +1,11 @@
+﻿CREATE TABLE [dbo].[WatchlistTabData]
+(
+    [TabIndex] INT NOT NULL PRIMARY KEY, 
+    [TabName] NVARCHAR(50) NOT NULL DEFAULT '', 
+    [Index1] NVARCHAR(50) NOT NULL DEFAULT '', 
+    [Index2] NVARCHAR(50) NOT NULL DEFAULT '', 
+    [Index3] NVARCHAR(50) NOT NULL DEFAULT '', 
+    [Index4] NVARCHAR(50) NOT NULL DEFAULT '', 
+    [Index5] NVARCHAR(50) NOT NULL DEFAULT '', 
+    [Index6] NVARCHAR(50) NOT NULL DEFAULT ''
+)

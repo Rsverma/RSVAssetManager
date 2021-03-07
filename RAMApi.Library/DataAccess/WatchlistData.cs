@@ -25,8 +25,7 @@ namespace RAMApi.Library.DataAccess
                 WatchlistTabModel tabModel = output[i];
                 tabModel.Symbols = symbols;
             }
-            return output.Select((s, i) => (s, i))
-                         .ToDictionary(x => x.i, x => x.s);
+            return output.ToDictionary(x => x.TabIndex);
         }
 
         public void UpdateTabName(KeyValuePair<int, string> tabName)
@@ -39,13 +38,13 @@ namespace RAMApi.Library.DataAccess
             _ = _sql.SaveData<dynamic>("dbo.spWatchlist_UpdateTabIndices",
                 new
                 {
-                    tabIndex = tabIndices.Key,
-                    index1 = tabIndices.Value[0],
-                    index2 = tabIndices.Value[1],
-                    index3 = tabIndices.Value[2],
-                    index4 = tabIndices.Value[3],
-                    index5 = tabIndices.Value[4],
-                    index6 = tabIndices.Value[5]
+                    TabIndex = tabIndices.Key,
+                    Index1 = tabIndices.Value[0],
+                    Index2 = tabIndices.Value[1],
+                    Index3 = tabIndices.Value[2],
+                    Index4 = tabIndices.Value[3],
+                    Index5 = tabIndices.Value[4],
+                    Index6 = tabIndices.Value[5]
                 },
                 "RAMData");
         }

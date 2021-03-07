@@ -81,5 +81,12 @@
     <Build Include="dbo\Tables\Fill.sql" />
     <Build Include="dbo\Stored Procedures\spFill_Insert.sql" />
     <Build Include="dbo\Stored Procedures\spFill_GetByClOrderID.sql" />
+    <Build Include="dbo\Tables\WatchlistTabSymbol.sql" />
+    <Build Include="dbo\Tables\WatchlistTabData.sql" />
+    <Build Include="dbo\Stored Procedures\spWatchlist_GetAllTabsData.sql" />
+    <Build Include="dbo\Stored Procedures\spWatchlist_GetTabSymbols.sql" />
+    <Build Include="dbo\Stored Procedures\spWatchlist_UpdateTabName.sql" />
+    <Build Include="dbo\Stored Procedures\spWatchlist_UpdateTabIndices.sql" />
+    <Build Include="dbo\Stored Procedures\spWatchlist_InsertTabSymbol.sql" />
   </ItemGroup>
 </Project>
