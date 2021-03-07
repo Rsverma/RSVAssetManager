@@ -7,6 +7,7 @@
              xmlns:hc="https://handyorg.github.io/handycontrol" 
              xmlns:controls="clr-namespace:RAMDesktopUI.Controls"
              mc:Ignorable="d" 
+             x:Name="{Binding TabIndex}"
              d:DesignHeight="600" d:DesignWidth="1100">
 
     <Grid>

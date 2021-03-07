@@ -119,25 +119,6 @@ namespace RAMDesktopUI.Library.Api
             };
             return data;
         }
-        public List<string> GetWatchlistSymbols()
-        {
-            var x = new List<string> { "AAPL", "MSFT", "GOOG" };
-            return x;
-        }
-
-        public async Task PostWatchlistSymbol(string symbol)
-        {
-            using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("/api/WatchlistSymbol", symbol))
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    // log successfull call?
-                }
-                else
-                {
-                    throw new Exception(response.ReasonPhrase);
-                }
-            }
-        }
+        
     }
 }

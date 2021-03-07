@@ -1,4 +1,5 @@
 ﻿using RAMDesktopUI.Library.Api;
+using RAMDesktopUI.Library.Cache;
 using RAMDesktopUI.Library.Models;
 using RAMDesktopUI.Models;
 using System;
@@ -14,50 +15,72 @@ namespace RAMDesktopUI.ViewModels
 {
     public class WatchlistViewModel : ModuleBase
     {
-        private Timer _timer;
-        private BindingList<LiveFeedDataModel> _symbolMarketData = new BindingList<LiveFeedDataModel>();
-        private readonly IMarketDataEndpoint _marketData;
-        private List<string> _symbols = new List<string>();
-
-        public WatchlistViewModel(IMarketDataEndpoint marketData)
+        private readonly IWatchlistCache _watchlistCache;
+        public WatchlistViewModel(IWatchlistCache watchlistCache)
         {
-            _marketData = marketData;
+            CurWindowState = WindowState.Maximized;
+            _watchlistCache = watchlistCache;
+            Tab1Header = watchlistCache.TabWiseData[1].TabName;
+            Tab2Header = watchlistCache.TabWiseData[2].TabName;
+            Tab3Header = watchlistCache.TabWiseData[3].TabName;
+            Tab4Header = watchlistCache.TabWiseData[4].TabName;
+            Tab5Header = watchlistCache.TabWiseData[5].TabName;
         }
 
-        protected override void OnViewLoaded(object view)
+        private string _tab1Header;
+        public string Tab1Header
         {
-            _symbols = _marketData.GetWatchlistSymbols();
-            _timer = new Timer(OnTimedEventAsync,null,0,5000);
-            base.OnViewLoaded(view);
-        }
-
-        private async void OnTimedEventAsync(object state)
-        {
-            List<LiveFeedDataModel> marketData = await _marketData.GetSymbolMarketData(_symbols);
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                foreach (var data in marketData)
-                {
-                    int index = SymbolMarketData.IndexOf(data);
-                    if (index < 0)
-                    {
-                        SymbolMarketData.Add(data);
-                    }
-                    else
-                        SymbolMarketData[index] = data;
-                }
-            });
-        }
-
-        public BindingList<LiveFeedDataModel> SymbolMarketData
-        {
-            get { return _symbolMarketData; }
+            get { return _tab1Header; }
             set
             {
-                _symbolMarketData = value;
-
-                NotifyOfPropertyChange(() => SymbolMarketData);
+                _tab1Header = value;
+                NotifyOfPropertyChange(() => Tab1Header);
             }
         }
+
+        private string _tab2Header;
+        public string Tab2Header
+        {
+            get { return _tab2Header; }
+            set
+            {
+                _tab2Header = value;
+                NotifyOfPropertyChange(() => Tab2Header);
+            }
+        }
+
+        private string _tab3Header;
+        public string Tab3Header
+        {
+            get { return _tab3Header; }
+            set
+            {
+                _tab3Header = value;
+                NotifyOfPropertyChange(() => Tab3Header);
+            }
+        }
+
+        private string _tab4Header;
+        public string Tab4Header
+        {
+            get { return _tab4Header; }
+            set
+            {
+                _tab4Header = value;
+                NotifyOfPropertyChange(() => Tab4Header);
+            }
+        }
+
+        private string _tab5Header;
+        public string Tab5Header
+        {
+            get { return _tab5Header; }
+            set
+            {
+                _tab5Header = value;
+                NotifyOfPropertyChange(() => Tab5Header);
+            }
+        }
+
     }
 }
