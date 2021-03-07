@@ -13,28 +13,26 @@
     </hc:Window.NonClientAreaContent>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <TabControl Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Tabs}">
-            <TabControl.ItemTemplate>
-                <!-- this is the header template-->
-                <DataTemplate>
-                    <TextBlock Text="{Binding Header}" />
-                </DataTemplate>
-            </TabControl.ItemTemplate>
-            <TabControl.ContentTemplate>
-                <DataTemplate>
-                    <ContentControl cal:View.Model="{Binding}"/>
-                </DataTemplate>
-            </TabControl.ContentTemplate>
-        </TabControl>
-        
+        <hc:ButtonGroup HorizontalAlignment="Stretch">
+            <RadioButton x:Name="Tab1Checked" Content="{Binding Tab1Name}"/>
+            <RadioButton x:Name="Tab2Checked" Content="{Binding Tab2Name}"/>
+            <RadioButton x:Name="Tab3Checked" Content="{Binding Tab3Name}"/>
+            <RadioButton x:Name="Tab4Checked" Content="{Binding Tab4Name}"/>
+            <RadioButton x:Name="Tab5Checked" Content="{Binding Tab5Name}"/>
+        </hc:ButtonGroup>
+
+        <ContentControl Grid.Row="1" cal:View.Model="{Binding Tab1}" Visibility="{Binding Tab1Checked, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Visible}"/>
+        <ContentControl Grid.Row="1" cal:View.Model="{Binding Tab2}" Visibility="{Binding Tab2Checked, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}"/>
+        <ContentControl Grid.Row="1" cal:View.Model="{Binding Tab3}" Visibility="{Binding Tab3Checked, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}"/>
+        <ContentControl Grid.Row="1" cal:View.Model="{Binding Tab4}" Visibility="{Binding Tab4Checked, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}"/>
+        <ContentControl Grid.Row="1" cal:View.Model="{Binding Tab5}" Visibility="{Binding Tab5Checked, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}"/>
+
     </Grid>
 </hc:Window>

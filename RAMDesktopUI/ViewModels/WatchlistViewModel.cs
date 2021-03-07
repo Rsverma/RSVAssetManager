@@ -18,17 +18,102 @@ namespace RAMDesktopUI.ViewModels
     public class WatchlistViewModel : ModuleBase
     {
         private readonly IWatchlistCache _watchlistCache;
-        public ObservableCollection<WatchlistTabViewModel> Tabs { get; set; }
+        public WatchlistTabViewModel Tab1 { get; set; }
+        public WatchlistTabViewModel Tab2 { get; set; }
+        public WatchlistTabViewModel Tab3 { get; set; }
+        public WatchlistTabViewModel Tab4 { get; set; }
+        public WatchlistTabViewModel Tab5 { get; set; }
         public WatchlistViewModel(IWatchlistCache watchlistCache)
         {
             CurWindowState = WindowState.Maximized;
             _watchlistCache = watchlistCache;
-            Tabs = new ObservableCollection<WatchlistTabViewModel>();
-            Tabs.Add(new WatchlistTabViewModel(watchlistCache, 1));
-            Tabs.Add(new WatchlistTabViewModel(watchlistCache, 2));
-            Tabs.Add(new WatchlistTabViewModel(watchlistCache, 3));
-            Tabs.Add(new WatchlistTabViewModel(watchlistCache, 4));
-            Tabs.Add(new WatchlistTabViewModel(watchlistCache, 5));
+            Tab1 = new WatchlistTabViewModel(watchlistCache, 1);
+            Tab2 = new WatchlistTabViewModel(watchlistCache, 2);
+            Tab3 = new WatchlistTabViewModel(watchlistCache, 3);
+            Tab4 = new WatchlistTabViewModel(watchlistCache, 4);
+            Tab5 = new WatchlistTabViewModel(watchlistCache, 5);
+            Tab1Checked = true;
         }
+
+        public string Tab1Name
+        {
+            get { return _watchlistCache.TabWiseData[1].TabName; }
+        }
+
+        public string Tab2Name
+        {
+            get { return _watchlistCache.TabWiseData[2].TabName; }
+        }
+
+        public string Tab3Name
+        {
+            get { return _watchlistCache.TabWiseData[3].TabName; }
+        }
+
+        public string Tab4Name
+        {
+            get { return _watchlistCache.TabWiseData[4].TabName; }
+        }
+
+        public string Tab5Name
+        {
+            get { return _watchlistCache.TabWiseData[5].TabName; }
+        }
+
+        private bool _tab1Checked;
+        public bool Tab1Checked
+        {
+            get { return _tab1Checked; }
+            set
+            {
+                _tab1Checked = value;
+                NotifyOfPropertyChange(() => Tab1Checked);
+            }
+        }
+
+        private bool _tab2Checked;
+        public bool Tab2Checked
+        {
+            get { return _tab2Checked; }
+            set
+            {
+                _tab2Checked = value;
+                NotifyOfPropertyChange(() => Tab2Checked);
+            }
+        }
+
+        private bool _tab3Checked;
+        public bool Tab3Checked
+        {
+            get { return _tab3Checked; }
+            set
+            {
+                _tab3Checked = value;
+                NotifyOfPropertyChange(() => Tab3Checked);
+            }
+        }
+
+        private bool _tab4Checked;
+        public bool Tab4Checked
+        {
+            get { return _tab4Checked; }
+            set
+            {
+                _tab4Checked = value;
+                NotifyOfPropertyChange(() => Tab4Checked);
+            }
+        }
+
+        private bool _tab5Checked;
+        public bool Tab5Checked
+        {
+            get { return _tab5Checked; }
+            set
+            {
+                _tab5Checked = value;
+                NotifyOfPropertyChange(() => Tab5Checked);
+            }
+        }
+
     }
 }
