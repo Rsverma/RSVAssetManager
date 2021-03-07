@@ -9,5 +9,6 @@ namespace RAMDesktopUI.Library.Cache
         Dictionary<int, WatchlistTabModel> TabWiseData { get; }
 
         event EventHandler InitializationCompleted;
+        string AddSymbolToTab(string symbol, int tabIndex);
     }
 }

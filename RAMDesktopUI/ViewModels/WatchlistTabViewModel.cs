@@ -1,14 +1,18 @@
 ﻿using Caliburn.Micro;
+using HandyControl.Controls;
+using RAMDesktopUI.Controls;
 using RAMDesktopUI.Library.Cache;
 using RAMDesktopUI.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace RAMDesktopUI.ViewModels
 {
@@ -118,14 +122,42 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
-        //private async void OnTimedEventAsync(object state)
-        //{
-        //   // List<LiveFeedDataModel> marketData = await _marketData.GetSymbolMarketData(_symbols);
-        //    Application.Current.Dispatcher.Invoke(() =>
-        //    {
+        private string _symbol;
 
+        public string Symbol
+        {
+            get { return _symbol; }
+            set
+            {
+                _symbol = value;
+                NotifyOfPropertyChange(() => Symbol);
+            }
+        }
 
-        //    });
-        //}
+        public void AddSymbol()
+        {
+            if(!string.IsNullOrWhiteSpace(Symbol))
+            {
+                string errMsg = _watchlistCache.AddSymbolToTab(Symbol, _tabIndex);
+                if (string.IsNullOrWhiteSpace(errMsg))
+                {
+                    _marketDataRows.Add(new LiveFeedDataModel { Symbol = Symbol });
+                }
+            }
+        }
+        public void ImportSymbols()
+        {
+
+        }
+
+        public void RenameTab()
+        {
+            InputBox popUp = new InputBox("Please enter tab name:", Header);
+
+            if(popUp.ShowDialog() == true)
+            {
+
+            }
+        }
     }
 }

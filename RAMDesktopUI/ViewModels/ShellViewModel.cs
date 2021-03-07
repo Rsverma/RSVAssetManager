@@ -70,9 +70,9 @@ namespace RAMDesktopUI.ViewModels
                         viewModel = IoC.Get<WatchlistViewModel>();
                         break;
                 }
-                viewModel.ActivateWith(this);
                 _modules.Add(moduleEvent.ModuleType, viewModel);
                 await _window.ShowWindowAsync(viewModel, null, settings);
+                ((Window)viewModel.GetView()).Owner = (Window)GetView();
                 ((Window)viewModel.GetView()).Closing += ModuleClosing;
             }
             else

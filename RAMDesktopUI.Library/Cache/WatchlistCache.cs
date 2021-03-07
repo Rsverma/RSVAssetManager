@@ -31,5 +31,26 @@ namespace RAMDesktopUI.Library.Cache
             get { return _tabWiseData; }
         }
 
+        public string AddSymbolToTab(string symbol, int tabIndex)
+        {
+            string output = string.Empty;
+            try
+            {
+                if (_tabWiseData[tabIndex].Symbols.Contains(symbol))
+                {
+                    output = "Symbol already exists in tab";
+                }
+                else
+                {
+                    _tabWiseData[tabIndex].Symbols.Add(symbol);
+                    _watchlistData.PostTabSymbol(new KeyValuePair<int, string>(tabIndex, symbol));
+                }
+            }
+            catch(Exception ex)
+            {
+                output = ex.Message;
+            }
+            return output;
+        }
     }
 }
