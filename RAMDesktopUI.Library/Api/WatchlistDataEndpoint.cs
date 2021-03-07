@@ -17,7 +17,7 @@ namespace RAMDesktopUI.Library.Api
         }
         public async Task PostTabSymbol(KeyValuePair<int, string> tabSymbol)
         {
-            using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("/api/WatchlistData/AddSymbol", tabSymbol))
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("/api/WatchlistData/PostTabSymbol", tabSymbol))
             {
                 if (response.IsSuccessStatusCode)
                 {

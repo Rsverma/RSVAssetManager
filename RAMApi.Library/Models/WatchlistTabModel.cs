@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RAMDesktopUI.Library.Models
+namespace RAMApi.Library.Models
 {
     public class WatchlistTabModel
     {
