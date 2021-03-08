@@ -1,45 +1,67 @@
 ﻿using Caliburn.Micro;
-using HandyControl.Controls;
 using RAMDesktopUI.Controls;
-using RAMDesktopUI.EventModels;
 using RAMDesktopUI.Library.Cache;
 using RAMDesktopUI.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media;
+using System.Windows.Data;
 
 namespace RAMDesktopUI.ViewModels
 {
-    public class WatchlistTabViewModel : Screen, IHandle<MarketDataEvent>
+    public class WatchlistTabViewModel : Screen
     {
         private readonly IWatchlistCache _watchlistCache;
         private readonly int _tabIndex;
+        private ObservableCollection<LiveFeedDataModel> _liveFeedData;
 
+        public ObservableCollection<LiveFeedDataModel> LiveFeedData
+        {
+            get { return _liveFeedData; }
+            set
+            {
+                _liveFeedData = value;
+                NotifyOfPropertyChange(() => LiveFeedData);
+            }
+        }
+
+        private ICollectionView _marketDataRows;
+        public ICollectionView MarketDataRows
+        {
+            get { return _marketDataRows; }
+        }
         public WatchlistTabViewModel(IWatchlistCache watchlistCache, int index)
         {
             _watchlistCache = watchlistCache;
             _tabIndex = index;
             WatchlistTabModel tabData = _watchlistCache.TabWiseData[_tabIndex];
             Header = tabData.TabName;
-            foreach (string symbol in tabData.Symbols)
-            {
-                MarketDataRows.Add(new LiveFeedDataModel { Symbol = symbol });
-            }
+            var dataList = tabData.Symbols.Select(x => new LiveFeedDataModel { Symbol = x });
 
-            NotifyOfPropertyChange(() => MarketDataRows);
+            LiveFeedData = new ObservableCollection<LiveFeedDataModel>(dataList);
+            _marketDataRows = CollectionViewSource.GetDefaultView(LiveFeedData);
+            _marketDataRows.CurrentChanged += _marketDataRows_CurrentChanged;
+            _marketDataRows.Filter = _marketDataRows_Filter;
             Index1 = tabData.Index1;
             Index2 = tabData.Index2;
             Index3 = tabData.Index3;
             Index4 = tabData.Index4;
             Index5 = tabData.Index5;
             Index6 = tabData.Index6;
+        }
+
+        private bool _marketDataRows_Filter(object obj)
+        {
+            return true;
+            //throw new NotImplementedException();
+        }
+
+        private void _marketDataRows_CurrentChanged(object sender, System.EventArgs e)
+        {
+            //throw new System.NotImplementedException();
         }
 
         public string Header
@@ -106,7 +128,6 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
-        private ObservableCollection<LiveFeedDataModel> _marketDataRows = new ObservableCollection<LiveFeedDataModel>();
         private string header;
         private string index1;
         private string index2;
@@ -114,16 +135,6 @@ namespace RAMDesktopUI.ViewModels
         private string index4;
         private string index5;
         private string index6;
-
-        public ObservableCollection<LiveFeedDataModel> MarketDataRows
-        {
-            get { return _marketDataRows; }
-            set
-            {
-                _marketDataRows = value;
-                NotifyOfPropertyChange(() => MarketDataRows);
-            }
-        }
 
         private string _symbol;
 
@@ -144,7 +155,7 @@ namespace RAMDesktopUI.ViewModels
                 string errMsg = _watchlistCache.AddSymbolToTab(Symbol, _tabIndex);
                 if (string.IsNullOrWhiteSpace(errMsg))
                 {
-                    _marketDataRows.Add(new LiveFeedDataModel { Symbol = Symbol });
+                    LiveFeedData.Add(new LiveFeedDataModel { Symbol = Symbol });
                     Symbol = string.Empty;
                 }
             }
@@ -171,17 +182,16 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
-        public Task HandleAsync(MarketDataEvent message, CancellationToken cancellationToken)
+        public async Task UpdateLiveData(IDictionary<string, LiveFeedDataModel> liveFeedDict)
         {
-            foreach (LiveFeedDataModel data in message.LiveFeed.Values)
+            for (int i = 0; i < LiveFeedData.Count; i++)
             {
-                int index = _marketDataRows.IndexOf(data);
-                if (index >= 0)
-                {
-                    _marketDataRows[index] = data;
-                }
+                LiveFeedDataModel data = LiveFeedData[i];
+                if (liveFeedDict.ContainsKey(data.Symbol))
+                    LiveFeedData[i] = liveFeedDict[data.Symbol];
             }
-            return Task.CompletedTask;
+            NotifyOfPropertyChange(() => LiveFeedData);
+            await Task.CompletedTask;
         }
     }
 }

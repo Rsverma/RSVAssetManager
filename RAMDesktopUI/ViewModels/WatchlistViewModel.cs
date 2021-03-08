@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using RAMDesktopUI.EventModels;
 using RAMDesktopUI.Helpers;
 using RAMDesktopUI.Library.Api;
 using RAMDesktopUI.Library.Cache;
@@ -16,8 +17,9 @@ using System.Windows;
 
 namespace RAMDesktopUI.ViewModels
 {
-    public class WatchlistViewModel : ModuleBase
+    public class WatchlistViewModel : ModuleBase, IHandle<MarketDataEvent>
     {
+        private readonly IEventAggregator _events;
         private readonly IWatchlistCache _watchlistCache;
         private readonly IMarketDataHelper _dataHelper;
 
@@ -26,12 +28,13 @@ namespace RAMDesktopUI.ViewModels
         public WatchlistTabViewModel Tab3 { get; set; }
         public WatchlistTabViewModel Tab4 { get; set; }
         public WatchlistTabViewModel Tab5 { get; set; }
-        public WatchlistViewModel(IWatchlistCache watchlistCache, IMarketDataHelper dataHelper)
+        public WatchlistViewModel(IEventAggregator events, IWatchlistCache watchlistCache, IMarketDataHelper dataHelper)
         {
             CurWindowState = WindowState.Maximized;
+            _events = events;
+            _events.SubscribeOnPublishedThread(this);
             _watchlistCache = watchlistCache;
             _dataHelper = dataHelper;
-            ;
             IEnumerable<string> symbols = _watchlistCache.TabWiseData.SelectMany(x => x.Value.Symbols);
             _dataHelper.AddSymbols(symbols);
             Tab1 = new WatchlistTabViewModel(watchlistCache, 1);
@@ -97,5 +100,29 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
+
+        public async Task HandleAsync(MarketDataEvent message, CancellationToken cancellationToken)
+        {
+            if(Tab1Checked)
+            {
+                await Tab1.UpdateLiveData(message.LiveFeed);
+            }
+            else if (Tab2Checked)
+            {
+                await Tab2.UpdateLiveData(message.LiveFeed);
+            }
+            else if (Tab3Checked)
+            {
+                await Tab3.UpdateLiveData(message.LiveFeed);
+            }
+            else if (Tab4Checked)
+            {
+                await Tab4.UpdateLiveData(message.LiveFeed);
+            }
+            else if (Tab5Checked)
+            {
+                await Tab5.UpdateLiveData(message.LiveFeed);
+            }
+        }
     }
 }

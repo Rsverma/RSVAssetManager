@@ -1,26 +1,110 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace RAMDesktopUI.Library.Models
 {
 
-    public class LiveFeedDataModel
+    public class LiveFeedDataModel : INotifyPropertyChanged
     {
-        public string Symbol { get; set; }
-        public double Ask { get; set; }
+        private string _symbol;
+        private double _ask;
+        private bool? _isAskGreater;
+        private double _bid;
+        private bool? _isBidGreater;
+        private double _last;
+        private bool? _isLastGreater;
 
-        [Bindable(false)]
-        public bool? isAskGreater { get; set; }
-        public double Bid { get; set; }
+        public string Symbol
+        {
+            get => _symbol; set
+            {
+                _symbol = value;
+                NotifyPropertyChanged();
+            }
+        }
 
-        [Bindable(false)]
-        public bool? isBidGreater { get; set; }
-        public double Last { get; set; }
+        public double Ask
+        {
+            get => _ask;
+            set
+            {
+                if (_ask == value)
+                {
+                    IsAskGreater = null;
+                }
+                else
+                {
+                    IsAskGreater = value > _ask;
+                    _ask = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
 
-        [Bindable(false)]
-        public bool? isLastGreater { get; set; }
+        public bool? IsAskGreater
+        {
+            get => _isAskGreater; set
+            {
+                _isAskGreater = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public double Bid
+        {
+            get => _bid;
+            set
+            {
+                if (_bid == value)
+                {
+                    IsBidGreater = null;
+                }
+                else
+                {
+                    IsBidGreater = value > _bid;
+                    _bid = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public bool? IsBidGreater
+        {
+            get => _isBidGreater; set
+            {
+                _isBidGreater = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public double Last
+        {
+            get => _last;
+            set
+            {
+                if (_last == value)
+                {
+                    IsLastGreater = null;
+                }
+                else
+                {
+                    IsLastGreater = value > _last;
+                    _last = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public bool? IsLastGreater
+        {
+            get => _isLastGreater; set
+            {
+                _isLastGreater = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public double High { get; set; }
         public double Low { get; set; }
         public double Open { get; set; }
@@ -95,15 +179,13 @@ namespace RAMDesktopUI.Library.Models
         public bool esgPopulated { get; set; }
         public string displayName { get; set; }
 
-        public override bool Equals(object obj)
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            return obj is LiveFeedDataModel data &&
-                   Symbol == data.Symbol;
-        }
-
-        public override int GetHashCode()
-        {
-            return -1758840423 + EqualityComparer<string>.Default.GetHashCode(Symbol);
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }
