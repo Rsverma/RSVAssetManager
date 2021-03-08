@@ -18,7 +18,7 @@ namespace RAMDesktopUI.Library.Api
             _apiHelper = apiHelper;
         }
 
-        public async Task<List<LiveFeedDataModel>> GetSymbolMarketData(List<string> symbols)
+        public async Task<List<LiveFeedDataModel>> GetSymbolMarketData(ICollection<string> symbols)
         {
             List<LiveFeedDataModel> result = new List<LiveFeedDataModel>();
             try

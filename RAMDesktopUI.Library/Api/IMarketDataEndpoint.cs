@@ -8,6 +8,6 @@ namespace RAMDesktopUI.Library.Api
 {
     public interface IMarketDataEndpoint
     {
-        Task<List<LiveFeedDataModel>> GetSymbolMarketData(List<string> symbols);
+        Task<List<LiveFeedDataModel>> GetSymbolMarketData(ICollection<string> symbols);
     }
 }

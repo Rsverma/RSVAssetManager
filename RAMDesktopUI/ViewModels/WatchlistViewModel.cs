@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using RAMDesktopUI.Helpers;
 using RAMDesktopUI.Library.Api;
 using RAMDesktopUI.Library.Cache;
 using RAMDesktopUI.Library.Models;
@@ -18,15 +19,21 @@ namespace RAMDesktopUI.ViewModels
     public class WatchlistViewModel : ModuleBase
     {
         private readonly IWatchlistCache _watchlistCache;
+        private readonly IMarketDataHelper _dataHelper;
+
         public WatchlistTabViewModel Tab1 { get; set; }
         public WatchlistTabViewModel Tab2 { get; set; }
         public WatchlistTabViewModel Tab3 { get; set; }
         public WatchlistTabViewModel Tab4 { get; set; }
         public WatchlistTabViewModel Tab5 { get; set; }
-        public WatchlistViewModel(IWatchlistCache watchlistCache)
+        public WatchlistViewModel(IWatchlistCache watchlistCache, IMarketDataHelper dataHelper)
         {
             CurWindowState = WindowState.Maximized;
             _watchlistCache = watchlistCache;
+            _dataHelper = dataHelper;
+            ;
+            IEnumerable<string> symbols = _watchlistCache.TabWiseData.SelectMany(x => x.Value.Symbols);
+            _dataHelper.AddSymbols(symbols);
             Tab1 = new WatchlistTabViewModel(watchlistCache, 1);
             Tab2 = new WatchlistTabViewModel(watchlistCache, 2);
             Tab3 = new WatchlistTabViewModel(watchlistCache, 3);

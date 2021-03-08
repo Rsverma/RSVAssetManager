@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using HandyControl.Controls;
 using RAMDesktopUI.Controls;
+using RAMDesktopUI.EventModels;
 using RAMDesktopUI.Library.Cache;
 using RAMDesktopUI.Library.Models;
 using System;
@@ -16,7 +17,7 @@ using System.Windows.Media;
 
 namespace RAMDesktopUI.ViewModels
 {
-    public class WatchlistTabViewModel : Screen
+    public class WatchlistTabViewModel : Screen, IHandle<MarketDataEvent>
     {
         private readonly IWatchlistCache _watchlistCache;
         private readonly int _tabIndex;
@@ -168,6 +169,19 @@ namespace RAMDesktopUI.ViewModels
                     }
                 }
             }
+        }
+
+        public Task HandleAsync(MarketDataEvent message, CancellationToken cancellationToken)
+        {
+            foreach (LiveFeedDataModel data in message.LiveFeed.Values)
+            {
+                int index = _marketDataRows.IndexOf(data);
+                if (index >= 0)
+                {
+                    _marketDataRows[index] = data;
+                }
+            }
+            return Task.CompletedTask;
         }
     }
 }

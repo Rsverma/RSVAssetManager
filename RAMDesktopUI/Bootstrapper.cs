@@ -73,6 +73,7 @@ namespace RAMDesktopUI
                 .Singleton<IOrderFieldsCache, OrderFieldsCache>()
                 .Singleton<IOrderCache, OrderCache>()
                 .Singleton<IWatchlistCache, WatchlistCache>()
+                .Singleton<IMarketDataHelper, MarketDataHelper>()
                 .Singleton<IAPIHelper, APIHelper>();
 
             GetType().Assembly.GetTypes()

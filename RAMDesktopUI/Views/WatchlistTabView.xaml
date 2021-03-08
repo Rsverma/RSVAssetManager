@@ -31,34 +31,34 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Orientation="Vertical"  Grid.Column="0" HorizontalAlignment="Center">
-                    <TextBlock x:Name="Index1" Foreground="DeepSkyBlue" FontSize="20"/>
-                    <TextBlock Text="3,841.94"/>
-                    <TextBlock Text="+73.47(+1.95%)"/>
+                    <TextBlock x:Name="Index1" Foreground="DeepSkyBlue" FontSize="16"/>
+                    <TextBlock Text="3,841.94" FontSize="14"/>
+                    <TextBlock Text="-73.47(-1.95%)" FontSize="14" Foreground="Firebrick"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center">
-                    <TextBlock x:Name="Index2" Foreground="DeepSkyBlue" FontSize="20"/>
-                    <TextBlock Text="3,841.94"/>
-                    <TextBlock Text="+73.47(+1.95%)"/>
+                    <TextBlock x:Name="Index2" Foreground="DeepSkyBlue" FontSize="15"/>
+                    <TextBlock Text="3,841.94" FontSize="14"/>
+                    <TextBlock Text="+73.47(+1.95%)" FontSize="14" Foreground="ForestGreen"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Column="2" HorizontalAlignment="Center">
-                    <TextBlock x:Name="Index3" Foreground="DeepSkyBlue" FontSize="20"/>
-                    <TextBlock Text="3,841.94"/>
-                    <TextBlock Text="+73.47(+1.95%)"/>
+                    <TextBlock x:Name="Index3" Foreground="DeepSkyBlue" FontSize="15"/>
+                    <TextBlock Text="3,841.94" FontSize="14"/>
+                    <TextBlock Text="+73.47(+1.95%)" FontSize="14" Foreground="ForestGreen"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Column="3" HorizontalAlignment="Center">
-                    <TextBlock x:Name="Index4" Foreground="DeepSkyBlue" FontSize="20"/>
-                    <TextBlock Text="3,841.94"/>
-                    <TextBlock Text="+73.47(+1.95%)"/>
+                    <TextBlock x:Name="Index4" Foreground="DeepSkyBlue" FontSize="15"/>
+                    <TextBlock Text="3,841.94" FontSize="14"/>
+                    <TextBlock Text="+73.47(+1.95%)" FontSize="14" Foreground="ForestGreen"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Column="4" HorizontalAlignment="Center">
-                    <TextBlock x:Name="Index5" Foreground="DeepSkyBlue" FontSize="20"/>
-                    <TextBlock Text="3,841.94"/>
-                    <TextBlock Text="+73.47(+1.95%)"/>
+                    <TextBlock x:Name="Index5" Foreground="DeepSkyBlue" FontSize="15"/>
+                    <TextBlock Text="3,841.94" FontSize="14"/>
+                    <TextBlock Text="+73.47(+1.95%)" FontSize="14" Foreground="ForestGreen"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Column="5" HorizontalAlignment="Center">
-                    <TextBlock x:Name="Index6" Foreground="DeepSkyBlue" FontSize="20"/>
-                    <TextBlock Text="3,841.94"/>
-                    <TextBlock Text="+73.47(+1.95%)"/>
+                    <TextBlock x:Name="Index6" Foreground="DeepSkyBlue" FontSize="15"/>
+                    <TextBlock Text="3,841.94" FontSize="14"/>
+                    <TextBlock Text="+73.47(+1.95%)" FontSize="14" Foreground="ForestGreen"/>
                 </StackPanel>
                 <hc:TextBox x:Name="Symbol" hc:InfoElement.Placeholder="Enter Symbol" ShowClearButton="True" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10"/>
                 <Button x:Name="AddSymbol" Grid.Row="1" Grid.Column="1" Content="Add Symbol" HorizontalAlignment="Left" Margin="10"/>
