@@ -44,7 +44,7 @@ namespace RAMDesktopUI.ViewModels
 
             LiveFeedData = new ObservableCollection<LiveFeedDataModel>(dataList);
             _marketDataRows = CollectionViewSource.GetDefaultView(LiveFeedData);
-            _marketDataRows.CurrentChanged += _marketDataRows_CurrentChanged;
+            //_marketDataRows.CurrentChanged += _marketDataRows_CurrentChanged;
             _marketDataRows.Filter = _marketDataRows_Filter;
 
             Index1 = new WatchlistIndexModel { Symbol = tabData.Index1, Name = tabData.Index1 };
@@ -64,6 +64,17 @@ namespace RAMDesktopUI.ViewModels
         private void _marketDataRows_CurrentChanged(object sender, System.EventArgs e)
         {
             //throw new System.NotImplementedException();
+        }
+        private LiveFeedDataModel _selectedMarketDataRow;
+
+        public LiveFeedDataModel SelectedMarketDataRow
+        {
+            get { return _selectedMarketDataRow; }
+            set
+            {
+                _selectedMarketDataRow = value;
+                NotifyOfPropertyChange(() => _selectedMarketDataRow);
+            }
         }
 
         private string header;
@@ -155,16 +166,39 @@ namespace RAMDesktopUI.ViewModels
 
         public void AddSymbol()
         {
-            if(!string.IsNullOrWhiteSpace(Symbol))
+            if (!string.IsNullOrWhiteSpace(Symbol))
             {
                 string errMsg = _watchlistCache.AddSymbolToTab(Symbol, _tabIndex);
                 if (string.IsNullOrWhiteSpace(errMsg))
                 {
-                    LiveFeedData.Add(new LiveFeedDataModel { Symbol = Symbol });
-                    Symbol = string.Empty;
+                    lock (_locker)
+                    {
+                        LiveFeedData.Add(new LiveFeedDataModel { Symbol = Symbol });
+                    }
+                }
+                Symbol = string.Empty;
+            }
+        }
+        private readonly object _locker = new object();
+        public void RemoveSymbol(object source)
+        {
+            if (SelectedMarketDataRow != null)
+            {
+                string errMsg = _watchlistCache.RemoveSymbolFromTab(SelectedMarketDataRow.Symbol, _tabIndex);
+                if (string.IsNullOrWhiteSpace(errMsg))
+                {
+                    lock (_locker)
+                    {
+                        LiveFeedDataModel model = LiveFeedData.FirstOrDefault(x => x.Symbol.Equals(SelectedMarketDataRow.Symbol, StringComparison.OrdinalIgnoreCase));
+                        if (model != null)
+                        {
+                            LiveFeedData.Remove(model);
+                        }
+                    }
                 }
             }
         }
+
         public void ImportSymbols()
         {
 
@@ -189,11 +223,14 @@ namespace RAMDesktopUI.ViewModels
 
         public async Task UpdateLiveData(IDictionary<string, LiveFeedDataModel> liveFeedDict)
         {
-            for (int i = 0; i < LiveFeedData.Count; i++)
+            lock (_locker)
             {
-                LiveFeedDataModel data = LiveFeedData[i];
-                if (liveFeedDict.ContainsKey(data.Symbol))
-                    LiveFeedData[i] = liveFeedDict[data.Symbol];
+                for (int i = 0; i < LiveFeedData.Count; i++)
+                {
+                    LiveFeedDataModel data = LiveFeedData[i];
+                    if (liveFeedDict.ContainsKey(data.Symbol))
+                        LiveFeedData[i] = liveFeedDict[data.Symbol];
+                }
             }
             if (liveFeedDict.ContainsKey(index1.Symbol))
             {

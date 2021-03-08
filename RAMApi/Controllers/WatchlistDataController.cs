@@ -49,5 +49,12 @@ namespace RAMApi.Controllers
         {
             _watchlistData.SaveTabSymbol(tabSymbol);
         }
+
+        [HttpDelete]
+        [Route("DeleteTabSymbol")]
+        public void DeleteTabSymbol(KeyValuePair<int, string> tabSymbol)
+        {
+            _watchlistData.DeleteTabSymbol(tabSymbol);
+        }
     }
 }

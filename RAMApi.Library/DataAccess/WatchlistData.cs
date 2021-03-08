@@ -54,5 +54,9 @@ namespace RAMApi.Library.DataAccess
             _ = _sql.SaveData("dbo.spWatchlist_InsertTabSymbol", tabSymbol, "RAMData");
         }
 
+        public void DeleteTabSymbol(KeyValuePair<int, string> tabSymbol)
+        {
+            _ = _sql.SaveData("dbo.spWatchlist_DeleteTabSymbol", tabSymbol, "RAMData");
+        }
     }
 }

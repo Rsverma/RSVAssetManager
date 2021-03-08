@@ -1,4 +1,5 @@
-﻿using RAMDesktopUI.Library.Models;
+﻿using Newtonsoft.Json;
+using RAMDesktopUI.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -66,6 +67,27 @@ namespace RAMDesktopUI.Library.Api
                 {
                     Dictionary<int, WatchlistTabModel> result = await response.Content.ReadAsAsync<Dictionary<int, WatchlistTabModel>>();
                     return result;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
+
+        public async Task DeleteTabSymbol(KeyValuePair<int, string> tabSymbol)
+        {
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Delete,
+                RequestUri = new Uri("/api/WatchlistData/DeleteTabSymbol"),
+                Content = new StringContent(JsonConvert.SerializeObject(tabSymbol), Encoding.UTF8, "application/json")
+            };
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.SendAsync(request))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    // log successfull call?
                 }
                 else
                 {

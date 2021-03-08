@@ -8,6 +8,7 @@ namespace RAMDesktopUI.Library.Api
     {
         Task<Dictionary<int, WatchlistTabModel>> GetAllTabsData();
         Task PostTabSymbol(KeyValuePair<int, string> tabSymbol);
+        Task DeleteTabSymbol(KeyValuePair<int, string> tabSymbol);
         Task PutTabIndices(KeyValuePair<int, List<string>> tabIndices);
         Task PutTabName(KeyValuePair<int, string> tabName);
     }

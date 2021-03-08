@@ -5,11 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RAMDesktopUI.Views"
              xmlns:hc="https://handyorg.github.io/handycontrol" 
+             xmlns:cal="http://www.caliburnproject.org"
              xmlns:controls="clr-namespace:RAMDesktopUI.Controls"
              mc:Ignorable="d"  FontSize="14"
              d:DesignHeight="600" d:DesignWidth="1100">
 
-    <Grid>
+    <Grid Name="GridLayout">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -68,26 +69,43 @@
         </Border>
         <controls:RSVDataGrid x:Name="MarketDataRows" FrozenColumnCount="1" IsSynchronizedWithCurrentItem="True" Grid.Row="1" CanUserAddRows="False" 
                   CanUserDeleteRows="False" IsReadOnly="True" HeadersVisibility="All" RowHeaderWidth="25"
-                  ColumnHeaderHeight="40" CanUserResizeRows="False" AutoGenerateColumns="False" RowHeight="30" >
+                  ColumnHeaderHeight="40" CanUserResizeRows="False" AutoGenerateColumns="False" RowHeight="30" 
+                               Tag="{Binding DataContext, ElementName=GridLayout}">
+            <controls:RSVDataGrid.ContextMenu>
+                <ContextMenu Name="cm" cal:Action.TargetWithoutContext="{Binding Path=PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+                    <MenuItem Header="Remove symbol" cal:Message.Attach="RemoveSymbol($dataContext)" />
+                </ContextMenu>
+            </controls:RSVDataGrid.ContextMenu>
             <controls:RSVDataGrid.Columns>
                 <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" FontWeight="Bold"/>
+                <DataGridTextColumn Header="Company Name" Binding="{Binding shortName}"/>
                 <DataGridTextColumn Header="Last Price" Binding="{Binding Last}"/>
                 <DataGridTextColumn Header="Ask Price" Binding="{Binding Ask}" Foreground="DodgerBlue"/>
                 <DataGridTextColumn Header="Bid Price" Binding="{Binding Bid}" Foreground="Firebrick"/>
-                <DataGridTextColumn Header="Day Change" Binding="{Binding Change}">
+                <DataGridTextColumn Header="Day Change" Binding="{Binding Change, StringFormat='+#.00 ▲;-#.00 ▼;0.00'}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Foreground" Value="{Binding Change, Converter={StaticResource ValueToBrushConverter}}"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="% Day Change" Binding="{Binding ChangePercent, StringFormat={}{0}%}">
+                <DataGridTextColumn Header="% Day Change" Binding="{Binding ChangePercent, StringFormat='+#.00%;-#.00%;0.00%'}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Foreground" Value="{Binding ChangePercent, Converter={StaticResource ValueToBrushConverter}}"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Previous Day Close" Binding="{Binding Close}"/>
+                <DataGridTextColumn Header="Day Open" Binding="{Binding Open}"/>
+                <DataGridTextColumn Header="Day High" Binding="{Binding High}"/>
+                <DataGridTextColumn Header="Day Low" Binding="{Binding Low}"/>
+                <DataGridTextColumn Header="52W High" Binding="{Binding fiftyTwoWeekHigh}"/>
+                <DataGridTextColumn Header="52W Low" Binding="{Binding fiftyTwoWeekLow}"/>
+                <DataGridTextColumn Header="Currency" Binding="{Binding currency}"/>
+                <DataGridTextColumn Header="Asset Type" Binding="{Binding Asset}"/>
+                <DataGridTextColumn Header="Market Cap" Binding="{Binding marketCap}"/>
             </controls:RSVDataGrid.Columns>
         </controls:RSVDataGrid>
     </Grid>

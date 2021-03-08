@@ -67,5 +67,27 @@ namespace RAMDesktopUI.Library.Cache
             }
             return output;
         }
+
+        public string RemoveSymbolFromTab(string symbol, int tabIndex)
+        {
+            string output = string.Empty;
+            try
+            {
+                if (_tabWiseData[tabIndex].Symbols.Contains(symbol))
+                {
+                    _tabWiseData[tabIndex].Symbols.Remove(symbol);
+                    _watchlistData.DeleteTabSymbol(new KeyValuePair<int, string>(tabIndex, symbol));
+                }
+                else
+                {
+                    output = "Symbol not found in tab";
+                }
+            }
+            catch (Exception ex)
+            {
+                output = ex.Message;
+            }
+            return output;
+        }
     }
 }

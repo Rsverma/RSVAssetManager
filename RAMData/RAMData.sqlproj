@@ -88,5 +88,6 @@
     <Build Include="dbo\Stored Procedures\spWatchlist_UpdateTabName.sql" />
     <Build Include="dbo\Stored Procedures\spWatchlist_UpdateTabIndices.sql" />
     <Build Include="dbo\Stored Procedures\spWatchlist_InsertTabSymbol.sql" />
+    <Build Include="dbo\Stored Procedures\spWatchlist_DeleteTabSymbol.sql" />
   </ItemGroup>
 </Project>
