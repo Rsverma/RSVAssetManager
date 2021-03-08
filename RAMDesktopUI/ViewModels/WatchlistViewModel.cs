@@ -21,7 +21,6 @@ namespace RAMDesktopUI.ViewModels
     {
         private readonly IEventAggregator _events;
         private readonly IWatchlistCache _watchlistCache;
-        private readonly IMarketDataHelper _dataHelper;
 
         public WatchlistTabViewModel Tab1 { get; set; }
         public WatchlistTabViewModel Tab2 { get; set; }
@@ -34,7 +33,6 @@ namespace RAMDesktopUI.ViewModels
             _events = events;
             _events.SubscribeOnPublishedThread(this);
             _watchlistCache = watchlistCache;
-            _dataHelper = dataHelper;
             
             List<string> symbols = _watchlistCache.TabWiseData.Values.SelectMany(x => x.Symbols).ToList();
             symbols.AddRange(_watchlistCache.TabWiseData.Values.Select(x => x.Index1));
@@ -45,12 +43,12 @@ namespace RAMDesktopUI.ViewModels
             symbols.AddRange(_watchlistCache.TabWiseData.Values.Select(x => x.Index6));
 
 
-            _dataHelper.AddSymbols(symbols);
-            Tab1 = new WatchlistTabViewModel(watchlistCache, 1);
-            Tab2 = new WatchlistTabViewModel(watchlistCache, 2);
-            Tab3 = new WatchlistTabViewModel(watchlistCache, 3);
-            Tab4 = new WatchlistTabViewModel(watchlistCache, 4);
-            Tab5 = new WatchlistTabViewModel(watchlistCache, 5);
+            dataHelper.AddSymbols(symbols);
+            Tab1 = new WatchlistTabViewModel(watchlistCache, 1, dataHelper);
+            Tab2 = new WatchlistTabViewModel(watchlistCache, 2, dataHelper);
+            Tab3 = new WatchlistTabViewModel(watchlistCache, 3, dataHelper);
+            Tab4 = new WatchlistTabViewModel(watchlistCache, 4, dataHelper);
+            Tab5 = new WatchlistTabViewModel(watchlistCache, 5, dataHelper);
             Tab1Checked = true;
         }
 

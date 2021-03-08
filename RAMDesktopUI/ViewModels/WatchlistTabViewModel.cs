@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using RAMDesktopUI.Controls;
+using RAMDesktopUI.Helpers;
 using RAMDesktopUI.Library.Cache;
 using RAMDesktopUI.Library.Models;
 using RAMDesktopUI.Models;
@@ -17,6 +18,7 @@ namespace RAMDesktopUI.ViewModels
     {
         private readonly IWatchlistCache _watchlistCache;
         private readonly int _tabIndex;
+        private readonly IMarketDataHelper _dataHelper;
         private ObservableCollection<LiveFeedDataModel> _liveFeedData;
 
         public ObservableCollection<LiveFeedDataModel> LiveFeedData
@@ -34,10 +36,11 @@ namespace RAMDesktopUI.ViewModels
         {
             get { return _marketDataRows; }
         }
-        public WatchlistTabViewModel(IWatchlistCache watchlistCache, int index)
+        public WatchlistTabViewModel(IWatchlistCache watchlistCache, int index, IMarketDataHelper dataHelper)
         {
             _watchlistCache = watchlistCache;
             _tabIndex = index;
+            _dataHelper = dataHelper;
             WatchlistTabModel tabData = _watchlistCache.TabWiseData[_tabIndex];
             Header = tabData.TabName;
             var dataList = tabData.Symbols.Select(x => new LiveFeedDataModel { Symbol = x });
@@ -171,6 +174,7 @@ namespace RAMDesktopUI.ViewModels
                 string errMsg = _watchlistCache.AddSymbolToTab(Symbol, _tabIndex);
                 if (string.IsNullOrWhiteSpace(errMsg))
                 {
+                    _dataHelper.AddSymbols(new List<string> { Symbol });
                     lock (_locker)
                     {
                         LiveFeedData.Add(new LiveFeedDataModel { Symbol = Symbol });
