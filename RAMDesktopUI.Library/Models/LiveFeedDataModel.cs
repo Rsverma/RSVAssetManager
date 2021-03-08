@@ -109,9 +109,6 @@ namespace RAMDesktopUI.Library.Models
         public double Low { get; set; }
         public double Open { get; set; }
         public double Change { get; set; }
-
-        [Bindable(false)]
-        public bool? isChangePositive { get; set; }
         public double ChangePercent { get; set; }
         public double Close { get; set; }
         public string Asset { get; set; }

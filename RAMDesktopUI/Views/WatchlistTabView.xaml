@@ -66,9 +66,35 @@
                 <Button x:Name="RenameTab" Grid.Row="1" Grid.Column="3" Content="Rename Tab" HorizontalAlignment="Center" Margin="0 10"/>
             </Grid>
         </Border>
-        <controls:RSVDataGrid x:Name="MarketDataRows" IsSynchronizedWithCurrentItem="True" Grid.Row="1" CanUserAddRows="False" 
-                  CanUserDeleteRows="False" IsReadOnly="True" HeadersVisibility="All"
-                  CanUserResizeRows="False" AutoGenerateColumns="True" >
+        <controls:RSVDataGrid x:Name="MarketDataRows" FrozenColumnCount="1" IsSynchronizedWithCurrentItem="True" Grid.Row="1" CanUserAddRows="False" 
+                  CanUserDeleteRows="False" IsReadOnly="True" HeadersVisibility="All" RowHeaderWidth="30"
+                  CanUserResizeRows="False" AutoGenerateColumns="False" RowHeight="30" >
+            <controls:RSVDataGrid.Columns>
+                <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}"/>
+                <DataGridTextColumn Header="Last Price" Binding="{Binding Last}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Foreground" Value="{Binding IsLastGreater, Converter={StaticResource ValueToBrushConverter}}"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Ask Price" Binding="{Binding Ask}" Foreground="DodgerBlue"/>
+                <DataGridTextColumn Header="Bid Price" Binding="{Binding Bid}" Foreground="Firebrick"/>
+                <DataGridTextColumn Header="Day Change" Binding="{Binding Change}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Foreground" Value="{Binding Change, Converter={StaticResource ValueToBrushConverter}}"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="% Day Change" Binding="{Binding ChangePercent}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Foreground" Value="{Binding ChangePercent, Converter={StaticResource ValueToBrushConverter}}"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </controls:RSVDataGrid.Columns>
         </controls:RSVDataGrid>
     </Grid>
 </UserControl>

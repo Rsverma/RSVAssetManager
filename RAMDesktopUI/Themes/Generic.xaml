@@ -2,7 +2,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:hc="https://handyorg.github.io/handycontrol"
-    xmlns:controls="clr-namespace:RAMDesktopUI.Controls">
+    xmlns:controls="clr-namespace:RAMDesktopUI.Controls" 
+    xmlns:helpers="clr-namespace:RAMDesktopUI.Helpers">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDark.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" >
@@ -122,6 +123,9 @@
         </ResourceDictionary>
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <helpers:ValueToBrushConverter x:Key="ValueToBrushConverter"/>
         </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
