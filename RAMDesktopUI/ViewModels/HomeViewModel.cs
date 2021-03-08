@@ -43,6 +43,7 @@ namespace RAMDesktopUI.ViewModels
             _isFieldCacheInitialized = true;
             NotifyOfPropertyChange(() => CanLaunchOrderTicket);
             NotifyOfPropertyChange(() => CanLaunchTradeBlotter);
+            NotifyOfPropertyChange(() => CanLaunchWatchlist);
             _fieldsCache.InitializationCompleted -= FieldsCache_InitializationCompleted;
         }
 
@@ -58,7 +59,7 @@ namespace RAMDesktopUI.ViewModels
         public bool CanLaunchTradeBlotter { get { return _isOrderCacheInitialized && _isFieldCacheInitialized; } }
         public bool CanLaunchPositionManager { get { return false; } }
         public bool CanLaunchPortfolioMonitor { get { return false; } }
-        public bool CanLaunchWatchlist { get { return _isWatchlistCacheInitialized; } }
+        public bool CanLaunchWatchlist { get { return _isWatchlistCacheInitialized && _isFieldCacheInitialized; } }
         public bool CanLaunchImportData { get { return false; } }
         public bool CanLaunchComplianceManager { get { return false; } }
         public bool CanLaunchTaxLotManager { get { return false; } }

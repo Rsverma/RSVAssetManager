@@ -35,7 +35,16 @@ namespace RAMDesktopUI.ViewModels
             _events.SubscribeOnPublishedThread(this);
             _watchlistCache = watchlistCache;
             _dataHelper = dataHelper;
-            IEnumerable<string> symbols = _watchlistCache.TabWiseData.SelectMany(x => x.Value.Symbols);
+            
+            List<string> symbols = _watchlistCache.TabWiseData.Values.SelectMany(x => x.Symbols).ToList();
+            symbols.AddRange(_watchlistCache.TabWiseData.Values.Select(x => x.Index1));
+            symbols.AddRange(_watchlistCache.TabWiseData.Values.Select(x => x.Index2));
+            symbols.AddRange(_watchlistCache.TabWiseData.Values.Select(x => x.Index3));
+            symbols.AddRange(_watchlistCache.TabWiseData.Values.Select(x => x.Index4));
+            symbols.AddRange(_watchlistCache.TabWiseData.Values.Select(x => x.Index5));
+            symbols.AddRange(_watchlistCache.TabWiseData.Values.Select(x => x.Index6));
+
+
             _dataHelper.AddSymbols(symbols);
             Tab1 = new WatchlistTabViewModel(watchlistCache, 1);
             Tab2 = new WatchlistTabViewModel(watchlistCache, 2);

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace RAMDesktopUI.Helpers
 {
@@ -33,11 +34,11 @@ namespace RAMDesktopUI.Helpers
 
             if(input == true)
             {
-                return Brushes.ForestGreen;
+                return new SolidColorBrush(Colors.ForestGreen);
             }
             else if (input == false)
             {
-                return Brushes.Firebrick;
+                return new SolidColorBrush(Colors.Firebrick);
             }
             else
             {

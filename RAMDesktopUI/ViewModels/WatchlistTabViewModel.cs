@@ -2,6 +2,7 @@
 using RAMDesktopUI.Controls;
 using RAMDesktopUI.Library.Cache;
 using RAMDesktopUI.Library.Models;
+using RAMDesktopUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -45,12 +46,13 @@ namespace RAMDesktopUI.ViewModels
             _marketDataRows = CollectionViewSource.GetDefaultView(LiveFeedData);
             _marketDataRows.CurrentChanged += _marketDataRows_CurrentChanged;
             _marketDataRows.Filter = _marketDataRows_Filter;
-            Index1 = tabData.Index1;
-            Index2 = tabData.Index2;
-            Index3 = tabData.Index3;
-            Index4 = tabData.Index4;
-            Index5 = tabData.Index5;
-            Index6 = tabData.Index6;
+
+            Index1 = new WatchlistIndexModel { Symbol = tabData.Index1, Name = tabData.Index1 };
+            Index2 = new WatchlistIndexModel { Symbol = tabData.Index2, Name = tabData.Index2 };
+            Index3 = new WatchlistIndexModel { Symbol = tabData.Index3, Name = tabData.Index3 };
+            Index4 = new WatchlistIndexModel { Symbol = tabData.Index4, Name = tabData.Index4 };
+            Index5 = new WatchlistIndexModel { Symbol = tabData.Index5, Name = tabData.Index5 };
+            Index6 = new WatchlistIndexModel { Symbol = tabData.Index6, Name = tabData.Index6 };
         }
 
         private bool _marketDataRows_Filter(object obj)
@@ -64,6 +66,7 @@ namespace RAMDesktopUI.ViewModels
             //throw new System.NotImplementedException();
         }
 
+        private string header;
         public string Header
         {
             get => header;
@@ -73,7 +76,9 @@ namespace RAMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => Header);
             }
         }
-        public string Index1
+
+        #region indicesData
+        public WatchlistIndexModel Index1
         {
             get => index1; 
             set
@@ -82,7 +87,7 @@ namespace RAMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => Index1);
             }
         }
-        public string Index2
+        public WatchlistIndexModel Index2
         {
             get => index2; 
             set
@@ -91,7 +96,7 @@ namespace RAMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => Index2);
             }
         }
-        public string Index3
+        public WatchlistIndexModel Index3
         {
             get => index3; 
             set
@@ -100,7 +105,7 @@ namespace RAMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => Index3);
             }
         }
-        public string Index4
+        public WatchlistIndexModel Index4
         {
             get => index4; 
             set
@@ -109,7 +114,7 @@ namespace RAMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => Index4);
             }
         }
-        public string Index5
+        public WatchlistIndexModel Index5
         {
             get => index5; 
             set
@@ -118,7 +123,7 @@ namespace RAMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => Index5);
             }
         }
-        public string Index6
+        public WatchlistIndexModel Index6
         {
             get => index6;
             set
@@ -128,13 +133,13 @@ namespace RAMDesktopUI.ViewModels
             }
         }
 
-        private string header;
-        private string index1;
-        private string index2;
-        private string index3;
-        private string index4;
-        private string index5;
-        private string index6;
+        private WatchlistIndexModel index1;
+        private WatchlistIndexModel index2;
+        private WatchlistIndexModel index3;
+        private WatchlistIndexModel index4;
+        private WatchlistIndexModel index5;
+        private WatchlistIndexModel index6;
+        #endregion
 
         private string _symbol;
 
@@ -190,7 +195,54 @@ namespace RAMDesktopUI.ViewModels
                 if (liveFeedDict.ContainsKey(data.Symbol))
                     LiveFeedData[i] = liveFeedDict[data.Symbol];
             }
-            NotifyOfPropertyChange(() => LiveFeedData);
+            if (liveFeedDict.ContainsKey(index1.Symbol))
+            {
+                index1.Name = liveFeedDict[index1.Symbol].shortName;
+                index1.Price = liveFeedDict[index1.Symbol].Last;
+                index1.Change = liveFeedDict[index1.Symbol].Change;
+                index1.ChangeDescript = liveFeedDict[index1.Symbol].Change.ToString("+#.00;-#.00;0.00")
+                    + liveFeedDict[index1.Symbol].ChangePercent.ToString(" (+#.00) ▲; (-#.00) ▼; (0.00)");
+            }
+            if (liveFeedDict.ContainsKey(index2.Symbol))
+            {
+                index2.Name = liveFeedDict[index2.Symbol].shortName;
+                index2.Price = liveFeedDict[index2.Symbol].Last;
+                index2.Change = liveFeedDict[index2.Symbol].Change;
+                index2.ChangeDescript = liveFeedDict[index2.Symbol].Change.ToString("+#.00;-#.00;0.00")
+                    + liveFeedDict[index2.Symbol].ChangePercent.ToString(" (+#.00) ▲; (-#.00) ▼; (0.00)");
+            }
+            if (liveFeedDict.ContainsKey(index3.Symbol))
+            {
+                index3.Name = liveFeedDict[index3.Symbol].shortName;
+                index3.Price = liveFeedDict[index3.Symbol].Last;
+                index3.Change = liveFeedDict[index3.Symbol].Change;
+                index3.ChangeDescript = liveFeedDict[index3.Symbol].Change.ToString("+#.00;-#.00;0.00")
+                    + liveFeedDict[index3.Symbol].ChangePercent.ToString(" (+#.00) ▲; (-#.00) ▼; (0.00)");
+            }
+            if (liveFeedDict.ContainsKey(index4.Symbol))
+            {
+                index4.Name = liveFeedDict[index4.Symbol].shortName;
+                index4.Price = liveFeedDict[index4.Symbol].Last;
+                index4.Change = liveFeedDict[index4.Symbol].Change;
+                index4.ChangeDescript = liveFeedDict[index4.Symbol].Change.ToString("+#.00;-#.00;0.00")
+                    + liveFeedDict[index4.Symbol].ChangePercent.ToString(" (+#.00) ▲; (-#.00) ▼; (0.00)");
+            }
+            if (liveFeedDict.ContainsKey(index5.Symbol))
+            {
+                index5.Name = liveFeedDict[index5.Symbol].shortName;
+                index5.Price = liveFeedDict[index5.Symbol].Last;
+                index5.Change = liveFeedDict[index5.Symbol].Change;
+                index5.ChangeDescript = liveFeedDict[index5.Symbol].Change.ToString("+#.00;-#.00;0.00")
+                    + liveFeedDict[index5.Symbol].ChangePercent.ToString(" (+#.00) ▲; (-#.00) ▼; (0.00)");
+            }
+            if (liveFeedDict.ContainsKey(index6.Symbol))
+            {
+                index6.Name = liveFeedDict[index6.Symbol].shortName;
+                index6.Price = liveFeedDict[index6.Symbol].Last;
+                index6.Change = liveFeedDict[index6.Symbol].Change;
+                index6.ChangeDescript = liveFeedDict[index6.Symbol].Change.ToString("+#.00;-#.00;0.00")
+                    + liveFeedDict[index6.Symbol].ChangePercent.ToString(" (+#.00) ▲; (-#.00) ▼; (0.00)");
+            }
             await Task.CompletedTask;
         }
     }

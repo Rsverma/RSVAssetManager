@@ -11,9 +11,7 @@ namespace RAMDesktopUI.Library.Models
     {
         private string _symbol;
         private double _ask;
-        private bool? _isAskGreater;
         private double _bid;
-        private bool? _isBidGreater;
         private double _last;
         private bool? _isLastGreater;
 
@@ -31,53 +29,21 @@ namespace RAMDesktopUI.Library.Models
             get => _ask;
             set
             {
-                if (_ask == value)
-                {
-                    IsAskGreater = null;
-                }
-                else
-                {
-                    IsAskGreater = value > _ask;
-                    _ask = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-
-        public bool? IsAskGreater
-        {
-            get => _isAskGreater; set
-            {
-                _isAskGreater = value;
+                _ask = value;
                 NotifyPropertyChanged();
             }
         }
+
         public double Bid
         {
             get => _bid;
             set
             {
-                if (_bid == value)
-                {
-                    IsBidGreater = null;
-                }
-                else
-                {
-                    IsBidGreater = value > _bid;
-                    _bid = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-
-        public bool? IsBidGreater
-        {
-            get => _isBidGreater; set
-            {
-                _isBidGreater = value;
+                _bid = value;
                 NotifyPropertyChanged();
             }
         }
+
         public double Last
         {
             get => _last;
