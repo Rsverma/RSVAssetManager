@@ -11,8 +11,11 @@
   <ItemGroup>
     <None Remove="Resources\AppIication1.ico" />
     <None Remove="Resources\Application.ico" />
+    <None Remove="Resources\AuditTrail.ico" />
+    <None Remove="Resources\ComplianceManager.ico" />
     <None Remove="Resources\CreateOrder1.ico" />
     <None Remove="Resources\FundAllocator1.ico" />
+    <None Remove="Resources\ImportManager.ico" />
     <None Remove="Resources\Login.ico" />
     <None Remove="Resources\Login1.ico" />
     <None Remove="Resources\OrderManager1.ico" />
@@ -22,9 +25,13 @@
     <None Remove="Resources\PortfolioRebalancer.ico" />
     <None Remove="Resources\PortfolioRebalancer1.ico" />
     <None Remove="Resources\PositionManager.ico" />
+    <None Remove="Resources\SecurityMaster.ico" />
+    <None Remove="Resources\TaxLotManager.ico" />
     <None Remove="Resources\TradeBlotter.ico" />
+    <None Remove="Resources\TradeDelivery.ico" />
     <None Remove="Resources\UserManager.ico" />
     <None Remove="Resources\UserManager1.ico" />
+    <None Remove="Resources\UserPreferences.ico" />
     <None Remove="Resources\Watchlist.ico" />
     <None Remove="Resources\Watchlist1.ico" />
   </ItemGroup>
@@ -34,6 +41,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\AppIication1.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\AuditTrail.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ComplianceManager.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ImportManager.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\OrderTicket.ico">
@@ -54,6 +70,12 @@
     <Content Include="Resources\Login1.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\SecurityMaster.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\TaxLotManager.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\TradeBlotter.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -72,10 +94,16 @@
     <Content Include="Resources\PortfolioRebalancer1.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\TradeDelivery.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\UserManager.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\UserManager1.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\UserPreferences.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Watchlist.ico">
@@ -94,6 +122,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RAMDesktopUI.Library\RAMDesktopUI.Library.csproj" />
+    <ProjectReference Include="..\RAMDesktopUI.Utilities\RAMDesktopUI.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

@@ -13,7 +13,7 @@ namespace RAMDesktopUI.Library.Helpers
             PositionManager,
             PortfolioMonitor,
             Watchlist,
-            ImportData,
+            ImportImportManager,
             ComplianceManager,
             TaxLotManager,
             SecurityMaster,

@@ -77,12 +77,9 @@ namespace RAMDesktopUI.Library.Api
 
         public async Task DeleteTabSymbol(KeyValuePair<int, string> tabSymbol)
         {
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Delete,
-                RequestUri = new Uri("/api/WatchlistData/DeleteTabSymbol"),
-                Content = new StringContent(JsonConvert.SerializeObject(tabSymbol), Encoding.UTF8, "application/json")
-            };
+            var request = new HttpRequestMessage(HttpMethod.Delete, "/api/WatchlistData/DeleteTabSymbol");
+            request.Content = new StringContent(JsonConvert.SerializeObject(tabSymbol), Encoding.UTF8, "application/json");
+            
             using (HttpResponseMessage response = await _apiHelper.ApiClient.SendAsync(request))
             {
                 if (response.IsSuccessStatusCode)

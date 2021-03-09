@@ -60,7 +60,7 @@ namespace RAMDesktopUI.ViewModels
         public bool CanLaunchPositionManager { get { return false; } }
         public bool CanLaunchPortfolioMonitor { get { return false; } }
         public bool CanLaunchWatchlist { get { return _isWatchlistCacheInitialized && _isFieldCacheInitialized; } }
-        public bool CanLaunchImportData { get { return false; } }
+        public bool CanLaunchImportManager { get { return false; } }
         public bool CanLaunchComplianceManager { get { return false; } }
         public bool CanLaunchTaxLotManager { get { return false; } }
         public bool CanLaunchSecurityMaster { get { return false; } }
@@ -102,9 +102,9 @@ namespace RAMDesktopUI.ViewModels
             await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.Watchlist));
         }
 
-        public async Task LaunchImportData()
+        public async Task LaunchImportManager()
         {
-            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.ImportData));
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.ImportImportManager));
         }
         public async Task LaunchComplianceManager()
         {

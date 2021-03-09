@@ -5,7 +5,7 @@
     xmlns:controls="clr-namespace:RAMDesktopUI.Controls" 
     xmlns:helpers="clr-namespace:RAMDesktopUI.Helpers">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDark.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" >
             <Style x:Key="RSVDataGridRowStyle" BasedOn="{StaticResource DataGridRowStyle}" TargetType="DataGridRow">
                 <Setter Property="MinHeight" Value="20"/>
@@ -120,6 +120,10 @@
                     </MultiTrigger>
                 </Style.Triggers>
             </Style>
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="PrimaryBrush" Color="Gray"/>
+            <SolidColorBrush x:Key="ErrorBrush" Color="Red"/>
         </ResourceDictionary>
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>

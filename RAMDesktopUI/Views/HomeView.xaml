@@ -6,19 +6,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RAMDesktopUI.Views"
              mc:Ignorable="d"
+             xmlns:cal="http://www.caliburnproject.org"
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_File">
-                <MenuItem x:Name="Exit" Header="E_xit" Padding="0" MinWidth="5"/>
-            </MenuItem>
-            <MenuItem Header="_Users"  Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
-                <MenuItem x:Name="UserManagement" Header="User_Management"/>
-            </MenuItem>
-            <MenuItem Header="_Account">
-                <MenuItem x:Name="LogOut" Header="_Log Out" Padding="0" MinWidth="5"/>
-            </MenuItem>
-        </Menu>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Menu Grid.Column="0">
+                <MenuItem Header="_File">
+                    <MenuItem x:Name="Exit" Header="E_xit" Padding="0" MinWidth="5"/>
+                </MenuItem>
+                <MenuItem Header="_Users"  Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
+                    <MenuItem x:Name="UserManagement" Header="User_Management"/>
+                </MenuItem>
+                <MenuItem Header="_Account">
+                    <MenuItem x:Name="LogOut" Header="_Log Out" Padding="0" MinWidth="5"/>
+                </MenuItem>
+            </Menu>
+            <Button Grid.Column="1" cal:Message.Attach="[Event Click] = [Action Exit()]" Foreground="{DynamicResource PrimaryTextBrush}" Background="{DynamicResource TextIconBrush}" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource DeleteFillCircleGeometry}">
+                
+            </Button>
+        </Grid>
         <Grid Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -63,7 +73,7 @@
             <Button x:Name="LaunchPortfolioMonitor" Grid.Column="1" Grid.Row="2" Width="150" Margin="5" Height="35">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/PortfolioMonitor.ico" Margin="0" Height="20" Width="20"/>
-                    <TextBlock Margin="2">PortfolioMonitor</TextBlock>
+                    <TextBlock Margin="2">Portfolio Monitor</TextBlock>
                 </StackPanel>
             </Button>
             
@@ -74,32 +84,53 @@
                 </StackPanel>
             </Button>
 
-            <Button x:Name="LaunchImportData" Grid.Column="3" Grid.Row="2" Width="150" Margin="5" Height="35">
-                Import Data
+            <Button x:Name="LaunchImportManager" Grid.Column="3" Grid.Row="2" Width="150" Margin="5" Height="35">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/ImportManager.ico" Margin="0" Height="20" Width="20"/>
+                    <TextBlock Margin="2">Import Manager</TextBlock>
+                </StackPanel>
             </Button>
             
             <Button x:Name="LaunchComplianceManager" Grid.Column="1" Grid.Row="3" Width="150" Margin="5" Height="35">
-                Compliance Manager
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/ComplianceManager.ico" Margin="0" Height="20" Width="20"/>
+                    <TextBlock Margin="2">Compliance Manager</TextBlock>
+                </StackPanel>
             </Button>
 
             <Button x:Name="LaunchTaxLotManager" Grid.Column="2" Grid.Row="3" Width="150" Margin="5" Height="35">
-                Tax Lot Manager
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/TaxLotManager.ico" Margin="0" Height="20" Width="20"/>
+                    <TextBlock Margin="2">Tax Lot Manager</TextBlock>
+                </StackPanel>
             </Button>
 
             <Button x:Name="LaunchSecurityMaster" Grid.Column="3" Grid.Row="3" Width="150" Margin="5" Height="35">
-                Security Master
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/SecurityMaster.ico" Margin="0" Height="20" Width="20"/>
+                    <TextBlock Margin="2">Security Master</TextBlock>
+                </StackPanel>
             </Button>
             
             <Button x:Name="LaunchTradeDelivery" Grid.Column="1" Grid.Row="4" Width="150" Margin="5" Height="35">
-                Trade Delivery
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/TradeDelivery.ico" Margin="0" Height="20" Width="20"/>
+                    <TextBlock Margin="2">Trade Delivery</TextBlock>
+                </StackPanel>
             </Button>
 
             <Button x:Name="LaunchAuditTrail" Grid.Column="2" Grid.Row="4" Width="150" Margin="5" Height="35">
-                Audit Trail
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/AuditTrail.ico" Margin="0" Height="20" Width="20"/>
+                    <TextBlock Margin="2">Audit Trail</TextBlock>
+                </StackPanel>
             </Button>
             
             <Button x:Name="LaunchUserPreferences" Grid.Column="3" Grid.Row="4" Width="150" Margin="5" Height="35">
-                User Preferences
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/UserPreferences.ico" Margin="0" Height="20" Width="20"/>
+                    <TextBlock Margin="2">User Preferences</TextBlock>
+                </StackPanel>
             </Button>
         </Grid>
     </DockPanel>

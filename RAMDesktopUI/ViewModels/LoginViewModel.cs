@@ -1,9 +1,11 @@
 ﻿using Caliburn.Micro;
 using RAMDesktopUI.EventModels;
 using RAMDesktopUI.Library.Api;
+using RAMDesktopUI.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -94,9 +96,18 @@ namespace RAMDesktopUI.ViewModels
 
                 await _events.PublishOnUIThreadAsync(new LogInOutEvent { IsLogin = true });
             }
+            catch (HttpRequestException ex)
+            {
+                ErrorMessage = "Connection to server failed";
+                Logger.LogError(ex, LogAction.LogOnly);
+            }
             catch (Exception ex)
             {
-                ErrorMessage = ex.Message;
+                if (ex.Message.Equals("Bad Request"))
+                    ErrorMessage = "Wrong Username or Password";
+                else
+                    ErrorMessage = ex.Message;
+                Logger.LogError(ex, LogAction.LogOnly);
             }
         }
 

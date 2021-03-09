@@ -16,14 +16,14 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" 
-                   Fill="Gray" Margin="0 0 0 20" />
+                   Fill="{DynamicResource PrimaryBrush}" Margin="0 0 0 20" />
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Image Width="40" Height="40" HorizontalAlignment="Right" Margin="0 0 10 20" Source="/Resources/Login.ico" />
             <TextBlock Margin="10 0 0 20" HorizontalAlignment="Left" FontSize="40">
@@ -31,9 +31,9 @@
             </TextBlock>
         </StackPanel>
         <!--Error Message row-->
-        <TextBlock x:Name="ErrorMessage" Grid.Row="2" Grid.Column="1" 
-                   Grid.ColumnSpan="2" Margin="0 0 0 20" Visibility="{Binding IsErrorVisible, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}"
-                   Foreground="Red" MaxWidth="300" TextWrapping="Wrap" />
+        <TextBlock x:Name="ErrorMessage" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Margin="5"
+                   Grid.ColumnSpan="2" Visibility="{Binding IsErrorVisible, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Hidden}"
+                   Foreground="{DynamicResource ErrorBrush}" MaxWidth="300" TextWrapping="Wrap" />
 
 
         <!--Username row-->

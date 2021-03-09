@@ -5,10 +5,12 @@ using RAMDesktopUI.Helpers;
 using RAMDesktopUI.Library.Cache;
 using RAMDesktopUI.Library.Models;
 using RAMDesktopUI.Models;
+using RAMDesktopUI.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -208,10 +210,11 @@ namespace RAMDesktopUI.ViewModels
         public void ImportSymbols()
         {
             OpenFileDialog openFileDialog = new();
-            openFileDialog.Filter = "CSV documents (.csv)|*.csv";
+            openFileDialog.Filter = "CSV files (*.csv)|*.csv|Excel Files|*.xls;*.xlsx;*.xlsb";
             bool? result = openFileDialog.ShowDialog();
             if (result == true)
             {
+                DataSet data = ExcelCSVHelper.GetDataSetFromFile(openFileDialog.FileName);
                 List<string> vs = File.ReadAllLines(openFileDialog.FileName).ToList();
                 for (int i = 0; i < vs.Count; )
                 {
