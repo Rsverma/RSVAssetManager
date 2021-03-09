@@ -210,33 +210,32 @@ namespace RAMDesktopUI.ViewModels
         public void ImportSymbols()
         {
             OpenFileDialog openFileDialog = new();
-            openFileDialog.Filter = "CSV files (*.csv)|*.csv|Excel Files|*.xls;*.xlsx;*.xlsb";
+            openFileDialog.Filter = "Excel or CSV Files|*.csv;*.xls;*.xlsx;*.xlsb";
             bool? result = openFileDialog.ShowDialog();
             if (result == true)
             {
                 DataSet data = ExcelCSVHelper.GetDataSetFromFile(openFileDialog.FileName);
-                List<string> vs = File.ReadAllLines(openFileDialog.FileName).ToList();
-                for (int i = 0; i < vs.Count; )
+                if (data != null && data.Tables.Count > 0 && data.Tables[0].Columns.Count > 0)
                 {
-                    if (!string.IsNullOrWhiteSpace(vs[i]) && i > 0)
+                    List<string> symbols = new();
+                    foreach(DataRow row in data.Tables[0].Rows)
                     {
-                        string symbol = vs[i].Replace("\"", "").Replace("\\", "").Trim().ToUpper();
-                        string errMsg = _watchlistCache.AddSymbolToTab(symbol, _tabIndex);
-                        if (string.IsNullOrWhiteSpace(errMsg))
+                        string symbol = row[0].ToString().Replace("\"", "").Replace("\\", "").Trim().ToUpper();
+                        if (!string.IsNullOrWhiteSpace(symbol))
                         {
-                            lock (_locker)
+                            string errMsg = _watchlistCache.AddSymbolToTab(symbol, _tabIndex);
+                            if (string.IsNullOrWhiteSpace(errMsg))
                             {
-                                LiveFeedData.Add(new LiveFeedDataModel { Symbol = symbol });
+                                lock (_locker)
+                                {
+                                    LiveFeedData.Add(new LiveFeedDataModel { Symbol = symbol });
+                                }
+                                symbols.Add(symbol);
                             }
-                            i++;
                         }
-                        else
-                            vs.RemoveAt(i);
                     }
-                    else
-                        vs.RemoveAt(i);
+                    _dataHelper.AddSymbols(symbols);
                 }
-                _dataHelper.AddSymbols(vs);
             }
         }
 
@@ -273,48 +272,48 @@ namespace RAMDesktopUI.ViewModels
                 index1.Name = liveFeedDict[index1.Symbol].shortName;
                 index1.Price = liveFeedDict[index1.Symbol].Last;
                 index1.Change = liveFeedDict[index1.Symbol].Change;
-                index1.ChangeDescript = liveFeedDict[index1.Symbol].Change.ToString("+#.00;-#.00;0.00")
-                    + liveFeedDict[index1.Symbol].ChangePercent.ToString(" (+#.00) ▲; (-#.00) ▼; (0.00)");
+                index1.ChangeDescript = liveFeedDict[index1.Symbol].Change.ToString("+0.00;-0.00;0.00")
+                    + liveFeedDict[index1.Symbol].ChangePercent.ToString(" (+0.00) ▲; (-0.00) ▼; (0.00)");
             }
             if (liveFeedDict.ContainsKey(index2.Symbol))
             {
                 index2.Name = liveFeedDict[index2.Symbol].shortName;
                 index2.Price = liveFeedDict[index2.Symbol].Last;
                 index2.Change = liveFeedDict[index2.Symbol].Change;
-                index2.ChangeDescript = liveFeedDict[index2.Symbol].Change.ToString("+#.00;-#.00;0.00")
-                    + liveFeedDict[index2.Symbol].ChangePercent.ToString(" (+#.00) ▲; (-#.00) ▼; (0.00)");
+                index2.ChangeDescript = liveFeedDict[index2.Symbol].Change.ToString("+0.00;-0.00;0.00")
+                    + liveFeedDict[index2.Symbol].ChangePercent.ToString(" (+0.00) ▲; (-0.00) ▼; (0.00)");
             }
             if (liveFeedDict.ContainsKey(index3.Symbol))
             {
                 index3.Name = liveFeedDict[index3.Symbol].shortName;
                 index3.Price = liveFeedDict[index3.Symbol].Last;
                 index3.Change = liveFeedDict[index3.Symbol].Change;
-                index3.ChangeDescript = liveFeedDict[index3.Symbol].Change.ToString("+#.00;-#.00;0.00")
-                    + liveFeedDict[index3.Symbol].ChangePercent.ToString(" (+#.00) ▲; (-#.00) ▼; (0.00)");
+                index3.ChangeDescript = liveFeedDict[index3.Symbol].Change.ToString("+0.00;-0.00;0.00")
+                    + liveFeedDict[index3.Symbol].ChangePercent.ToString(" (+0.00) ▲; (-0.00) ▼; (0.00)");
             }
             if (liveFeedDict.ContainsKey(index4.Symbol))
             {
                 index4.Name = liveFeedDict[index4.Symbol].shortName;
                 index4.Price = liveFeedDict[index4.Symbol].Last;
                 index4.Change = liveFeedDict[index4.Symbol].Change;
-                index4.ChangeDescript = liveFeedDict[index4.Symbol].Change.ToString("+#.00;-#.00;0.00")
-                    + liveFeedDict[index4.Symbol].ChangePercent.ToString(" (+#.00) ▲; (-#.00) ▼; (0.00)");
+                index4.ChangeDescript = liveFeedDict[index4.Symbol].Change.ToString("+0.00;-0.00;0.00")
+                    + liveFeedDict[index4.Symbol].ChangePercent.ToString(" (+0.00) ▲; (-0.00) ▼; (0.00)");
             }
             if (liveFeedDict.ContainsKey(index5.Symbol))
             {
                 index5.Name = liveFeedDict[index5.Symbol].shortName;
                 index5.Price = liveFeedDict[index5.Symbol].Last;
                 index5.Change = liveFeedDict[index5.Symbol].Change;
-                index5.ChangeDescript = liveFeedDict[index5.Symbol].Change.ToString("+#.00;-#.00;0.00")
-                    + liveFeedDict[index5.Symbol].ChangePercent.ToString(" (+#.00) ▲; (-#.00) ▼; (0.00)");
+                index5.ChangeDescript = liveFeedDict[index5.Symbol].Change.ToString("+0.00;-0.00;0.00")
+                    + liveFeedDict[index5.Symbol].ChangePercent.ToString(" (+0.00) ▲; (-0.00) ▼; (0.00)");
             }
             if (liveFeedDict.ContainsKey(index6.Symbol))
             {
                 index6.Name = liveFeedDict[index6.Symbol].shortName;
                 index6.Price = liveFeedDict[index6.Symbol].Last;
                 index6.Change = liveFeedDict[index6.Symbol].Change;
-                index6.ChangeDescript = liveFeedDict[index6.Symbol].Change.ToString("+#.00;-#.00;0.00")
-                    + liveFeedDict[index6.Symbol].ChangePercent.ToString(" (+#.00) ▲; (-#.00) ▼; (0.00)");
+                index6.ChangeDescript = liveFeedDict[index6.Symbol].Change.ToString("+0.00;-0.00;0.00")
+                    + liveFeedDict[index6.Symbol].ChangePercent.ToString(" (+0.00) ▲; (-0.00) ▼; (0.00)");
             }
             await Task.CompletedTask;
         }

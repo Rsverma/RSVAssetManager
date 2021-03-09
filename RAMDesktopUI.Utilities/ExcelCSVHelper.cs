@@ -18,7 +18,13 @@ namespace RAMDesktopUI.Utilities
                     {
                         using (IExcelDataReader reader = ExcelReaderFactory.CreateCsvReader(stream))
                         {
-                            result = reader.AsDataSet();
+                            result = reader.AsDataSet(new ExcelDataSetConfiguration()
+                            {
+                                ConfigureDataTable = (tableReader) => new ExcelDataTableConfiguration()
+                                {
+                                    UseHeaderRow = true
+                                }
+                            });
                         }
                     }
                     else

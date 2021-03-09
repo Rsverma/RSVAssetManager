@@ -33,32 +33,32 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Orientation="Vertical"  Grid.Column="0" HorizontalAlignment="Center">
                     <TextBlock Text="{Binding Index1.Name}" Foreground="DeepSkyBlue"/>
-                    <TextBlock Text="{Binding Index1.Price,StringFormat='#,#.00'}" />
+                    <TextBlock Text="{Binding Index1.Price,StringFormat='#,0.00'}" />
                     <TextBlock Text="{Binding Index1.ChangeDescript}" Foreground="{Binding Index1.Change, Converter={StaticResource ValueToBrushConverter}}"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center">
                     <TextBlock Text="{Binding Index2.Name}" Foreground="DeepSkyBlue"/>
-                    <TextBlock Text="{Binding Index2.Price,StringFormat='#,#.00'}" />
+                    <TextBlock Text="{Binding Index2.Price,StringFormat='#,0.00'}" />
                     <TextBlock Text="{Binding Index2.ChangeDescript}" Foreground="{Binding Index2.Change, Converter={StaticResource ValueToBrushConverter}}"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Column="2" HorizontalAlignment="Center">
                     <TextBlock Text="{Binding Index3.Name}" Foreground="DeepSkyBlue"/>
-                    <TextBlock Text="{Binding Index3.Price,StringFormat='#,#.00'}" />
+                    <TextBlock Text="{Binding Index3.Price,StringFormat='#,0.00'}" />
                     <TextBlock Text="{Binding Index3.ChangeDescript}" Foreground="{Binding Index3.Change, Converter={StaticResource ValueToBrushConverter}}"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Column="3" HorizontalAlignment="Center">
                     <TextBlock Text="{Binding Index4.Name}" Foreground="DeepSkyBlue"/>
-                    <TextBlock Text="{Binding Index4.Price,StringFormat='#,#.00'}" />
+                    <TextBlock Text="{Binding Index4.Price,StringFormat='#,0.00'}" />
                     <TextBlock Text="{Binding Index4.ChangeDescript}" Foreground="{Binding Index4.Change, Converter={StaticResource ValueToBrushConverter}}"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Column="4" HorizontalAlignment="Center">
                     <TextBlock Text="{Binding Index5.Name}" Foreground="DeepSkyBlue"/>
-                    <TextBlock Text="{Binding Index5.Price,StringFormat='#,#.00'}" />
+                    <TextBlock Text="{Binding Index5.Price,StringFormat='#,0.00'}" />
                     <TextBlock Text="{Binding Index5.ChangeDescript}" Foreground="{Binding Index5.Change, Converter={StaticResource ValueToBrushConverter}}"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Column="5" HorizontalAlignment="Center">
                     <TextBlock Text="{Binding Index6.Name}" Foreground="DeepSkyBlue"/>
-                    <TextBlock Text="{Binding Index6.Price,StringFormat='#,#.00'}" />
+                    <TextBlock Text="{Binding Index6.Price,StringFormat='#,0.00'}" />
                     <TextBlock Text="{Binding Index6.ChangeDescript}" Foreground="{Binding Index6.Change, Converter={StaticResource ValueToBrushConverter}}"/>
                 </StackPanel>
                 <hc:TextBox x:Name="Symbol" hc:InfoElement.Placeholder="Enter Symbol" ShowClearButton="True" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10"/>
@@ -82,14 +82,14 @@
                 <DataGridTextColumn Header="Last Price" Binding="{Binding Last}"/>
                 <DataGridTextColumn Header="Ask Price" Binding="{Binding Ask}" Foreground="DodgerBlue"/>
                 <DataGridTextColumn Header="Bid Price" Binding="{Binding Bid}" Foreground="Firebrick"/>
-                <DataGridTextColumn Header="Day Change" Binding="{Binding Change, StringFormat='+#.00 ▲;-#.00 ▼;0.00'}">
+                <DataGridTextColumn Header="Day Change" Binding="{Binding Change, StringFormat='+0.00 ▲;-0.00 ▼;0.00'}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Foreground" Value="{Binding Change, Converter={StaticResource ValueToBrushConverter}}"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="% Day Change" Binding="{Binding ChangePercent, StringFormat='+#.00%;-#.00%;0.00%'}">
+                <DataGridTextColumn Header="% Day Change" Binding="{Binding ChangePercent, StringFormat='+0.00%;-0.00%;0.00%'}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Foreground" Value="{Binding ChangePercent, Converter={StaticResource ValueToBrushConverter}}"/>

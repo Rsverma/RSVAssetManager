@@ -21,6 +21,7 @@ namespace RAMDesktopUI
         public Bootstrapper()
         {
             Initialize();
+            System.Text.Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             ConventionManager.AddElementConvention<FrameworkElement>(
          UIElement.IsEnabledProperty,
          "IsEnabled",
