@@ -1,0 +1,27 @@
+﻿<hc:Window  xmlns:hc="https://handyorg.github.io/handycontrol" x:Class="RAMDesktopUI.Views.ImportManagerView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RAMDesktopUI.Views"
+        mc:Ignorable="d" ShowTitle="False" xmlns:cal="http://www.caliburnproject.org"
+        x:Name="ImportManager" Height="600" Width="1200" WindowState="{Binding CurWindowState, Mode=TwoWay}">
+
+    <hc:Window.NonClientAreaContent>
+        <TextBlock Text="Import Manager" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </hc:Window.NonClientAreaContent>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="8*"/>
+        </Grid.ColumnDefinitions>
+        <hc:SideMenu BorderThickness="1" Width="200" Margin="0 0 30 0" HorizontalAlignment="Left" 
+                     Selector.SelectionChanged="SideMenu_SelectionChanged_1"
+                     SelectionChanged="SideMenu_SelectionChanged">
+            <hc:SideMenuItem Header="Import Stage"/>
+            <hc:SideMenuItem Header="Import Trade"/>
+            <hc:SideMenuItem Header="Import Securities"/>
+        </hc:SideMenu>
+        <Button Grid.Column="1" x:Name="DemoClick" Content="Click me"/>
+    </Grid>
+</hc:Window>

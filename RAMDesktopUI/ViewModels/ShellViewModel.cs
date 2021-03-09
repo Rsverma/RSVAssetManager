@@ -69,6 +69,9 @@ namespace RAMDesktopUI.ViewModels
                     case ModuleTypes.Watchlist:
                         viewModel = IoC.Get<WatchlistViewModel>();
                         break;
+                    case ModuleTypes.ImportManager:
+                        viewModel = IoC.Get<ImportManagerViewModel>();
+                        break;
                 }
                 _modules.Add(moduleEvent.ModuleType, viewModel);
                 await _window.ShowWindowAsync(viewModel, null, settings);
