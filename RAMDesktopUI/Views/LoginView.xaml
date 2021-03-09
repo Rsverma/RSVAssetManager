@@ -24,10 +24,12 @@
         </Grid.RowDefinitions>
         <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" 
                    Fill="Gray" Margin="0 0 0 20" />
-        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="0 0 0 20"
-                   HorizontalAlignment="Center" FontSize="30">
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Image Width="40" Height="40" HorizontalAlignment="Right" Margin="0 0 10 20" Source="/Resources/Login.ico" />
+            <TextBlock Margin="10 0 0 20" HorizontalAlignment="Left" FontSize="40">
             Login
-        </TextBlock>
+            </TextBlock>
+        </StackPanel>
         <!--Error Message row-->
         <TextBlock x:Name="ErrorMessage" Grid.Row="2" Grid.Column="1" 
                    Grid.ColumnSpan="2" Margin="0 0 0 20" Visibility="{Binding IsErrorVisible, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}"

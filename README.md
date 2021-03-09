@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/Rsverma/RSVAssetManager/archive/main.zip"><img src="https://github.com/Rsverma/RSVAssetManager/blob/main/RAMDesktopUI/Resources/AppIication.ico" alt="RSV Asset Manager" width="200"></a>
+  <a href="https://github.com/Rsverma/RSVAssetManager/archive/main.zip"><img src="https://github.com/Rsverma/RSVAssetManager/blob/main/RAMDesktopUI/Resources/Application.ico" alt="RSV Asset Manager" width="200"></a>
   <br>
   RSV Asset Manager
   <br>

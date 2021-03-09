@@ -207,9 +207,9 @@ namespace RAMDesktopUI.ViewModels
 
         public void ImportSymbols()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            OpenFileDialog openFileDialog = new();
             openFileDialog.Filter = "CSV documents (.csv)|*.csv";
-            Nullable<bool> result = openFileDialog.ShowDialog();
+            bool? result = openFileDialog.ShowDialog();
             if (result == true)
             {
                 List<string> vs = File.ReadAllLines(openFileDialog.FileName).ToList();

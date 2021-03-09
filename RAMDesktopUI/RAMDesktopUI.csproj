@@ -5,13 +5,85 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <AssemblyName>RSVAssetManager</AssemblyName>
-    <ApplicationIcon>Resources\AppIication.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Application.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\AppIication.ico" />
-    <None Remove="Resources\CreateOrder.ico" />
-    <None Remove="Resources\OrderManager.ico" />
+    <None Remove="Resources\AppIication1.ico" />
+    <None Remove="Resources\Application.ico" />
+    <None Remove="Resources\CreateOrder1.ico" />
+    <None Remove="Resources\FundAllocator1.ico" />
+    <None Remove="Resources\Login.ico" />
+    <None Remove="Resources\Login1.ico" />
+    <None Remove="Resources\OrderManager1.ico" />
+    <None Remove="Resources\OrderTicket.ico" />
+    <None Remove="Resources\PortfolioManager1.ico" />
+    <None Remove="Resources\PortfolioMonitor.ico" />
+    <None Remove="Resources\PortfolioRebalancer.ico" />
+    <None Remove="Resources\PortfolioRebalancer1.ico" />
+    <None Remove="Resources\PositionManager.ico" />
+    <None Remove="Resources\TradeBlotter.ico" />
+    <None Remove="Resources\UserManager.ico" />
+    <None Remove="Resources\UserManager1.ico" />
+    <None Remove="Resources\Watchlist.ico" />
+    <None Remove="Resources\Watchlist1.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Application.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\AppIication1.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\OrderTicket.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CreateOrder1.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PositionManager.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\FundAllocator1.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Login.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Login1.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\TradeBlotter.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\OrderManager1.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PortfolioMonitor.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PortfolioManager1.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PortfolioRebalancer.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PortfolioRebalancer1.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\UserManager.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\UserManager1.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Watchlist.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Watchlist1.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -22,18 +94,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RAMDesktopUI.Library\RAMDesktopUI.Library.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Resources\AppIication.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\CreateOrder.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\OrderManager.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
 
 </Project>
