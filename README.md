@@ -74,10 +74,10 @@ $ git clone https://github.com/Rsverma/RSVAssetManager.git
 This software uses the following open source packages:
 
 - [Caliburn Micro](https://caliburnmicro.com/)
-- [Material Design In XAML](http://materialdesigninxaml.net/)
+- [Handy Control](https://github.com/HandyOrg/HandyControl)
 - [SwashBuckle](https://github.com/domaindrivendev/Swashbuckle.WebApi)
 - [Dapper](https://github.com/StackExchange/Dapper)
-- Icons from - [IconFinder](https://www.iconfinder.com/iconsets/business-collection-2027)
+- <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 - Special shoutout [TimCo Retail Manager Course](https://www.youtube.com/playlist?list=PLLWMQd6PeGY0bEMxObA6dtYXuJOGfxSPx)
 
 ## Related
@@ -89,6 +89,6 @@ This software uses the following open source packages:
 AGPL-3.0 
 
 ---
-<a href="mailto:rsverma333@gmail.com?"><img src="https://img.shields.io/badge/gmail-%23DD0031.svg?&style=for-the-badge&logo=gmail&logoColor=white"/></a>
+<a href="mailto:rsverma333@gmail.com"><img src="https://img.shields.io/badge/gmail-%23DD0031.svg?&style=for-the-badge&logo=gmail&logoColor=white"/></a>
 > GitHub [@Rsverma](https://github.com/Rsverma) &nbsp;&middot;&nbsp;
 > LinkedIn [@rsverma333](https://www.linkedin.com/in/rsverma333/)

@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Microsoft.Win32;
 using RAMDesktopUI.Controls;
 using RAMDesktopUI.Helpers;
 using RAMDesktopUI.Library.Cache;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Data;
@@ -205,7 +207,34 @@ namespace RAMDesktopUI.ViewModels
 
         public void ImportSymbols()
         {
-
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "CSV documents (.csv)|*.csv";
+            Nullable<bool> result = openFileDialog.ShowDialog();
+            if (result == true)
+            {
+                List<string> vs = File.ReadAllLines(openFileDialog.FileName).ToList();
+                for (int i = 0; i < vs.Count; )
+                {
+                    if (!string.IsNullOrWhiteSpace(vs[i]) && i > 0)
+                    {
+                        string symbol = vs[i].Replace("\"", "").Replace("\\", "").Trim().ToUpper();
+                        string errMsg = _watchlistCache.AddSymbolToTab(symbol, _tabIndex);
+                        if (string.IsNullOrWhiteSpace(errMsg))
+                        {
+                            lock (_locker)
+                            {
+                                LiveFeedData.Add(new LiveFeedDataModel { Symbol = symbol });
+                            }
+                            i++;
+                        }
+                        else
+                            vs.RemoveAt(i);
+                    }
+                    else
+                        vs.RemoveAt(i);
+                }
+                _dataHelper.AddSymbols(vs);
+            }
         }
 
         public void RenameTab()
