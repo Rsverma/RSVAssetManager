@@ -13,14 +13,12 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
-        <hc:SideMenu BorderThickness="1" Width="200" Margin="0 0 30 0" HorizontalAlignment="Left" 
-                     Selector.SelectionChanged="SideMenu_SelectionChanged_1"
-                     SelectionChanged="SideMenu_SelectionChanged">
-            <hc:SideMenuItem Header="Import Stage"/>
-            <hc:SideMenuItem Header="Import Trade"/>
-            <hc:SideMenuItem Header="Import Securities"/>
+        <hc:SideMenu Grid.Column="0" BorderThickness="1" Margin="0 0 30 0" HorizontalAlignment="Stretch">
+            <hc:SideMenuItem Header="Import Stage" x:Name="ImportStage" Command="{Binding SelectCmd}" CommandParameter="{Binding Name,RelativeSource={RelativeSource Self}}"/>
+            <hc:SideMenuItem Header="Import Trade" x:Name="ImportTrade" Command="{Binding SelectCmd}" CommandParameter="{Binding Name,RelativeSource={RelativeSource Self}}"/>
+            <hc:SideMenuItem Header="Import Securities" x:Name="ImportSecurities" Command="{Binding SelectCmd}" CommandParameter="{Binding Name,RelativeSource={RelativeSource Self}}"/>
         </hc:SideMenu>
         <Button Grid.Column="1" x:Name="DemoClick" Content="Click me"/>
     </Grid>

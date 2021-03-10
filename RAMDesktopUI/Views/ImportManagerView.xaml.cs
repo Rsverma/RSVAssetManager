@@ -23,15 +23,5 @@ namespace RAMDesktopUI.Views
         {
             InitializeComponent();
         }
-
-        private void SideMenu_SelectionChanged(object sender, HandyControl.Data.FunctionEventArgs<object> e)
-        {
-
-        }
-
-        private void SideMenu_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

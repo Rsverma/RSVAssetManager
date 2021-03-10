@@ -1,32 +1,32 @@
-﻿using System;
+﻿using RAMDesktopUI.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace RAMDesktopUI.ViewModels
 {
     public class ImportManagerViewModel : ModuleBase
     {
-        public void SwitchItemCmd(object sender, SelectionChangedEventArgs args)
+        public ICommand SelectCmd { get; private set; }
+        public ImportManagerViewModel()
         {
 
+            SelectCmd = new RelayCommand(SelectionChanged, CanSelectItem);
         }
 
-        public void SwitchItemCmd(SelectionChangedEventArgs args)
+        private bool CanSelectItem(object value)
         {
-
-        }
-        public void DemoClick()
-        {
-
+            return true;
         }
 
 
-        private void SideMenu_SelectionChanged(object sender, HandyControl.Data.FunctionEventArgs<object> e)
+        void SelectionChanged(object value)
         {
-
         }
     }
 }
