@@ -57,15 +57,15 @@ namespace RAMDesktopUI.ViewModels
 
         public bool CanLaunchOrderTicket { get { return _isFieldCacheInitialized; } }
         public bool CanLaunchTradeBlotter { get { return _isOrderCacheInitialized && _isFieldCacheInitialized; } }
-        public bool CanLaunchPositionManager { get { return false; } }
-        public bool CanLaunchPortfolioMonitor { get { return false; } }
+        public bool CanLaunchPositionManager { get { return true; } }
+        public bool CanLaunchPortfolioMonitor { get { return true; } }
         public bool CanLaunchWatchlist { get { return _isWatchlistCacheInitialized && _isFieldCacheInitialized; } }
-        public bool CanLaunchComplianceManager { get { return false; } }
-        public bool CanLaunchTaxLotManager { get { return false; } }
-        public bool CanLaunchSecurityMaster { get { return false; } }
-        public bool CanLaunchTradeDelivery { get { return false; } }
-        public bool CanLaunchAuditTrail { get { return false; } }
-        public bool CanLaunchUserPreferences { get { return false; } }
+        public bool CanLaunchComplianceManager { get { return true; } }
+        public bool CanLaunchTaxLotManager { get { return true; } }
+        public bool CanLaunchSecurityMaster { get { return true; } }
+        public bool CanLaunchTradeDelivery { get { return true; } }
+        public bool CanLaunchAuditTrail { get { return true; } }
+        public bool CanLaunchUserPreferences { get { return true; } }
         public async Task LogOut()
         {
             await _events.PublishOnUIThreadAsync(new LogInOutEvent { IsLogin = false });
@@ -131,7 +131,7 @@ namespace RAMDesktopUI.ViewModels
 
         public async Task LaunchUserPreferences()
         {
-            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.UserPreferences));
+            await _events.PublishOnUIThreadAsync(new LaunchModuleEvent(ModuleTypes.PreferenceManager));
         }
     }
 }

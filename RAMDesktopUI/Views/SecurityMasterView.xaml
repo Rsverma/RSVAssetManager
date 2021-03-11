@@ -1,12 +1,11 @@
-﻿<hc:Window xmlns:hc="https://handyorg.github.io/handycontrol" x:Class="RAMDesktopUI.Views.PortfolioManagerView"
+﻿<hc:Window xmlns:hc="https://handyorg.github.io/handycontrol" x:Class="RAMDesktopUI.Views.SecurityMasterView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RAMDesktopUI.Views"
         mc:Ignorable="d"
-        x:Name="PortfolioMonitor" Height="450" Width="800" WindowState="{Binding CurWindowState, Mode=TwoWay}">
-
+        x:Name="SecurityMaster" Height="450" Width="800">
     <Grid>
         
     </Grid>

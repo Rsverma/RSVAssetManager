@@ -17,7 +17,7 @@ namespace RAMDesktopUI.Views
     /// <summary>
     /// Interaction logic for PortfolioManagerView.xaml
     /// </summary>
-    public partial class PortfolioManagerView : Window
+    public partial class PortfolioManagerView : HandyControl.Controls.Window
     {
         public PortfolioManagerView()
         {

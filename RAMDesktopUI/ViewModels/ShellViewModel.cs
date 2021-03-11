@@ -63,6 +63,9 @@ namespace RAMDesktopUI.ViewModels
                     case ModuleTypes.TradeBlotter:
                         viewModel = IoC.Get<TradeBlotterViewModel>();
                         break;
+                    case ModuleTypes.PositionManager:
+                        viewModel = IoC.Get<PositionManagerViewModel>();
+                        break;
                     case ModuleTypes.PortfolioMonitor:
                         viewModel = IoC.Get<PortfolioMonitorViewModel>();
                         break;
@@ -71,6 +74,24 @@ namespace RAMDesktopUI.ViewModels
                         break;
                     case ModuleTypes.ImportManager:
                         viewModel = IoC.Get<ImportManagerViewModel>();
+                        break;
+                    case ModuleTypes.ComplianceManager:
+                        viewModel = IoC.Get<ComplianceManagerViewModel>();
+                        break;
+                    case ModuleTypes.TaxLotManager:
+                        viewModel = IoC.Get<TaxLotManagerViewModel>();
+                        break;
+                    case ModuleTypes.SecurityMaster:
+                        viewModel = IoC.Get<SecurityMasterViewModel>();
+                        break;
+                    case ModuleTypes.TradeDelivery:
+                        viewModel = IoC.Get<TradeDeliveryViewModel>();
+                        break;
+                    case ModuleTypes.AuditTrail:
+                        viewModel = IoC.Get<AuditTrailViewModel>();
+                        break;
+                    case ModuleTypes.PreferenceManager:
+                        viewModel = IoC.Get<PreferenceManagerViewModel>();
                         break;
                 }
                 _modules.Add(moduleEvent.ModuleType, viewModel);

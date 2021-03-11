@@ -19,7 +19,7 @@ namespace RAMDesktopUI.Library.Helpers
             SecurityMaster,
             TradeDelivery,
             AuditTrail,
-            UserPreferences
+            PreferenceManager
         }
     }
 }
