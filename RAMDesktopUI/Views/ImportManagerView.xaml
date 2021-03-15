@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RAMDesktopUI.Views"
+        xmlns:controls="clr-namespace:RAMDesktopUI.Controls"
         mc:Ignorable="d" ShowTitle="False" xmlns:cal="http://www.caliburnproject.org"
         x:Name="ImportManager" Height="600" Width="1200" WindowState="{Binding CurWindowState, Mode=TwoWay}">
 
@@ -11,15 +12,27 @@
         <TextBlock Text="Import Manager" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </hc:Window.NonClientAreaContent>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="6*"/>
         </Grid.ColumnDefinitions>
-        <hc:SideMenu Grid.Column="0" BorderThickness="1" Margin="0 0 30 0" HorizontalAlignment="Stretch">
+        <hc:SideMenu Grid.Column="0" Grid.RowSpan="2" BorderThickness="1" Margin="0" HorizontalAlignment="Stretch">
             <hc:SideMenuItem Header="Import Stage" x:Name="ImportStage" Command="{Binding SelectCmd}" CommandParameter="{Binding Name,RelativeSource={RelativeSource Self}}"/>
             <hc:SideMenuItem Header="Import Trade" x:Name="ImportTrade" Command="{Binding SelectCmd}" CommandParameter="{Binding Name,RelativeSource={RelativeSource Self}}"/>
             <hc:SideMenuItem Header="Import Securities" x:Name="ImportSecurities" Command="{Binding SelectCmd}" CommandParameter="{Binding Name,RelativeSource={RelativeSource Self}}"/>
         </hc:SideMenu>
-        <Button Grid.Column="1" x:Name="DemoClick" Content="Click me"/>
+
+        <Button x:Name="ImportFile" Content="Import" Grid.Column="1" Width="120" Margin="10"/>
+        <Button x:Name="UploadData" Content="Upload" Grid.Column="2" Width="120" Margin="10"/>
+        <controls:RSVDataGrid x:Name="ImportableRows" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+                              HeadersVisibility="All" RowHeaderWidth="25" ColumnHeaderHeight="40" 
+                              CanUserResizeRows="False" RowHeight="30" />
+
     </Grid>
 </hc:Window>
